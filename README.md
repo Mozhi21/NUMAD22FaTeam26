@@ -1,14 +1,15 @@
 # NUMAD22FaTeam26
 
-group assignment for team 26, CS5520 22 Fall
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=F77752&width=435&lines=Welcome+to+Team+26's+repo+!!;For+NEU+2022+Fall+CS5520+%3C3)](https://git.io/typing-svg)
 
-## team member
 
-Jason Zhang : HaozheZhang0818
+## Team Member :call_me_hand: :two: :six:
 
-Xinyi Feng : FentPams
+:man_technologist:     **Jason Zhang** : HaozheZhang0818
 
-Jing Ye : yej002
+:woman_technologist:   **Xinyi Feng** : [FentPams](https://github.com/FentPams)     
 
-Mozhi Shen : Mozhi21
+:woman_technologist:   **Jing Ye** : yej002
+
+:man_technologist:     **Mozhi Shen** : Mozhi21
 
