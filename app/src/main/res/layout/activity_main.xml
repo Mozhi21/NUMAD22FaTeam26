@@ -10,11 +10,39 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:onClick="toSearchActivity"
+        android:text="AT YOUR SERVICE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieAnimationView"
+        android:layout_width="116dp"
+        android:layout_height="139dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.028"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/pumpkinman" />
+
+    <TextView
+        android:id="@+id/groupInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="139dp"
+        android:fontFamily="@font/fuzzybubblesbold"
+        android:gravity="center"
+        android:text="Xinyi Feng\n\nJing Ye\n\nHaoZhe Zhang\n\nMozhi Shen"
+        android:textSize="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.809"
+        app:layout_constraintStart_toEndOf="@+id/lottieAnimationView"
+        app:layout_constraintTop_toTopOf="@+id/lottieAnimationView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
