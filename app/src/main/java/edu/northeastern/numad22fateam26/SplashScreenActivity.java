@@ -2,8 +2,11 @@ package edu.northeastern.numad22fateam26;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -28,6 +31,30 @@ public class SplashScreenActivity extends AppCompatActivity {
         fadeIn.setDuration(1000);
         fadeIn.setFillAfter(true);
         groupInfo.startAnimation(fadeIn);
+
+        // override the fadein animation END action.
+        fadeIn.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                // wait 2 seconds after animation end before jumping into main activity
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
+                    }
+                }, 2000);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
 
     }
 }
