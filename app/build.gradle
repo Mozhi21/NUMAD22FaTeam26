@@ -37,4 +37,22 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation 'com.airbnb.android:lottie:5.2.0'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //noinspection GradleCompatible
+
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    implementation 'com.squareup.okhttp3:okhttp:3.12.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.12.0'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+
+    implementation 'com.facebook.shimmer:shimmer:0.4.0'
+
+    //noinspection GradleDependency
+    implementation 'com.jakewharton:butterknife:9.0.0'
+    //noinspection GradleDependency
+    annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0'
 }

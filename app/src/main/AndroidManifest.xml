@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="edu.northeastern.numad22fateam26">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,6 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NUMAD22FaTeam26"
         tools:targetApi="31">
+        <activity
+            android:name=".view.detail.DetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.category.CategoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.home.HomeActivity"
+            android:exported="false" />
         <activity
             android:name=".SpoonacularSearchActivity"
             android:exported="false" />
@@ -27,7 +38,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
     </application>
 
 </manifest>
