@@ -14,11 +14,11 @@
         android:layout_margin="30dp"
         android:background="@drawable/custom_input"
         android:drawablePadding="12dp"
-        android:paddingStart="20dp"
         android:ems="10"
         android:hint="Please enter dish name"
         android:inputType="textPersonName"
         android:minHeight="48dp"
+        android:paddingStart="20dp"
         app:layout_constraintBottom_toTopOf="@+id/startSearchbtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,23 +45,26 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
+        android:contentDescription="@string/slider_desc"
         android:stepSize="100.00"
         android:valueFrom="0.0"
         android:valueTo="2000.00"
-        android:contentDescription="@string/slider_desc"
+        app:haloColor="@color/orange"
         app:layout_constraintBottom_toTopOf="@+id/startSearchbtn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextDishName"
-        app:haloColor="@color/orange"
+        app:layout_constraintVertical_bias="0.387"
         app:values="@array/initial_slider_values" />
 
     <Button
         android:id="@+id/startSearchbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="StartSearch"
+        android:layout_marginTop="120dp"
         android:onClick="startSearch"
+        android:text="StartSearch"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -92,5 +95,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.083" />
+
+    <CheckBox
+        android:id="@+id/veganCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vegan"
+        android:fontFamily="@font/fuzzybubblesregular"
+        app:layout_constraintBottom_toTopOf="@+id/startSearchbtn"
+        app:layout_constraintEnd_toStartOf="@+id/glutenCheckBox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/range_slider"
+        app:layout_constraintVertical_bias="0.52" />
+
+    <CheckBox
+        android:id="@+id/glutenCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gluten-free"
+        android:fontFamily="@font/fuzzybubblesregular"
+        app:layout_constraintEnd_toStartOf="@+id/DiaryCheckBox"
+        app:layout_constraintStart_toEndOf="@+id/veganCheckBox"
+        app:layout_constraintTop_toTopOf="@+id/veganCheckBox" />
+
+    <CheckBox
+        android:id="@+id/DiaryCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Diary-free"
+        android:fontFamily="@font/fuzzybubblesregular"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/glutenCheckBox"
+        app:layout_constraintTop_toTopOf="@+id/glutenCheckBox" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
