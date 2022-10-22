@@ -20,7 +20,7 @@
             android:layout_height="300dp">
             <View
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
+                android:layout_height="120dp"
                 android:background="@color/white" />
 
             <TextView
@@ -61,8 +61,8 @@
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/lottieAnimationView"
-                android:layout_width="420dp"
-                android:layout_height="300dp"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +74,7 @@
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewPagerHeader"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="50dp"
                 android:layout_below="@id/cardSearch"
                 android:layout_marginTop="10dp"
                 android:clipToPadding="false"
