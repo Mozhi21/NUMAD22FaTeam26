@@ -11,4 +11,5 @@
     <string name="favorite">Favorite</string>
     <string name="ournames">Xinyi~Jing~Jason~Mozhi</string>
     <string name="slider_desc">Calories</string>
+    <string name = "input_reminder">(optional) Enter keyword here. e.g. pasta</string>
 </resources>

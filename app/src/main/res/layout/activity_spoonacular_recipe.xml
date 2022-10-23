@@ -124,16 +124,16 @@
                 layout="@layout/item_recycler_recipe_shimmer" />
 
             <TextView
-                android:padding="10dp"
-                android:gravity="center"
-                android:textColor="@color/colorPrimaryLight"
-                android:text="@string/ournames"
-                android:fontFamily="@font/fuzzybubblesbold"
-                android:background="@color/white"
-                android:layout_alignParentBottom="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"/>
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="20dp"
+                android:background="@color/white"
+                android:fontFamily="@font/fuzzybubblesbold"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/ournames"
+                android:textColor="@color/colorPrimaryLight" />
 
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
