@@ -1,6 +1,5 @@
 package edu.northeastern.numad22fateam26;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,27 +8,19 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-import com.google.android.material.slider.LabelFormatter;
 import com.google.android.material.slider.Slider;
 import com.google.gson.Gson;
 
+import java.util.LinkedList;
 import java.util.List;
 
-import butterknife.BindView;
-import edu.northeastern.numad22fateam26.api.SpoonacularApi;
-import edu.northeastern.numad22fateam26.api.SpoonacularClient;
 import edu.northeastern.numad22fateam26.model.ListRecipesRequest;
-import edu.northeastern.numad22fateam26.model.ListRecipesResponse;
-import edu.northeastern.numad22fateam26.model.Recipe;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class SpoonacularSearchActivity extends AppCompatActivity {
     Slider calorieSlider, numberSlider;
     Gson gson;
     EditText dishText;
-    CheckBox vegancheck, glutencheck, diarycheck;
+    CheckBox veganCheck, glutenCheck, ketoCheck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +28,9 @@ public class SpoonacularSearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_spoonacular_search);
         gson = new Gson();
         dishText = findViewById(R.id.editTextTextDishName);
-        vegancheck = findViewById(R.id.veganCheckBox);
-        glutencheck = findViewById(R.id.glutenCheckBox);
-        diarycheck = findViewById(R.id.diaryCheckBox);
+        veganCheck = findViewById(R.id.veganCheckBox);
+        glutenCheck = findViewById(R.id.glutenCheckBox);
+        ketoCheck = findViewById(R.id.ketoCheckBox);
         calorieSlider = findViewById(R.id.range_slider);
         numberSlider = findViewById(R.id.number_slider);
     }
@@ -55,6 +46,11 @@ public class SpoonacularSearchActivity extends AppCompatActivity {
         request.setQuery(dishText.getText().toString());
         request.setMaxCalories((int)calorieSlider.getValue());
         request.setRecipeNumbers((int)numberSlider.getValue());
+        List<String> diet = new LinkedList<>();
+        if (veganCheck.isChecked()) diet.add("Vegan");
+        if (glutenCheck.isChecked()) diet.add("Gluten Free");
+        if (ketoCheck.isChecked()) diet.add("Ketogenic");
+        request.setDiet(String.join(",", diet));
 
         Intent intent = new Intent(SpoonacularSearchActivity.this, SpoonacularRecipeActivity.class);
         intent.putExtra("request", gson.toJson(request));

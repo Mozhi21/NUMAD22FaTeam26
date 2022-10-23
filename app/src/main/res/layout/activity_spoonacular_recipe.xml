@@ -22,19 +22,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:background="@color/white" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="30dp"
+                android:onClick="back"
+                android:src="@drawable/back_ic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/lottieAnimationView"
+                app:layout_constraintHorizontal_bias="0.116"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.083" />
 
             <TextView
                 android:id="@+id/title"
-                android:textColor="@color/colorWhite"
-                android:text="@string/app_name"
-                android:fontFamily="@font/fuzzybubblesbold"
-                android:textStyle="bold"
-                android:textSize="30sp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="16dp"
+                android:fontFamily="@font/fuzzybubblesbold"
+                android:textColor="@color/colorWhite"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardSearch"

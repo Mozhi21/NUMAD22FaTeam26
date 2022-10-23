@@ -4,6 +4,7 @@ public class ListRecipesRequest {
     String query;
     int maxCalories;
     int recipeNumbers;
+    String diet;
 
     public String getQuery() {
         return query;
@@ -17,6 +18,10 @@ public class ListRecipesRequest {
         return recipeNumbers;
     }
 
+    public String getDiet() {
+        return diet;
+    }
+
     public void setQuery(String query) {
         this.query = query;
     }
@@ -27,5 +32,9 @@ public class ListRecipesRequest {
 
     public void setRecipeNumbers(int recipeNumbers) {
         this.recipeNumbers = recipeNumbers;
+    }
+
+    public void setDiet(String diet) {
+        this.diet = diet;
     }
 }

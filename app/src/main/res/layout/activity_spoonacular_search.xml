@@ -134,17 +134,17 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/fuzzybubblesregular"
         android:text="Gluten-free"
-        app:layout_constraintEnd_toStartOf="@+id/diaryCheckBox"
+        app:layout_constraintEnd_toStartOf="@+id/ketoCheckBox"
         app:layout_constraintStart_toEndOf="@+id/veganCheckBox"
         app:layout_constraintBottom_toTopOf="@+id/startSearchbtn"
         app:layout_constraintTop_toTopOf="@+id/veganCheckBox" />
 
     <CheckBox
-        android:id="@+id/diaryCheckBox"
+        android:id="@+id/ketoCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/fuzzybubblesregular"
-        android:text="Diary-free"
+        android:text="Keto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/startSearchbtn"
         app:layout_constraintStart_toEndOf="@+id/glutenCheckBox"
