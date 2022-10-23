@@ -44,4 +44,14 @@ public class Recipe {
     public void setImageType(String imageType) {
         this.imageType = imageType;
     }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", image='" + image + '\'' +
+                ", imageType='" + imageType + '\'' +
+                '}';
+    }
 }

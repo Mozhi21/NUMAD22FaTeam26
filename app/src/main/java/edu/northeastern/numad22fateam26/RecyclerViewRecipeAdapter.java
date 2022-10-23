@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -66,7 +67,8 @@ public class RecyclerViewRecipeAdapter extends RecyclerView.Adapter<RecyclerView
 
         @Override
         public void onClick(View v) {
-            clickListener.onClick(v, getAdapterPosition());
+            //clickListener.onClick(v, getAdapterPosition());
+            Toast.makeText(v.getContext(), recipeTitle.getText().toString(),Toast.LENGTH_SHORT).show();
         }
     }
 

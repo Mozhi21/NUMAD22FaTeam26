@@ -21,9 +21,9 @@
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3109375" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.35215606689453127" />
-        <entry key="app/src/main/res/layout/activity_spoonacular_recipe.xml" value="0.30448760986328127" />
+        <entry key="app/src/main/res/layout/activity_spoonacular_recipe.xml" value="0.2152099609375" />
         <entry key="app/src/main/res/layout/activity_spoonacular_recipe_acitivity.xml" value="0.30416666666666664" />
-        <entry key="app/src/main/res/layout/activity_spoonacular_search.xml" value="0.3035980224609375" />
+        <entry key="app/src/main/res/layout/activity_spoonacular_search.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_category.xml" value="0.18707885742187505" />
         <entry key="app/src/main/res/layout/item_recycler_category.xml" value="0.3170289855072464" />
         <entry key="app/src/main/res/layout/item_recycler_category_shimmer.xml" value="0.1" />
