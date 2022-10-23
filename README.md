@@ -5,11 +5,11 @@
 
 ## Team Member :call_me_hand: :two: :six:
 
-:man_technologist:     **Jason Zhang** : HaozheZhang0818
+:man_technologist:     **Jason Zhang** : [HaozheZhang0818](https://github.com/HaozheZhang0818)
 
 :woman_technologist:   **Xinyi Feng** : [FentPams](https://github.com/FentPams)     
 
-:woman_technologist:   **Jing Ye** : yej002
+:woman_technologist:   **Jing Ye** : [yej002](https://github.com/yej002)
 
-:man_technologist:     **Mozhi Shen** : Mozhi21
+:man_technologist:     **Mozhi Shen** : [Mozhi21](https://github.com/Mozhi21)
 
