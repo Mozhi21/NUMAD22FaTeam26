@@ -33,6 +33,7 @@
         android:fontFamily="@font/fuzzybubblesregular"
         android:paddingTop="20dp"
         android:text="Range of Calories:"
+        android:textStyle="bold"
         android:textColor="@color/orange"
         app:layout_constraintBottom_toTopOf="@+id/range_slider"
         app:layout_constraintEnd_toEndOf="parent"
@@ -67,6 +68,7 @@
         android:fontFamily="@font/fuzzybubblesregular"
         android:paddingTop="30dp"
         android:text="Number of recipes to display:"
+        android:textStyle="bold"
         android:textColor="@color/orange"
         app:layout_constraintBottom_toTopOf="@+id/number_slider"
         app:layout_constraintStart_toStartOf="@+id/caltext"
@@ -80,7 +82,7 @@
         android:layout_marginEnd="50dp"
         android:contentDescription="@string/slider_desc"
         android:stepSize="1.00"
-        android:value="6.0"
+        android:value="9.0"
         android:valueFrom="1.0"
         android:valueTo="30.00"
         app:haloColor="@color/orange"
@@ -95,11 +97,12 @@
 
     <Button
         android:id="@+id/startSearchbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="340dp"
+        android:layout_height="40dp"
         android:layout_marginTop="150dp"
         android:onClick="startSearch"
-        android:text="StartSearch"
+        android:text="Search"
+        android:background="@drawable/button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -111,12 +114,12 @@
         android:layout_height="wrap_content"
         android:onClick="back"
         android:src="@drawable/back_ic"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextDishName"
         app:layout_constraintEnd_toStartOf="@+id/lottieAnimationView"
-        app:layout_constraintHorizontal_bias="0.116"
+        app:layout_constraintHorizontal_bias="0.12"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.083" />
+        app:layout_constraintVertical_bias="0.41" />
 
     <CheckBox
         android:id="@+id/veganCheckBox"
@@ -159,13 +162,13 @@
         android:fontFamily="@font/fuzzybubblesbold"
         android:text="FIND RECIPE"
         android:textColor="@color/orange"
-        android:textSize="30dp"
+        android:textSize="28dp"
         app:layout_constraintBottom_toTopOf="@+id/editTextTextDishName"
         app:layout_constraintEnd_toStartOf="@+id/lottieAnimationView"
-        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintHorizontal_bias="0.312"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.343" />
+        app:layout_constraintVertical_bias="0.318" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieAnimationView"
