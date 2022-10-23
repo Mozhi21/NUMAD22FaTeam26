@@ -26,7 +26,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SpoonacularSearchActivity extends AppCompatActivity {
-    Slider slider;
+    Slider calorieSlider, numberSlider;
     Gson gson;
     EditText dishText;
     CheckBox vegancheck, glutencheck, diarycheck;
@@ -40,17 +40,21 @@ public class SpoonacularSearchActivity extends AppCompatActivity {
         vegancheck = findViewById(R.id.veganCheckBox);
         glutencheck = findViewById(R.id.glutenCheckBox);
         diarycheck = findViewById(R.id.diaryCheckBox);
-        slider = findViewById(R.id.range_slider);
+        calorieSlider = findViewById(R.id.range_slider);
+        numberSlider = findViewById(R.id.number_slider);
     }
 
     public void back(View view){
         SpoonacularSearchActivity.super.onBackPressed();
     }
 
+
+
     public void startSearch(View view) {
         ListRecipesRequest request = new ListRecipesRequest();
         request.setQuery(dishText.getText().toString());
-        request.setMaxCalories((int)slider.getValue());
+        request.setMaxCalories((int)calorieSlider.getValue());
+        request.setRecipeNumbers((int)numberSlider.getValue());
 
         Intent intent = new Intent(SpoonacularSearchActivity.this, SpoonacularRecipeActivity.class);
         intent.putExtra("request", gson.toJson(request));

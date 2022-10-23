@@ -40,7 +40,7 @@ public class SpoonacularRecipeActivity extends AppCompatActivity {
         ListRecipesRequest request = gson.fromJson(request_json, ListRecipesRequest.class);
 
         SpoonacularApi apiInterface = SpoonacularClient.getClient().create(SpoonacularApi.class);
-        Call<ListRecipesResponse> call = apiInterface.listRecipes(request.getQuery(), request.getMaxCalories());
+        Call<ListRecipesResponse> call = apiInterface.listRecipes(request.getQuery(), request.getMaxCalories(), request.getRecipeNumbers());
         call.enqueue(new Callback<ListRecipesResponse>() {
             @Override
             public void onResponse(Call<ListRecipesResponse> call, Response<ListRecipesResponse> response) {
