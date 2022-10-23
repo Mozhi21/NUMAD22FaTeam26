@@ -13,3 +13,31 @@
 
 :man_technologist:     **Mozhi Shen** : [Mozhi21](https://github.com/Mozhi21)
 
+
+## Overview of our App :iphone:
+### :point_right:A7 at your service: 
+- Api use:   [Spoonacular](https://spoonacular.com/food-api)
+- This api support **1** request per second, **150** request per day
+
+###  :white_check_mark: Features completed:
+
+:small_orange_diamond: Splash Screen with group name and group member name (animation)
+
+:small_orange_diamond: Dashboard for displaying this assignment button (following assignment buttons are going to be added in future weeks)
+
+:small_orange_diamond: Search Recipes by(all are optional):
+  - dish name
+  - calories range
+  - diet key words:
+    - vegan (No ingredients may contain meat or meat by-products, nor may they contain eggs, dairy, or honey.)
+    - gluten free(no wheat, barley, rye, and other gluten-containing grains and foods made from them.)
+    - keto(The keto diet is based more on the ratio of fat, protein, and carbs in the diet rather than specific ingredients.)
+    - :exclamation:The vegan and keto diet is contradictory, when user select both, no dish will be displayed.
+    
+:small_orange_diamond: The number of recipes shown can be selected by users
+
+:small_orange_diamond: Using shimmer to implement active loading [link](https://github.com/facebook/shimmer-android)
+
+
+
+   
