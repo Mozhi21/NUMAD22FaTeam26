@@ -3,6 +3,9 @@ package edu.northeastern.numad22fateam26;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
+import android.view.View;
+import android.widget.TextView;
 
 public class AboutActivity extends AppCompatActivity {
 
@@ -10,5 +13,14 @@ public class AboutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+        setupHyperlink();
+    }
+    public void back(View view){
+        AboutActivity.super.onBackPressed();
+    }
+
+    private void setupHyperlink(){
+        TextView linkTextView = findViewById(R.id.xinyigitlink);
+        linkTextView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 }
