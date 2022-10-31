@@ -43,7 +43,7 @@
         android:fontFamily="@font/fuzzybubblesbold"
         android:onClick="toStickActivity"
         android:text="Stick It to 'Em"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/about_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />
@@ -52,14 +52,17 @@
         android:id="@+id/about_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/darkgrey"
+        android:backgroundTint="@color/colorWhite"
         android:fontFamily="@font/fuzzybubblesbold"
         android:onClick="toAboutActivity"
-        android:text="About"
+        android:text="About Our Team"
+        android:textColor="@color/darkgrey"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="@+id/groupInfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/groupInfo"
-        app:layout_constraintVertical_bias="0.94" />
+        app:layout_constraintVertical_bias="0.858" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieAnimationView"
