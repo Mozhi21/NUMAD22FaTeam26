@@ -6,38 +6,66 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieSpider"
-        android:layout_width="100dp"
-        android:layout_height="139dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/button"
+        android:layout_width="80dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toTopOf="@+id/stick_button"
+        app:layout_constraintEnd_toEndOf="@+id/groupInfo"
+        app:layout_constraintTop_toBottomOf="@+id/groupInfo"
         app:layout_constraintVertical_bias="0.0"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/spider" />
 
     <Button
+
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:background="@drawable/button"
         android:fontFamily="@font/fuzzybubblesbold"
         android:onClick="toSearchActivity"
         android:text="Spoonacular Service"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/stick_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.501" />
+        app:layout_constraintVertical_bias="0.3" />
+
+    <Button
+        android:id="@+id/stick_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button"
+        android:fontFamily="@font/fuzzybubblesbold"
+        android:onClick="toStickActivity"
+        android:text="Stick It to 'Em"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <Button
+        android:id="@+id/about_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/darkgrey"
+        android:fontFamily="@font/fuzzybubblesbold"
+        android:onClick="toAboutActivity"
+        android:text="About"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="@+id/groupInfo"
+        app:layout_constraintTop_toBottomOf="@+id/groupInfo"
+        app:layout_constraintVertical_bias="0.94" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieAnimationView"
         android:layout_width="116dp"
         android:layout_height="139dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.057"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,11 +84,12 @@
         android:text="Xinyi Feng\n\nJing Ye\n\nHaoZhe Zhang\n\nMozhi Shen"
         android:textSize="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.809"
+        app:layout_constraintHorizontal_bias="0.921"
         app:layout_constraintStart_toEndOf="@+id/lottieAnimationView"
         app:layout_constraintTop_toTopOf="@+id/lottieAnimationView" />
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -73,8 +102,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

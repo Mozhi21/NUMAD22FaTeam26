@@ -11,7 +11,7 @@ import retrofit2.http.Query;
 
 public interface SpoonacularApi {
 
-    @GET("/recipes/complexSearch?apiKey=15aae58e3c2e4b6ebb17a1333ecac595&sort=calories&sortDirection=desc")
+    @GET("/recipes/complexSearch?apiKey=56fee42fb92a4507a62612b3d08495ae&sort=calories&sortDirection=desc")
     Call<ListRecipesResponse> listRecipes(@Query("query") String query,
                                           @Query("maxCalories")int maxCalories,
                                           @Query("number")int recipeNumber,

@@ -18,4 +18,10 @@ public class MainActivity extends AppCompatActivity {
     public void toSearchActivity(View view){
         startActivity(new Intent(MainActivity.this, SpoonacularSearchActivity.class));
     }
+    public void toStickActivity(View view){
+        startActivity(new Intent(MainActivity.this, StickActivity.class));
+    }
+    public void toAboutActivity(View view){
+        startActivity(new Intent(MainActivity.this, AboutActivity.class));
+    }
 }
