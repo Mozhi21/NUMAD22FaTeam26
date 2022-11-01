@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "945533250458",
+    "project_id": "numad22fateam26",
+    "storage_bucket": "numad22fateam26.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:945533250458:android:5ebdb1be1e85cb64dc2823",
+        "android_client_info": {
+          "package_name": "edu.northeastern.numad22fateam26"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "945533250458-7urk90c0d42127q356uts7bdboboi1v2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.northeastern.numad22fateam26",
+            "certificate_hash": "5e49a925f04382933e8295b445eb7e578abc1efa"
+          }
+        },
+        {
+          "client_id": "945533250458-3ajkatmt0k43vohlrq9lp6nj8f694m9a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtUO2rQ68FfDMFs1-De0wPRc1RPzMOH0c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "945533250458-3ajkatmt0k43vohlrq9lp6nj8f694m9a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
