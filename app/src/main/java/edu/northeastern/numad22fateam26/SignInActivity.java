@@ -5,17 +5,26 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseUser;
 
 public class SignInActivity extends AppCompatActivity {
+    private TextView signUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
     }
+        public void signUp(View view){
+            startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
+        }
+
+
 //    @Override
 //    public void onStart() {
 //        super.onStart();
@@ -41,9 +50,9 @@ public class SignInActivity extends AppCompatActivity {
 //        });
 //    }
 
-    //transit to city category activity if sign in successfully
-    private void transitionToSocialMediaActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        //transit to city category activity if sign in successfully
+        private void transitionToSocialMediaActivity () {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
     }
-}
