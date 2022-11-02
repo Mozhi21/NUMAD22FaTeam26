@@ -1,16 +1,16 @@
 package edu.northeastern.numad22fateam26.model;
 
-public class UserHelper {
+public class User {
     String realname, password;
 
-    public UserHelper() {
+    public User() {
     }
     
-    public UserHelper(String username) {
+    public User(String username) {
         this.password = password;
     }
 
-    public UserHelper(String realname, String username) {
+    public User(String realname, String username) {
         this.realname = realname;
         this.password = password;
     }
