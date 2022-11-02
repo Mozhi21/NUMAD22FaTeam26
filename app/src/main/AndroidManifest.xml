@@ -20,12 +20,15 @@
             android:exported="false" />
         <activity
             android:name=".SignInActivity"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
             android:name=".AboutActivity"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
             android:name=".StickActivity"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
             android:name=".SpoonacularRecipeActivity"
