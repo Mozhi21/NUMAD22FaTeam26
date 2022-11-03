@@ -8,11 +8,13 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-public class PushNotificationService extends FirebaseMessagingService {
+public class FCMReceiveService extends FirebaseMessagingService {
+    private static final int NOTIFICATION_UNIQUE_ID = 101;
 
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
@@ -32,7 +34,7 @@ public class PushNotificationService extends FirebaseMessagingService {
                 .setContentText(text)
                 .setSmallIcon(android.R.drawable.star_big_on)
                 .setAutoCancel(true);
-        NotificationManagerCompat.from(this).notify(1,notification.build());
+        NotificationManagerCompat.from(this).notify(NOTIFICATION_UNIQUE_ID,notification.build());
 
         super.onMessageReceived(remoteMessage);
     }

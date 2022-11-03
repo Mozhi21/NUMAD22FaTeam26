@@ -7,20 +7,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import edu.northeastern.numad22fateam26.Services.FCMSendService;
+
 public class FCMActivity extends AppCompatActivity {
 
     private static final String SERVER_KEY = "key=AAAA3CYsa5o:APA91bH1nIvPXwnVUIjXjjwDHIWChJg21gksjWkRDvalw-vFYO3nwBPtlRH3PtA5cNsBq-KCkq_p-CFbXgeYfB3u0Ty89qjbM9u5NYh6cI_GGnb_kOvX4uUfYQaaf0QmHhxD0uLVt4-f";
+    private static final String BASE_URL = "https://fcm.googleapis.com/fcm/send";
     private static final String TAG = "FCMActivity";
+    private EditText notification_title, notification_message, userToken;
 
 //    private final ActivityResultLauncher<String> requestPermissionLauncher =
 //            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
@@ -49,10 +57,9 @@ public class FCMActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fcmactivity);
-//        askNotificationPermission();
+//        askNotificationPermission(); // not necessary for SDK < 33
 
-        // Device id
-
+        // Get device id
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
                     @Override
@@ -65,14 +72,31 @@ public class FCMActivity extends AppCompatActivity {
                         // Get new FCM registration token
                         String token = task.getResult();
                         System.out.println("TOKEN: " + token);
-                        // Log and toast
-//                    String msg = getString(R.string.msg_token_fmt, token);
                     }
                 });
-
-
-
-
+        notification_title = findViewById(R.id.notification_title);
+        notification_message = findViewById(R.id.notification_message);
+        userToken = findViewById(R.id.user_token_send_to);
     }
+
+    public void sendNotification(View view) {
+        String title = notification_title.getText().toString().trim();
+        String message = notification_message.getText().toString().trim();
+        String userToken = "faBpwDn6SwOkLGG-k6zf1n:APA91bGHG24-vO2o-KSvIkXNEs1I6Y0Q59GUVuYGA7z1dov52tWib3kc-2p-zB9X5EdPPgBVjPtAHKdMFoFhURC-Pt97f-7bvrEyvWyg7PfBEV083sXlW0dMgxbScSSGqdzGM0ueYaqw";
+        Log.v(TAG, "sent");
+        if (title.length() != 0  & message.length() != 0) {
+            FCMSendService.sendNotification(
+                    this,
+                    userToken,
+                    title,
+                    message
+                    );
+        }
+    }
+
+
+
+
+
 
 }

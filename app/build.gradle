@@ -66,4 +66,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging'
     implementation 'com.google.firebase:firebase-analytics'
 
+    // HTTP library auto scheduling of networking requests
+    implementation 'com.android.volley:volley:1.2.1'
+
 }
