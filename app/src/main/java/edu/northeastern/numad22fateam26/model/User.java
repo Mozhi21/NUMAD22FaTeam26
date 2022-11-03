@@ -1,33 +1,34 @@
 package edu.northeastern.numad22fateam26.model;
 
 public class User {
-    String realname, password;
+    private String userId;
+    private String FCMToken;
+    private String username;
 
     public User() {
     }
-    
-    public User(String username) {
-        this.password = password;
+
+    public String getUserId() {
+        return userId;
     }
 
-    public User(String realname, String username) {
-        this.realname = realname;
-        this.password = password;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getRealname() {
-        return realname;
+    public String getFCMToken() {
+        return FCMToken;
     }
 
-    public void setRealname(String realname) {
-        this.realname = realname;
+    public void setFCMToken(String FCMToken) {
+        this.FCMToken = FCMToken;
     }
 
-    public String getUsername() {
-        return password;
+    public String getUserName() {
+        return username;
     }
 
-    public void setUsername(String username) {
-        this.password = username;
+    public void setUserName(String username) {
+        this.username = username;
     }
 }
