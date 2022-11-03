@@ -28,6 +28,7 @@ public class FCMActivity extends AppCompatActivity {
     private static final String SERVER_KEY = "key=AAAA3CYsa5o:APA91bH1nIvPXwnVUIjXjjwDHIWChJg21gksjWkRDvalw-vFYO3nwBPtlRH3PtA5cNsBq-KCkq_p-CFbXgeYfB3u0Ty89qjbM9u5NYh6cI_GGnb_kOvX4uUfYQaaf0QmHhxD0uLVt4-f";
     private static final String BASE_URL = "https://fcm.googleapis.com/fcm/send";
     private static final String TAG = "FCMActivity";
+    private static final String TOKEN = "DEVICE TOKEN: ";
     private EditText notification_title, notification_message, userToken;
 
 //    private final ActivityResultLauncher<String> requestPermissionLauncher =
@@ -71,7 +72,7 @@ public class FCMActivity extends AppCompatActivity {
 
                         // Get new FCM registration token
                         String token = task.getResult();
-                        System.out.println("TOKEN: " + token);
+                        Log.i(TOKEN, token);
                     }
                 });
         notification_title = findViewById(R.id.notification_title);
@@ -83,20 +84,15 @@ public class FCMActivity extends AppCompatActivity {
         String title = notification_title.getText().toString().trim();
         String message = notification_message.getText().toString().trim();
         String userToken = "faBpwDn6SwOkLGG-k6zf1n:APA91bGHG24-vO2o-KSvIkXNEs1I6Y0Q59GUVuYGA7z1dov52tWib3kc-2p-zB9X5EdPPgBVjPtAHKdMFoFhURC-Pt97f-7bvrEyvWyg7PfBEV083sXlW0dMgxbScSSGqdzGM0ueYaqw";
+        String userToken2 = "d9FiXv6bRTusJ5UBlre8gd:APA91bG7HNCjFLkoafsyy6EHCwqCjx4qInt1Fhl07g3_P-MxXgx7k7E91g4zvJ2I-FK9EzK7YezSJDVv8za-iOPRY5tyHJ0GcfY1nzgQRLrmymMP07vdv0NM6ZapZT62alkkAyZZTl3s";
         Log.v(TAG, "sent");
         if (title.length() != 0  & message.length() != 0) {
             FCMSendService.sendNotification(
                     this,
-                    userToken,
+                    userToken2,
                     title,
                     message
                     );
         }
     }
-
-
-
-
-
-
 }

@@ -23,7 +23,7 @@ import edu.northeastern.numad22fateam26.BuildConfig;
 public class FCMSendService {
     private static final String SERVER_KEY = "key=AAAA3CYsa5o:APA91bH1nIvPXwnVUIjXjjwDHIWChJg21gksjWkRDvalw-vFYO3nwBPtlRH3PtA5cNsBq-KCkq_p-CFbXgeYfB3u0Ty89qjbM9u5NYh6cI_GGnb_kOvX4uUfYQaaf0QmHhxD0uLVt4-f";
     private static final String BASE_URL = "https://fcm.googleapis.com/fcm/send";
-    private static final String TAG = "FCMSendService";
+    private static final String TAG = "FCMSendService: ";
     public static void sendNotification(Context context, String token, String title, String message) {
 //        if (BuildConfig.DEBUG) {
 //            //if debugging, turn on strict mode
@@ -63,20 +63,19 @@ public class FCMSendService {
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            System.out.println("FCM: " + response);
+                            Log.v(TAG, response.toString());
                         }
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            System.out.println("Error: " + error.getMessage());
+                            Log.v(TAG, error.getMessage());
                         }
                     }) {
                 @Override
                 public Map<String, String>  getHeaders() throws AuthFailureError {
-                    Map<String, String> params = new HashMap<>();
-                    params.put("Content-Type", "application/json");
-                    params.put("Authorization", SERVER_KEY);
-                    return params;
+                    return Map.of(
+                            "Content-Type", "application/json",
+                            "Authorization", SERVER_KEY);
                 }
             };
 
