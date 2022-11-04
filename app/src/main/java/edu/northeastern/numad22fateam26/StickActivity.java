@@ -62,4 +62,8 @@ public class StickActivity extends AppCompatActivity {
     public void back(View view){
         startActivity(new Intent(StickActivity.this, MainActivity.class));
     }
+
+    public void toFCMActivity(View view){
+        startActivity(new Intent(StickActivity.this, FCMActivity.class));
+    }
 }
