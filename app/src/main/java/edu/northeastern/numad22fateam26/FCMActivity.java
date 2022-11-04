@@ -1,27 +1,18 @@
 package edu.northeastern.numad22fateam26;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 
-import edu.northeastern.numad22fateam26.Services.FCMSendService;
+import edu.northeastern.numad22fateam26.service.FCMSendService;
 
 public class FCMActivity extends AppCompatActivity {
 

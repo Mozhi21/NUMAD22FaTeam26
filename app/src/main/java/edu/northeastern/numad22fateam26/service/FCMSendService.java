@@ -1,7 +1,6 @@
-package edu.northeastern.numad22fateam26.Services;
+package edu.northeastern.numad22fateam26.service;
 
 import android.content.Context;
-import android.os.StrictMode;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
@@ -11,14 +10,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.common.util.ScopeUtil;
 
 import org.json.JSONObject;
 
-import java.util.HashMap;
 import java.util.Map;
-
-import edu.northeastern.numad22fateam26.BuildConfig;
 
 public class FCMSendService {
     private static final String SERVER_KEY = "key=AAAA3CYsa5o:APA91bH1nIvPXwnVUIjXjjwDHIWChJg21gksjWkRDvalw-vFYO3nwBPtlRH3PtA5cNsBq-KCkq_p-CFbXgeYfB3u0Ty89qjbM9u5NYh6cI_GGnb_kOvX4uUfYQaaf0QmHhxD0uLVt4-f";

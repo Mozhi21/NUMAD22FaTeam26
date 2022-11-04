@@ -9,10 +9,8 @@ import android.view.View;
 
 import com.google.gson.Gson;
 
-import java.util.LinkedList;
 import java.util.List;
 
-import butterknife.BindView;
 import edu.northeastern.numad22fateam26.api.SpoonacularApi;
 import edu.northeastern.numad22fateam26.api.SpoonacularClient;
 import edu.northeastern.numad22fateam26.model.ListRecipesRequest;

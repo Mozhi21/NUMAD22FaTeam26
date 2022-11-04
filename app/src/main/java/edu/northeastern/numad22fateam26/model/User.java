@@ -31,4 +31,13 @@ public class User {
     public void setUserName(String username) {
         this.username = username;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId='" + userId + '\'' +
+                ", FCMToken='" + FCMToken + '\'' +
+                ", username='" + username + '\'' +
+                '}';
+    }
 }

@@ -50,7 +50,7 @@
             android:name=".MainActivity"
             android:exported="false" />
 
-        <service android:name=".Services.FCMReceiveService"
+        <service android:name=".service.FCMReceiveService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
