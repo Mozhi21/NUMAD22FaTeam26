@@ -59,6 +59,7 @@ public class StickActivity extends AppCompatActivity {
     public void sendC1(View view) {
         User selectedUser = (User)spinner.getSelectedItem();
         FCMSendService.sendNotification(this, selectedUser.getFCMToken(), "hello", "awesome!!!!");
+
         Toast.makeText(this, "send to user:" + selectedUser.getUserName(), Toast.LENGTH_SHORT).show();
     }
 
