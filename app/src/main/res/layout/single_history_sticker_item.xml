@@ -1,14 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,8 +29,7 @@
                         android:fontFamily="@font/fuzzybubblesregular"
                         android:text="FromWhom"
                         android:textColor="@color/orange"
-                        android:textSize="12sp"
-                        android:weight="0" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/sendDate"
@@ -46,17 +39,14 @@
                         android:fontFamily="@font/fuzzybubblesregular"
                         android:text="Date"
                         android:textColor="@color/orange"
-                        android:textSize="12sp"
-                        android:weight="0" />
+                        android:textSize="12sp" />
 
                     <CheckBox
                         android:id="@+id/checkBox"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:text="Mark as readed"
-
-                        android:layout_margin="7dp"
-                        android:weight="0" />
+                        android:layout_margin="7dp" />
                 </LinearLayout>
                 <ImageView
                     android:id="@+id/imageView"
@@ -78,12 +68,5 @@
 
 
             </LinearLayout>
-
         </androidx.cardview.widget.CardView>
-
-
-
-
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
