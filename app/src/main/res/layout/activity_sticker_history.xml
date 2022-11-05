@@ -53,6 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="UNREAD MESSAGES"
+        android:fontFamily="@font/fuzzybubblesbold"
         android:textColor="@color/orange"
         app:layout_constraintBottom_toTopOf="@+id/unreadedRecycler"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,8 +66,8 @@
         android:id="@+id/unreadedRecycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="368dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/readedRecycler"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
@@ -76,6 +77,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="READED MESSAGES"
+        android:fontFamily="@font/fuzzybubblesbold"
         android:textColor="@color/orange"
         app:layout_constraintBottom_toTopOf="@+id/readedRecycler"
         app:layout_constraintEnd_toEndOf="parent"
@@ -92,6 +94,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/readed_txt" />
+        app:layout_constraintTop_toBottomOf="@+id/unreadedRecycler" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

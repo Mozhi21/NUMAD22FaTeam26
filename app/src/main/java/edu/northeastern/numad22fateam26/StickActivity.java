@@ -153,4 +153,8 @@ public class StickActivity extends AppCompatActivity implements Dialog.DialogLis
     public void toStickerHistoryActivity(View view){
         startActivity(new Intent(StickActivity.this, StickerHistoryActivity.class));
     }
+
+    public void BackToHomeActivity(View view){
+        startActivity(new Intent(StickActivity.this, MainActivity.class));
+    }
 }
