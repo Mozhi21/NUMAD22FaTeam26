@@ -143,4 +143,14 @@ public class StickActivity extends AppCompatActivity implements Dialog.DialogLis
         Dialog dialog = new Dialog();
         dialog.show(getSupportFragmentManager(),"Dialog");
     }
+
+    public void logout(View view){
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(StickActivity.this, MainActivity.class));
+
+    }
+
+    public void toStickerHistoryActivity(View view){
+        startActivity(new Intent(StickActivity.this, StickerHistoryActivity.class));
+    }
 }
