@@ -20,6 +20,7 @@
         <entry key="app/src/main/res/drawable/search_view_bg.xml" value="0.264" />
         <entry key="app/src/main/res/drawable/shdow_bottom_to_top.xml" value="0.338" />
         <entry key="app/src/main/res/drawable/spinner_background.xml" value="0.1305" />
+        <entry key="app/src/main/res/drawable/sticker_dialog.xml" value="0.264" />
         <entry key="app/src/main/res/font/font.xml" value="0.3546875" />
         <entry key="app/src/main/res/font/fonts.xml" value="0.3546875" />
         <entry key="app/src/main/res/layout/activity_about.xml" value="0.38094177246093763" />
@@ -36,12 +37,15 @@
         <entry key="app/src/main/res/layout/activity_spoonacular_recipe_acitivity.xml" value="0.30416666666666664" />
         <entry key="app/src/main/res/layout/activity_spoonacular_search.xml" value="0.40726013183593757" />
         <entry key="app/src/main/res/layout/activity_stick.xml" value="0.3037155151367188" />
+        <entry key="app/src/main/res/layout/activity_sticker_history.xml" value="0.2530064900716146" />
         <entry key="app/src/main/res/layout/fragment_category.xml" value="0.18707885742187505" />
         <entry key="app/src/main/res/layout/item_recycler_category.xml" value="0.3170289855072464" />
         <entry key="app/src/main/res/layout/item_recycler_category_shimmer.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_recycler_meal.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_recycler_recipe.xml" value="0.30416666666666664" />
         <entry key="app/src/main/res/layout/item_recycler_recipe_shimmer.xml" value="0.30416666666666664" />
+        <entry key="app/src/main/res/layout/item_recycler_sticker.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/item_recycler_stickers.xml" value="0.34427083333333336" />
         <entry key="app/src/main/res/layout/item_view_pager_header.xml" value="0.3170289855072464" />
         <entry key="app/src/main/res/layout/item_view_pager_header_shimmer.xml" value="0.3170289855072464" />
         <entry key="app/src/main/res/layout/single_user_item.xml" value="0.32447916666666665" />

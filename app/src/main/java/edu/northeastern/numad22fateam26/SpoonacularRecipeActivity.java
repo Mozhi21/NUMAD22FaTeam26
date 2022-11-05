@@ -72,8 +72,8 @@ public class SpoonacularRecipeActivity extends AppCompatActivity {
         findViewById(R.id.shimmerRecipe).setVisibility(View.GONE);
     }
 
-    public void setRecipe(List<Recipe> Recipe) {
-        RecyclerViewRecipeAdapter recipeAdapter = new RecyclerViewRecipeAdapter(Recipe, this);
+    public void setRecipe(List<Recipe> recipes) {
+        RecyclerViewRecipeAdapter recipeAdapter = new RecyclerViewRecipeAdapter(recipes, this);
         recyclerViewRecipe.setAdapter(recipeAdapter);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 3,
                 GridLayoutManager.VERTICAL, false);
