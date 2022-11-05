@@ -2,6 +2,7 @@ package edu.northeastern.numad22fateam26;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.loader.app.LoaderManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,7 +27,7 @@ import edu.northeastern.numad22fateam26.model.Sticker;
 import edu.northeastern.numad22fateam26.service.FCMSendService;
 import edu.northeastern.numad22fateam26.model.User;
 
-public class StickActivity extends AppCompatActivity {
+public class StickActivity extends AppCompatActivity implements Dialog.DialogListener {
 
     FirebaseAuth auth;
     Spinner spinner;
@@ -94,10 +95,18 @@ public class StickActivity extends AppCompatActivity {
         //recipeAdapter.notifyDataSetChanged();
 
         stickerAdapter.setOnItemClickListener((view, position) ->  {
-            User selectedUser = (User)spinner.getSelectedItem();
-            FCMSendService.sendNotification(this, selectedUser.getFCMToken(), "from " + auth.getCurrentUser().getEmail(), "hey look this!!!!");
-            Toast.makeText(this, "send to user:" + selectedUser.getUserName(), Toast.LENGTH_SHORT).show();
+            openDialog();
         });
     }
+    @Override
+    public void applyTexts(String title, String message){
+        User selectedUser = (User)spinner.getSelectedItem();
+        FCMSendService.sendNotification(this, selectedUser.getFCMToken(), title, message);
+        Toast.makeText(this, "send to user:" + selectedUser.getUserName(), Toast.LENGTH_SHORT).show();
+    }
 
+    public void openDialog(){
+        Dialog dialog = new Dialog();
+        dialog.show(getSupportFragmentManager(),"Dialog");
+    }
 }
