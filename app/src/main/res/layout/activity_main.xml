@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/button"
         android:fontFamily="@font/fuzzybubblesbold"
-        android:onClick="toStickActivity"
+        android:onClick="toSignInActivity"
         android:text="Stick It to 'Em"
         app:layout_constraintBottom_toTopOf="@+id/about_button"
         app:layout_constraintEnd_toEndOf="parent"

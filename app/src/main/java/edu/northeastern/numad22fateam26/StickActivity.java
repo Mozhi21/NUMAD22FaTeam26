@@ -20,7 +20,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import edu.northeastern.numad22fateam26.model.Sticker;
@@ -29,11 +31,15 @@ import edu.northeastern.numad22fateam26.model.User;
 
 public class StickActivity extends AppCompatActivity implements Dialog.DialogListener {
 
-    FirebaseAuth auth;
-    Spinner spinner;
-    DatabaseReference database;
-    ArrayList<User> users;
-    RecyclerView recyclerViewSticker;
+    private FirebaseAuth auth;
+    private Spinner spinner;
+    private DatabaseReference database;
+    private ArrayList<User> users;
+    private RecyclerView recyclerViewSticker;
+    private Map<String, Sticker> idToSticker;
+    private List<Sticker> stickers;
+
+    private static final List<String> STICKER_IDS = List.of("b01", "c01", "g01","l01","m01","s01","x01","y01","z01");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +50,7 @@ public class StickActivity extends AppCompatActivity implements Dialog.DialogLis
         recyclerViewSticker = findViewById(R.id.recyclerSticker);
 
         auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance().getReference("users");
 
         setSpinner();
         setRecyclerViewSticker();
@@ -62,7 +69,6 @@ public class StickActivity extends AppCompatActivity implements Dialog.DialogLis
     }
 
     private void setSpinner() {
-        database = FirebaseDatabase.getInstance().getReference("users");
         users = new ArrayList<>();
         UserListAdapter adapter = new UserListAdapter(StickActivity.this, users);
         spinner.setAdapter(adapter);
@@ -85,7 +91,14 @@ public class StickActivity extends AppCompatActivity implements Dialog.DialogLis
     }
 
     private void setRecyclerViewSticker() {
-        List<Sticker> stickers = List.of("b01", "c01", "g01","l01","m01","s01","x01","y01","z01").stream().map(name -> new Sticker(name, "5")).collect(Collectors.toList());
+        // init sticker list
+        idToSticker = new HashMap<>();
+        for (String stickerId : STICKER_IDS) {
+            idToSticker.put(stickerId, new Sticker(stickerId, "0"));
+        }
+        stickers = STICKER_IDS.stream().map(idToSticker::get).collect(Collectors.toList());
+
+        // set stickers recycler view
         RecyclerViewStickerAdapter stickerAdapter = new RecyclerViewStickerAdapter(stickers, this);
         recyclerViewSticker.setAdapter(stickerAdapter);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 3,
@@ -94,10 +107,31 @@ public class StickActivity extends AppCompatActivity implements Dialog.DialogLis
         recyclerViewSticker.setNestedScrollingEnabled(true);
         //recipeAdapter.notifyDataSetChanged();
 
+        // read count from database
+        DatabaseReference userRef = database.child(auth.getCurrentUser().getUid()).child("sticker_count");
+
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot:snapshot.getChildren()){
+                    String id = dataSnapshot.getKey();
+                    String times = dataSnapshot.getValue().toString();
+                    idToSticker.get(id).setCount(times);
+                }
+                stickerAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+        // set click listener
         stickerAdapter.setOnItemClickListener((view, position) ->  {
             openDialog();
         });
     }
+
     @Override
     public void applyTexts(String title, String message){
         User selectedUser = (User)spinner.getSelectedItem();
