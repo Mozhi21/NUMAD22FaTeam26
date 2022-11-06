@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -38,6 +39,7 @@ public class StickActivity extends AppCompatActivity implements Dialog.DialogLis
     private FirebaseAuth auth;
     private Spinner spinner;
     private DatabaseReference database;
+    private String clickedStickerId;
     private ArrayList<User> users;
     private RecyclerView recyclerViewSticker;
     private Map<String, Sticker> idToSticker;
@@ -173,7 +175,9 @@ public class StickActivity extends AppCompatActivity implements Dialog.DialogLis
 
         // set click listener
         stickerAdapter.setOnItemClickListener((view, position) ->  {
-            openDialog(position);
+            clickedStickerId = stickers.get(position).getId();
+            Log.v("sticker clicked: ", String.valueOf(stickers.get(position).getId()));
+            openDialog();
         });
     }
 }

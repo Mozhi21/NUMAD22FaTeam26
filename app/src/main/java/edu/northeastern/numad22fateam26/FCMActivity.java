@@ -71,19 +71,19 @@ public class FCMActivity extends AppCompatActivity {
         userToken = findViewById(R.id.user_token_send_to);
     }
 
-    public void sendNotification(View view) {
-        String title = notification_title.getText().toString().trim();
-        String message = notification_message.getText().toString().trim();
-        String userToken = "faBpwDn6SwOkLGG-k6zf1n:APA91bGHG24-vO2o-KSvIkXNEs1I6Y0Q59GUVuYGA7z1dov52tWib3kc-2p-zB9X5EdPPgBVjPtAHKdMFoFhURC-Pt97f-7bvrEyvWyg7PfBEV083sXlW0dMgxbScSSGqdzGM0ueYaqw";
-        String userToken2 = "d9FiXv6bRTusJ5UBlre8gd:APA91bG7HNCjFLkoafsyy6EHCwqCjx4qInt1Fhl07g3_P-MxXgx7k7E91g4zvJ2I-FK9EzK7YezSJDVv8za-iOPRY5tyHJ0GcfY1nzgQRLrmymMP07vdv0NM6ZapZT62alkkAyZZTl3s";
-        Log.v(TAG, "sent");
-        if (title.length() != 0  & message.length() != 0) {
-            FCMSendService.sendNotification(
-                    this,
-                    userToken2,
-                    title,
-                    message
-                    );
-        }
-    }
+//    public void sendNotification(View view) {
+//        String title = notification_title.getText().toString().trim();
+//        String message = notification_message.getText().toString().trim();
+//        String userToken = "faBpwDn6SwOkLGG-k6zf1n:APA91bGHG24-vO2o-KSvIkXNEs1I6Y0Q59GUVuYGA7z1dov52tWib3kc-2p-zB9X5EdPPgBVjPtAHKdMFoFhURC-Pt97f-7bvrEyvWyg7PfBEV083sXlW0dMgxbScSSGqdzGM0ueYaqw";
+//        String userToken2 = "d9FiXv6bRTusJ5UBlre8gd:APA91bG7HNCjFLkoafsyy6EHCwqCjx4qInt1Fhl07g3_P-MxXgx7k7E91g4zvJ2I-FK9EzK7YezSJDVv8za-iOPRY5tyHJ0GcfY1nzgQRLrmymMP07vdv0NM6ZapZT62alkkAyZZTl3s";
+//        Log.v(TAG, "sent");
+//        if (title.length() != 0  & message.length() != 0) {
+//            FCMSendService.sendNotification(
+//                    this,
+//                    userToken2,
+//                    title,
+//                    message
+//                    );
+//        }
+//    }
 }
