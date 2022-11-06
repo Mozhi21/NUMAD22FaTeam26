@@ -120,7 +120,8 @@
                 android:clipToPadding="false"
                 android:scrollbars="none" />
 
-            <include android:id="@+id/shimmerRecipe"
+            <include
+                android:id="@+id/shimmerRecipe"
                 layout="@layout/item_recycler_recipe_shimmer" />
 
             <TextView
