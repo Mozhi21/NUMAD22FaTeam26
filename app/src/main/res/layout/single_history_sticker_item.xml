@@ -50,10 +50,10 @@
                 </LinearLayout>
                 <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="50dp"
+                    android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:scaleType="fitXY"
+                    android:scaleType="centerInside"
                     android:src ="@drawable/c00" />
 
                 <TextView
