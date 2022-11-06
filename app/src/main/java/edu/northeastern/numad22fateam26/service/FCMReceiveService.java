@@ -10,8 +10,11 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
@@ -53,7 +56,13 @@ public class FCMReceiveService extends FirebaseMessagingService {
         // Handling FCM messages here
         String title = remoteMessage.getNotification().getTitle();
         String textMessage = remoteMessage.getNotification().getBody();
-        Bitmap bitmap = getBitmapFromUrl(Objects.requireNonNull(remoteMessage.getNotification().getImageUrl()).toString());
+//        Bitmap bitmap = getBitmapFromUrl(Objects.requireNonNull(remoteMessage.getNotification().getImageUrl()).toString());
+//        createNotificationWithUrl();
+
+        // handling pre-defined stickers in resources
+        String stickerId = remoteMessage.getData().get("stickerId");
+        int stickerResId = getResources().getIdentifier(stickerId, "drawable",getPackageName());
+        Bitmap stickerBitmap = BitmapFactory.decodeResource(getResources(), stickerResId);
 
         Intent activityIntent = new Intent(this, StickerHistoryActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,
@@ -64,17 +73,18 @@ public class FCMReceiveService extends FirebaseMessagingService {
                 .setContentTitle(title)
                 .setContentText(textMessage)
                 .setSmallIcon(android.R.drawable.stat_notify_chat)
-                .setStyle(new NotificationCompat
-                        .BigPictureStyle()
-                        .bigPicture(bitmap)
-                        .bigLargeIcon(null))
-                .setLargeIcon(bitmap)
+                           .setStyle(new NotificationCompat
+                .BigPictureStyle()
+                .bigPicture(stickerBitmap)
+                .bigLargeIcon(null))
+                .setLargeIcon(stickerBitmap)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent);
 
+
         // add action bar
 //        notification.addAction(android.R.mipmap.sym_def_app_icon, "REPLY", pendingIntent);
-        notification.addAction(android.R.mipmap.sym_def_app_icon, "Take a look", pendingIntent);
+        notification.addAction(android.R.drawable.stat_notify_chat, "Take a look", pendingIntent);
 
         // build the notification
         NotificationManagerCompat.from(this).notify(NOTIFICATION_UNIQUE_ID,notification.build());
@@ -82,21 +92,47 @@ public class FCMReceiveService extends FirebaseMessagingService {
         super.onMessageReceived(remoteMessage);
     }
 
-    public Bitmap getBitmapFromUrl(String imageUrl) {
-        try {
-            URL url = new URL(imageUrl);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            return BitmapFactory.decodeStream(input);
+//    private void createNotificationWithUrl(String title, String textMessage, Bitmap bitmap) {
+//        Intent activityIntent = new Intent(this, StickerHistoryActivity.class);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(this,
+//                0, activityIntent,PendingIntent.FLAG_MUTABLE);
+//
+//
+//        NotificationCompat.Builder notification = new NotificationCompat.Builder(this, CHANNEL_ID_MESSAGE)
+//                .setContentTitle(title)
+//                .setContentText(textMessage)
+//                .setSmallIcon(android.R.drawable.stat_notify_chat)
+//                .setStyle(new NotificationCompat
+//                        .BigPictureStyle()
+//                        .bigPicture(bitmap)
+//                        .bigLargeIcon(null))
+//                .setLargeIcon(bitmap)
+//                .setAutoCancel(true)
+//                .setContentIntent(pendingIntent);
+//
+//        // add action bar
+////        notification.addAction(android.R.mipmap.sym_def_app_icon, "REPLY", pendingIntent);
+//        notification.addAction(android.R.drawable.stat_notify_chat, "Take a look", pendingIntent);
+//
+//        // build the notification
+//        NotificationManagerCompat.from(this).notify(NOTIFICATION_UNIQUE_ID,notification.build());
+//    }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-
-        }
-    }
+//    public Bitmap getBitmapFromUrl(String imageUrl) {
+//        try {
+//            URL url = new URL(imageUrl);
+//            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//            connection.setDoInput(true);
+//            connection.connect();
+//            InputStream input = connection.getInputStream();
+//            return BitmapFactory.decodeStream(input);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return null;
+//
+//        }
+//    }
 
 
     private void createNotificationChannel() {

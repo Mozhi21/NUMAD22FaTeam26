@@ -1,6 +1,9 @@
 package edu.northeastern.numad22fateam26;
 
+import static java.lang.String.valueOf;
+
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +49,7 @@ public class RecyclerViewStickerAdapter extends RecyclerView.Adapter<RecyclerVie
         int drawableResourceId = context.getResources().getIdentifier(id, "drawable", context.getPackageName());
         viewHolder.stickerImage.setImageResource(drawableResourceId);
         viewHolder.stickerCount.setText(count);
+        Log.v("sticker id: ", valueOf(id));
     }
 
 
@@ -69,6 +73,8 @@ public class RecyclerViewStickerAdapter extends RecyclerView.Adapter<RecyclerVie
         public void onClick(View v) {
             clickListener.onClick(v, getAdapterPosition());
             //Toast.makeText(v.getContext(), stickerCount.getText().toString(),Toast.LENGTH_SHORT).show();
+
+//            Log.v("clicked sticker id: ", valueOf(id));
         }
     }
 

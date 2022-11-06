@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -38,6 +39,7 @@ public class StickActivity extends AppCompatActivity implements Dialog.DialogLis
     private RecyclerView recyclerViewSticker;
     private Map<String, Sticker> idToSticker;
     private List<Sticker> stickers;
+    private String clickedStickerId;
 
     private static final List<String> STICKER_IDS = List.of("b01", "c01", "g01","l01","m01","s01","x01","y01","z01");
 
@@ -128,6 +130,8 @@ public class StickActivity extends AppCompatActivity implements Dialog.DialogLis
 
         // set click listener
         stickerAdapter.setOnItemClickListener((view, position) ->  {
+            clickedStickerId = stickers.get(position).getId();
+            Log.v("sticker clicked: ", String.valueOf(stickers.get(position).getId()));
             openDialog();
         });
     }
@@ -135,7 +139,7 @@ public class StickActivity extends AppCompatActivity implements Dialog.DialogLis
     @Override
     public void applyTexts(String title, String message){
         User selectedUser = (User)spinner.getSelectedItem();
-        FCMSendService.sendNotification(this, selectedUser.getFCMToken(), title, message);
+        FCMSendService.sendNotification(this, selectedUser.getFCMToken(), title, message, clickedStickerId);
         Toast.makeText(this, "send to user:" + selectedUser.getUserName(), Toast.LENGTH_SHORT).show();
     }
 
