@@ -22,9 +22,6 @@
             android:name=".StickerHistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".FCMActivity"
-            android:exported="false" />
-        <activity
             android:name=".SignInActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false" />

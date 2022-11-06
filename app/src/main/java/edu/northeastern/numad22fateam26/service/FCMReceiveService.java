@@ -3,18 +3,14 @@ package edu.northeastern.numad22fateam26.service;
 
 import static java.lang.String.valueOf;
 
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
@@ -22,11 +18,6 @@ import androidx.core.app.NotificationManagerCompat;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Objects;
 
 import edu.northeastern.numad22fateam26.StickerHistoryActivity;
 

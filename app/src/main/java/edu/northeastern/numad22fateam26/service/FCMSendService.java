@@ -15,8 +15,6 @@ import org.json.JSONObject;
 
 import java.util.Map;
 
-import edu.northeastern.numad22fateam26.StickActivity;
-
 public class FCMSendService {
     private static final String SERVER_KEY = "key=AAAA3CYsa5o:APA91bH1nIvPXwnVUIjXjjwDHIWChJg21gksjWkRDvalw-vFYO3nwBPtlRH3PtA5cNsBq-KCkq_p-CFbXgeYfB3u0Ty89qjbM9u5NYh6cI_GGnb_kOvX4uUfYQaaf0QmHhxD0uLVt4-f";
     private static final String BASE_URL = "https://fcm.googleapis.com/fcm/send";

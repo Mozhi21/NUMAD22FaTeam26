@@ -1,11 +1,5 @@
 package edu.northeastern.numad22fateam26;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.loader.app.LoaderManager;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -13,6 +7,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -26,13 +25,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import edu.northeastern.numad22fateam26.model.Sticker;
-import edu.northeastern.numad22fateam26.service.FCMSendService;
 import edu.northeastern.numad22fateam26.model.User;
+import edu.northeastern.numad22fateam26.service.FCMSendService;
 
 public class StickActivity extends AppCompatActivity implements Dialog.DialogListener {
 
@@ -82,10 +80,6 @@ public class StickActivity extends AppCompatActivity implements Dialog.DialogLis
 
     public void back(View view){
         startActivity(new Intent(StickActivity.this, MainActivity.class));
-    }
-
-    public void toFCMActivity(View view){
-        startActivity(new Intent(StickActivity.this, FCMActivity.class));
     }
 
     public void openDialog(int position){

@@ -1,12 +1,8 @@
 package edu.northeastern.numad22fateam26.api;
 
-import java.util.List;
-
 import edu.northeastern.numad22fateam26.model.ListRecipesResponse;
-import edu.northeastern.numad22fateam26.model.Recipe;
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Headers;
 import retrofit2.http.Query;
 
 public interface SpoonacularApi {

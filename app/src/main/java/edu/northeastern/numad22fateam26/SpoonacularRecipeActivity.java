@@ -1,11 +1,11 @@
 package edu.northeastern.numad22fateam26;
 
+import android.os.Bundle;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-import android.view.View;
 
 import com.google.gson.Gson;
 
