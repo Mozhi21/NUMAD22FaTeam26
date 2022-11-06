@@ -13,6 +13,7 @@
     <string name="slider_desc">Calories</string>
     <string name="input_reminder">(optional) Enter keyword here. e.g. pasta</string>
     <string name="Xinyigithub"><a href="https://github.com/FentPams">Github link</a></string>
+    <string name="JingGithubLink"><a href="https://github.com/yej002">Github link</a></string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
