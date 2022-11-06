@@ -104,7 +104,7 @@ public class SignInActivity extends AppCompatActivity {
 
     //transit to city category activity if sign in successfully
     private void transitionToSocialMediaActivity() {
-        Intent intent = new Intent(this, StickActivity.class);
+        Intent intent = new Intent(this, StickerActivity.class);
         startActivity(intent);
     }
 

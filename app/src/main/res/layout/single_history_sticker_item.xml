@@ -28,7 +28,7 @@
                         android:layout_margin="7dp"
                         android:fontFamily="@font/fuzzybubblesregular"
                         android:text="FromWhom"
-                        android:textColor="@color/orange"
+                        android:textColor="@color/black"
                         android:textSize="12sp" />
 
                     <TextView
@@ -38,7 +38,7 @@
                         android:layout_margin="7dp"
                         android:fontFamily="@font/fuzzybubblesregular"
                         android:text="Date"
-                        android:textColor="@color/orange"
+                        android:textColor="@color/black"
                         android:textSize="12sp" />
                 </LinearLayout>
                 <ImageView
@@ -54,10 +54,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/fuzzybubblesregular"
-                    android:gravity="left"
+                    android:gravity="center"
+                    android:textColor="@color/black"
                     android:text="Description"
-                    android:textSize="10sp"
-                    android:layout_marginLeft="10dp"/>
+                    android:textSize="13sp"/>
 
 
             </LinearLayout>

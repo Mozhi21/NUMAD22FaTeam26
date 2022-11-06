@@ -20,19 +20,22 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import edu.northeastern.numad22fateam26.model.Notification;
 import edu.northeastern.numad22fateam26.model.Sticker;
 import edu.northeastern.numad22fateam26.model.User;
 import edu.northeastern.numad22fateam26.service.FCMSendService;
 
-public class StickActivity extends AppCompatActivity implements Dialog.DialogListener {
+public class StickerActivity extends AppCompatActivity implements Dialog.DialogListener {
 
     private FirebaseAuth auth;
     private Spinner spinner;
@@ -67,7 +70,8 @@ public class StickActivity extends AppCompatActivity implements Dialog.DialogLis
         FCMSendService.sendNotification(this, selectedUser.getFCMToken(), title, message, clickedStickerId);
 
         // update sticker count(+1)
-        Sticker sticker = idToSticker.get(STICKER_IDS.get(position));
+        String id = STICKER_IDS.get(position);
+        Sticker sticker = idToSticker.get(id);
         sticker.increaseCount();
         // notify adapter
         stickerAdapter.notifyDataSetChanged();
@@ -75,11 +79,23 @@ public class StickActivity extends AppCompatActivity implements Dialog.DialogLis
         DatabaseReference userStickerCountRef = database.child(auth.getCurrentUser().getUid()).child("sticker_count").child(sticker.getId());
         userStickerCountRef.setValue(sticker.getCount());
 
+        //record this notification to database
+        String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date());
+        writeNotificationToDatabase(selectedUser.getUserId(), auth.getCurrentUser().getEmail(), timeStamp, id, message);
+
         Toast.makeText(this, "send to user:" + selectedUser.getUserName(), Toast.LENGTH_SHORT).show();
     }
 
+    private void writeNotificationToDatabase(String receiverUid, String senderEmail, String date, String id, String message) {
+        String senderName = senderEmail.substring(0, senderEmail.length() - "@group26.com".length());
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("notifications").child(receiverUid).push();
+        String uuid = ref.getKey();
+        Notification notification = new Notification(uuid, senderName, date, id, message);
+        ref.setValue(notification);
+    }
+
     public void back(View view){
-        startActivity(new Intent(StickActivity.this, MainActivity.class));
+        startActivity(new Intent(StickerActivity.this, MainActivity.class));
     }
 
     public void openDialog(int position){
@@ -89,21 +105,21 @@ public class StickActivity extends AppCompatActivity implements Dialog.DialogLis
 
     public void logout(View view){
         FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(StickActivity.this, MainActivity.class));
+        startActivity(new Intent(StickerActivity.this, MainActivity.class));
 
     }
 
     public void toStickerHistoryActivity(View view){
-        startActivity(new Intent(StickActivity.this, StickerHistoryActivity.class));
+        startActivity(new Intent(StickerActivity.this, StickerHistoryActivity.class));
     }
 
     public void BackToHomeActivity(View view){
-        startActivity(new Intent(StickActivity.this, MainActivity.class));
+        startActivity(new Intent(StickerActivity.this, MainActivity.class));
     }
 
     private void setSpinner() {
         users = new ArrayList<>();
-        UserListAdapter adapter = new UserListAdapter(StickActivity.this, users);
+        UserListAdapter adapter = new UserListAdapter(StickerActivity.this, users);
         spinner.setAdapter(adapter);
 
         database.addValueEventListener(new ValueEventListener() {
