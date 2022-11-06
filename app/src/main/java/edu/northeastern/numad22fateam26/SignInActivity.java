@@ -7,8 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -106,7 +104,7 @@ public class SignInActivity extends AppCompatActivity {
 
     //transit to city category activity if sign in successfully
     private void transitionToSocialMediaActivity() {
-        Intent intent = new Intent(this, StickActivity.class);
+        Intent intent = new Intent(this, StickerActivity.class);
         startActivity(intent);
     }
 

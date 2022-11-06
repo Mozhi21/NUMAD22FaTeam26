@@ -55,7 +55,7 @@
         android:text="UNREAD MESSAGES"
         android:fontFamily="@font/fuzzybubblesbold"
         android:textColor="@color/orange"
-        app:layout_constraintBottom_toTopOf="@+id/unreadedRecycler"
+        app:layout_constraintBottom_toTopOf="@+id/unreadRecycler"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.056"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,11 +63,11 @@
         app:layout_constraintVertical_bias="0.479" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/unreadedRecycler"
+        android:id="@+id/unreadRecycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/readedRecycler"
+        app:layout_constraintBottom_toTopOf="@+id/readRecycler"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
@@ -76,17 +76,17 @@
         android:id="@+id/readed_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="READED MESSAGES"
+        android:text="READ MESSAGES"
         android:fontFamily="@font/fuzzybubblesbold"
         android:textColor="@color/orange"
-        app:layout_constraintBottom_toTopOf="@+id/readedRecycler"
+        app:layout_constraintBottom_toTopOf="@+id/readRecycler"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.056"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/unreadedRecycler" />
+        app:layout_constraintTop_toBottomOf="@+id/unreadRecycler" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/readedRecycler"
+        android:id="@+id/readRecycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -94,6 +94,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/unreadedRecycler" />
+        app:layout_constraintTop_toBottomOf="@+id/unreadRecycler" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -32,7 +32,7 @@
                         android:textSize="12sp" />
 
                     <TextView
-                        android:id="@+id/sendDate"
+                        android:id="@+id/sentAt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="7dp"
@@ -41,15 +41,15 @@
                         android:textColor="@color/orange"
                         android:textSize="12sp" />
 
-                    <CheckBox
-                        android:id="@+id/checkBox"
-                        android:layout_width="fill_parent"
+                    <Button
+                        android:id="@+id/isRead"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Mark as readed"
-                        android:layout_margin="7dp" />
+                        android:text="Mark as read"
+                        android:layout_margin="12sp" />
                 </LinearLayout>
                 <ImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/historySticker"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
@@ -57,12 +57,22 @@
                     android:src ="@drawable/c00" />
 
                 <TextView
-                    android:id="@+id/description"
+                    android:id="@+id/messageTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/fuzzybubblesbold"
+                    android:gravity="left"
+                    android:text="Title"
+                    android:textSize="10sp"
+                    android:layout_marginLeft="10dp"/>
+
+                <TextView
+                    android:id="@+id/messageDetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/fuzzybubblesregular"
                     android:gravity="left"
-                    android:text="Description"
+                    android:text="Detail"
                     android:textSize="10sp"
                     android:layout_marginLeft="10dp"/>
 

@@ -33,7 +33,7 @@
             android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
-            android:name=".StickActivity"
+            android:name=".StickerActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
