@@ -15,11 +15,22 @@
 
 
 ## Overview of our App :iphone:
+### :point_right:A8 Stick it to them: 
+####  :white_check_mark: Features completed:
+-  Sign In & Sign Up with UserName only
+-  Sned users with pre-defined sticker
+-  Count the stickers have been sent
+-  Notifications with pics and text at background and foreground
+-  Unread and read messages (Transfer unread message to read by clicking the image)
+-  Personalize show the user interface(user name display)
+-  About our team UI
+
+
 ### :point_right:A7 at your service: 
 - Api use:   [Spoonacular](https://spoonacular.com/food-api)
 - This api support **1** request per second, **150** request per day
 
-###  :white_check_mark: Features completed:
+####  :white_check_mark: Features completed:
 
 :small_orange_diamond: Splash Screen with group name and group member name (animation)
 
@@ -37,6 +48,7 @@
 :small_orange_diamond: The number of recipes shown can be selected by users
 
 :small_orange_diamond: Using shimmer to implement active loading [link](https://github.com/facebook/shimmer-android)
+
 
 
 
