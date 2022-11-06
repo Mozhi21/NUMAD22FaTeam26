@@ -14,32 +14,32 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import edu.northeastern.numad22fateam26.model.StickerHistory;
+import edu.northeastern.numad22fateam26.model.Notification;
 
-public class RecyclerViewStickerHistoryAdapter extends RecyclerView.Adapter<RecyclerViewStickerHistoryAdapter.RecyclerViewHolder> {
+public class RecyclerViewNotificationAdapter extends RecyclerView.Adapter<RecyclerViewNotificationAdapter.RecyclerViewHolder> {
     Context context;
-    List<StickerHistory> stickerHistoryList;
-    private static RecyclerViewStickerHistoryAdapter.ClickListener clickListener;
+    List<Notification> notifications;
+    private RecyclerViewNotificationAdapter.ClickListener clickListener;
 
-    public RecyclerViewStickerHistoryAdapter(List<StickerHistory> stickerHistoryList, Context context) {
-        this.stickerHistoryList = stickerHistoryList;
+    public RecyclerViewNotificationAdapter(List<Notification> stickerHistoryList, Context context) {
+        this.notifications = stickerHistoryList;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public RecyclerViewStickerHistoryAdapter.RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public RecyclerViewNotificationAdapter.RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.single_history_sticker_item,
                 viewGroup, false);
-        return new RecyclerViewStickerHistoryAdapter.RecyclerViewHolder(view);
+        return new RecyclerViewNotificationAdapter.RecyclerViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewStickerHistoryAdapter.RecyclerViewHolder viewHolder, int i) {
-        String fromWhom = stickerHistoryList.get(i).getSenderName();
-        String date = stickerHistoryList.get(i).getDate();
-        String id = stickerHistoryList.get(i).getId();
-        String message = stickerHistoryList.get(i).getMessage();
+    public void onBindViewHolder(@NonNull RecyclerViewNotificationAdapter.RecyclerViewHolder viewHolder, int i) {
+        String fromWhom = notifications.get(i).getSenderName();
+        String date = notifications.get(i).getDate();
+        String id = notifications.get(i).getId();
+        String message = notifications.get(i).getMessage();
 
         int drawableResourceId = context.getResources().getIdentifier(id, "drawable", context.getPackageName());
         viewHolder.stickerImage.setImageResource(drawableResourceId);
@@ -50,11 +50,11 @@ public class RecyclerViewStickerHistoryAdapter extends RecyclerView.Adapter<Recy
 
     @Override
     public int getItemCount() {
-        return stickerHistoryList.size();
+        return notifications.size();
     }
 
 
-    static class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.imageView)
         ImageView stickerImage;
         @BindView(R.id.fromWhom)
@@ -78,8 +78,8 @@ public class RecyclerViewStickerHistoryAdapter extends RecyclerView.Adapter<Recy
     }
 
 
-    public void setOnItemClickListener(RecyclerViewStickerHistoryAdapter.ClickListener clickListener) {
-        RecyclerViewStickerHistoryAdapter.clickListener = clickListener;
+    public void setOnItemClickListener(RecyclerViewNotificationAdapter.ClickListener clickListener) {
+        this.clickListener = clickListener;
     }
 
 

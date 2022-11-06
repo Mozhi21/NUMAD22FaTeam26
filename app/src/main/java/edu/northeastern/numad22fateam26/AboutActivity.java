@@ -22,5 +22,7 @@ public class AboutActivity extends AppCompatActivity {
     private void setupHyperlink(){
         TextView linkTextView = findViewById(R.id.xinyigitlink);
         linkTextView.setMovementMethod(LinkMovementMethod.getInstance());
+        TextView jingTextView = findViewById(R.id.jing_contact);
+        jingTextView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 }

@@ -1,16 +1,24 @@
 package edu.northeastern.numad22fateam26.model;
 
-public class StickerHistory {
+public class Notification {
+    String uuid;
     String senderName;
     String date;
     String id;
     String message;
+    boolean reviewed;
 
-    public StickerHistory(String senderName, String date, String id, String message) {
+    public Notification() {
+
+    }
+
+    public Notification(String uuid, String senderName, String date, String id, String message) {
+        this.uuid = uuid;
         this.senderName = senderName;
         this.date = date;
         this.id = id;
         this.message = message;
+        this.reviewed = false;
     }
 
     public String getSenderName() {
@@ -43,5 +51,21 @@ public class StickerHistory {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public boolean isReviewed() {
+        return reviewed;
+    }
+
+    public void setReviewed(boolean reviewed) {
+        this.reviewed = reviewed;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 }

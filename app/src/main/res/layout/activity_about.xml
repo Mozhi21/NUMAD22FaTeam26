@@ -10,9 +10,9 @@
         android:id="@+id/backbtnonAbout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:onClick="back"
         android:src="@drawable/back_ic"
-        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toTopOf="@+id/groupimage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.040"
@@ -41,7 +41,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <TextView
         android:id="@+id/groupText"
@@ -122,17 +121,16 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
         </LinearLayout>
-
-
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/Jinglinear"
-        android:layout_width="300dp"
+        android:layout_width="wrap_content"
         android:layout_height="80dp"
         android:layout_margin="30dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/xinyilinear">
 
@@ -148,20 +146,182 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
-                android:src="@drawable/sample_image_category">
-            </ImageView>
+                android:src="@drawable/jing"></ImageView>
         </androidx.cardview.widget.CardView>
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="John Doe"
-            android:fontFamily="@font/fuzzybubblesregular"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/fuzzybubblesbold"
+            android:padding="17dp"
+            android:text="Jing Ye"
+            android:textColor="@color/orange"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/xinyi"
-            android:padding="30dp"
+            app:layout_constraintStart_toEndOf="@+id/jing"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/jing_contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/fuzzybubblesregular"
+                android:text="@string/JingGithubLink"
+                android:textSize="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/fuzzybubblesregular"
+                android:paddingTop="20dp"
+                android:text="ye.jing2@northeastern.edu"
+                android:textSize="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Johndoelinear"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_margin="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Jinglinear">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/johndoe"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:cardCornerRadius="40dp"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="350dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/sample_image_category"></ImageView>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/fuzzybubblesbold"
+            android:padding="17dp"
+            android:text="John Doe"
+            android:textColor="@color/orange"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/johndoe"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/johndoe_contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/fuzzybubblesregular"
+                android:text="John Doe's github link"
+                android:textSize="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/fuzzybubblesregular"
+                android:paddingTop="20dp"
+                android:text="John Doe's email"
+                android:textSize="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Johndoe2linear"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_margin="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Johndoelinear">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/johndoe2"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:cardCornerRadius="40dp"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="350dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/sample_image_category"></ImageView>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/fuzzybubblesbold"
+            android:padding="17dp"
+            android:text="John Doe 2"
+            android:textColor="@color/orange"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/johndoe2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/johndoe2_contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/fuzzybubblesregular"
+                android:text="John Doe2's github link"
+                android:textSize="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/fuzzybubblesregular"
+                android:paddingTop="20dp"
+                android:text="John Doe2's email"
+                android:textSize="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

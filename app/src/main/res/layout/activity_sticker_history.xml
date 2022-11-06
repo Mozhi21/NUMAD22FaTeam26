@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:text="UNREAD MESSAGES"
         android:fontFamily="@font/fuzzybubblesbold"
-        android:textColor="@color/orange"
+        android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toTopOf="@+id/unreadedRecycler"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.056"
@@ -78,7 +78,7 @@
         android:layout_height="wrap_content"
         android:text="READED MESSAGES"
         android:fontFamily="@font/fuzzybubblesbold"
-        android:textColor="@color/orange"
+        android:textColor="@color/teal_700"
         app:layout_constraintBottom_toTopOf="@+id/readedRecycler"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.056"
@@ -94,6 +94,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/unreadedRecycler" />
+        app:layout_constraintTop_toBottomOf="@+id/unreadedRecycler"
+        android:clipToPadding="false" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/click_animation"
+        android:layout_width="109dp"
+        android:layout_height="111dp"
+        android:layout_alignParentRight="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.87"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.179"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/click" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
