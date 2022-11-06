@@ -66,7 +66,7 @@ public class StickActivity extends AppCompatActivity implements Dialog.DialogLis
     @Override
     public void applyTexts(String title, String message, int position){
         User selectedUser = (User)spinner.getSelectedItem();
-        FCMSendService.sendNotification(this, selectedUser.getFCMToken(), title, message);
+        FCMSendService.sendNotification(this, selectedUser.getFCMToken(), title, message, clickedStickerId);
 
         // update sticker count(+1)
         Sticker sticker = idToSticker.get(STICKER_IDS.get(position));
@@ -177,7 +177,7 @@ public class StickActivity extends AppCompatActivity implements Dialog.DialogLis
         stickerAdapter.setOnItemClickListener((view, position) ->  {
             clickedStickerId = stickers.get(position).getId();
             Log.v("sticker clicked: ", String.valueOf(stickers.get(position).getId()));
-            openDialog();
+            openDialog(position);
         });
     }
 }
