@@ -1,9 +1,12 @@
 package edu.northeastern.numad22fateam26;
 
+import static edu.northeastern.numad22fateam26.StickerActivity.displayUserName;
+
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,6 +30,7 @@ import java.util.stream.Collectors;
 import edu.northeastern.numad22fateam26.model.Notification;
 import edu.northeastern.numad22fateam26.model.Sticker;
 
+
 public class StickerHistoryActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
@@ -34,6 +38,7 @@ public class StickerHistoryActivity extends AppCompatActivity {
     private RecyclerView unreadedRecyclerView;
     private RecyclerView readedRecyclerView;
     private LottieAnimationView lottie;
+    private TextView userNameDisplay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +52,9 @@ public class StickerHistoryActivity extends AppCompatActivity {
 
         setUnreadedNotifications();
         setReadedNotifications();
+
+        userNameDisplay = findViewById(R.id.textViewUserNameHistory);
+        displayUserName(userNameDisplay);
 
         lottie = findViewById(R.id.click_animation);
         lottie.setSpeed(5);
