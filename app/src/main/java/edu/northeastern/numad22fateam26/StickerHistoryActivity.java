@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,6 +33,7 @@ public class StickerHistoryActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private RecyclerView unreadedRecyclerView;
     private RecyclerView readedRecyclerView;
+    private LottieAnimationView lottie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,10 @@ public class StickerHistoryActivity extends AppCompatActivity {
 
         setUnreadedNotifications();
         setReadedNotifications();
+
+        lottie = findViewById(R.id.click_animation);
+        lottie.setSpeed(5);
+        lottie.animate().translationX(150000).setDuration(150000).setStartDelay(1000);
     }
 
     private void setUnreadedNotifications() {
