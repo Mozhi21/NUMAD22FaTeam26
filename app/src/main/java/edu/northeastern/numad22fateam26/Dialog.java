@@ -16,6 +16,12 @@ public class Dialog extends AppCompatDialogFragment {
     private EditText edtMessage;
     private EditText edtTitle;
     private DialogListener listener;
+    private int position;
+
+    public Dialog(int position) {
+        this.position = position;
+    }
+
     @NonNull
     @Override
     public android.app.Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -35,7 +41,7 @@ public class Dialog extends AppCompatDialogFragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String message = edtMessage.getText().toString();
                         String title = edtTitle.getText().toString();
-                        listener.applyTexts(title, message);
+                        listener.applyTexts(title, message, position);
 
                     }
                 });
@@ -56,6 +62,6 @@ public class Dialog extends AppCompatDialogFragment {
 
     }
     public interface DialogListener{
-        void applyTexts(String message, String senderName);
+        void applyTexts(String message, String senderName, int position);
     }
 }

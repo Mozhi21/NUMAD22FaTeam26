@@ -25,5 +25,9 @@ public class Sticker {
         this.count = count;
     }
 
+    public void increaseCount() {
+        this.count = String.valueOf(Integer.parseInt(this.count) + 1);
+    }
+
 }
 

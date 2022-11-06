@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Spinner;
@@ -20,8 +21,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -38,6 +42,7 @@ public class StickActivity extends AppCompatActivity implements Dialog.DialogLis
     private RecyclerView recyclerViewSticker;
     private Map<String, Sticker> idToSticker;
     private List<Sticker> stickers;
+    private RecyclerViewStickerAdapter stickerAdapter;
 
     private static final List<String> STICKER_IDS = List.of("b01", "c01", "g01","l01","m01","s01","x01","y01","z01");
 
@@ -56,8 +61,21 @@ public class StickActivity extends AppCompatActivity implements Dialog.DialogLis
         setRecyclerViewSticker();
     }
 
-    public void sendC1(View view) {
+    @Override
+    public void applyTexts(String title, String message, int position){
+        User selectedUser = (User)spinner.getSelectedItem();
+        FCMSendService.sendNotification(this, selectedUser.getFCMToken(), title, message);
 
+        // update sticker count(+1)
+        Sticker sticker = idToSticker.get(STICKER_IDS.get(position));
+        sticker.increaseCount();
+        // notify adapter
+        stickerAdapter.notifyDataSetChanged();
+        // update database also
+        DatabaseReference userStickerCountRef = database.child(auth.getCurrentUser().getUid()).child("sticker_count").child(sticker.getId());
+        userStickerCountRef.setValue(sticker.getCount());
+
+        Toast.makeText(this, "send to user:" + selectedUser.getUserName(), Toast.LENGTH_SHORT).show();
     }
 
     public void back(View view){
@@ -68,6 +86,25 @@ public class StickActivity extends AppCompatActivity implements Dialog.DialogLis
         startActivity(new Intent(StickActivity.this, FCMActivity.class));
     }
 
+    public void openDialog(int position){
+        Dialog dialog = new Dialog(position);
+        dialog.show(getSupportFragmentManager(),"Dialog");
+    }
+
+    public void logout(View view){
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(StickActivity.this, MainActivity.class));
+
+    }
+
+    public void toStickerHistoryActivity(View view){
+        startActivity(new Intent(StickActivity.this, StickerHistoryActivity.class));
+    }
+
+    public void BackToHomeActivity(View view){
+        startActivity(new Intent(StickActivity.this, MainActivity.class));
+    }
+
     private void setSpinner() {
         users = new ArrayList<>();
         UserListAdapter adapter = new UserListAdapter(StickActivity.this, users);
@@ -76,10 +113,12 @@ public class StickActivity extends AppCompatActivity implements Dialog.DialogLis
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                users.clear();
                 for(DataSnapshot dataSnapshot:snapshot.getChildren()){
                     User user = dataSnapshot.getValue(User.class);
                     user.setUserId(dataSnapshot.getKey());
                     users.add(user);
+                    Collections.sort(users,Comparator.comparing(a -> a.getUserName().toLowerCase()));
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -99,13 +138,19 @@ public class StickActivity extends AppCompatActivity implements Dialog.DialogLis
         stickers = STICKER_IDS.stream().map(idToSticker::get).collect(Collectors.toList());
 
         // set stickers recycler view
-        RecyclerViewStickerAdapter stickerAdapter = new RecyclerViewStickerAdapter(stickers, this);
+        stickerAdapter = new RecyclerViewStickerAdapter(stickers, this);
         recyclerViewSticker.setAdapter(stickerAdapter);
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 3,
-                GridLayoutManager.VERTICAL, false);
+        int orientation = this.getResources().getConfiguration().orientation;
+        GridLayoutManager layoutManager;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            layoutManager = new GridLayoutManager(this, 9,
+                    GridLayoutManager.VERTICAL, false);
+        } else { // vertical
+            layoutManager = new GridLayoutManager(this, 3,
+                    GridLayoutManager.VERTICAL, false);
+        }
         recyclerViewSticker.setLayoutManager(layoutManager);
         recyclerViewSticker.setNestedScrollingEnabled(true);
-        //recipeAdapter.notifyDataSetChanged();
 
         // read count from database
         DatabaseReference userRef = database.child(auth.getCurrentUser().getUid()).child("sticker_count");
@@ -128,33 +173,7 @@ public class StickActivity extends AppCompatActivity implements Dialog.DialogLis
 
         // set click listener
         stickerAdapter.setOnItemClickListener((view, position) ->  {
-            openDialog();
+            openDialog(position);
         });
-    }
-
-    @Override
-    public void applyTexts(String title, String message){
-        User selectedUser = (User)spinner.getSelectedItem();
-        FCMSendService.sendNotification(this, selectedUser.getFCMToken(), title, message);
-        Toast.makeText(this, "send to user:" + selectedUser.getUserName(), Toast.LENGTH_SHORT).show();
-    }
-
-    public void openDialog(){
-        Dialog dialog = new Dialog();
-        dialog.show(getSupportFragmentManager(),"Dialog");
-    }
-
-    public void logout(View view){
-        FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(StickActivity.this, MainActivity.class));
-
-    }
-
-    public void toStickerHistoryActivity(View view){
-        startActivity(new Intent(StickActivity.this, StickerHistoryActivity.class));
-    }
-
-    public void BackToHomeActivity(View view){
-        startActivity(new Intent(StickActivity.this, MainActivity.class));
     }
 }
