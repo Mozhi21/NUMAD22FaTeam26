@@ -49,6 +49,7 @@ public class FCMSendService {
             json.put("notification", notification);
             // sticker from resource folder
             JSONObject data = new JSONObject();
+            stickerId = "dsafasdf";
             data.put("stickerId", stickerId);
             json.put("data", data);
 
