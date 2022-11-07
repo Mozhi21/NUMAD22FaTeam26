@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -13,7 +14,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -46,6 +50,7 @@ public class StickerActivity extends AppCompatActivity implements Dialog.DialogL
     private Map<String, Sticker> idToSticker;
     private List<Sticker> stickers;
     private RecyclerViewStickerAdapter stickerAdapter;
+    private TextView userNameDisplay;
 
     private static final List<String> STICKER_IDS = List.of("b01", "c01", "g01","l01","m01","s01","x01","y01","z01");
 
@@ -53,6 +58,9 @@ public class StickerActivity extends AppCompatActivity implements Dialog.DialogL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stick);
+
+        userNameDisplay = findViewById(R.id.textViewUserNameStick);
+        displayUserName(userNameDisplay);
 
         spinner = findViewById(R.id.spinner);
         recyclerViewSticker = findViewById(R.id.recyclerSticker);
@@ -188,6 +196,21 @@ public class StickerActivity extends AppCompatActivity implements Dialog.DialogL
             clickedStickerId = stickers.get(position).getId();
             Log.v("sticker clicked: ", String.valueOf(stickers.get(position).getId()));
             openDialog(position);
+        });
+    }
+    public static void displayUserName(TextView userNameDisplay){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+        mDatabase.getReference("users").child(user.getUid()).child("username").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()){
+                    userNameDisplay.setText("Please Sign In!");
+                }
+                else {
+                    userNameDisplay.setText("Welcome Back, " +String.valueOf(task.getResult().getValue()));
+                }
+            }
         });
     }
 }
