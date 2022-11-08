@@ -35,6 +35,7 @@ public class FCMSendService {
 //                    .penaltyDeath()
 //                    .build());
 //        }
+        Log.v(TAG, token+ "\n" + title + "\n" + message + "\n" + stickerId );
 
         RequestQueue queue = Volley.newRequestQueue(context);
 
@@ -62,7 +63,7 @@ public class FCMSendService {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.v(TAG, error.getMessage());
+                            Log.e(TAG, error.getMessage());
                         }
                     }) {
                 @Override
