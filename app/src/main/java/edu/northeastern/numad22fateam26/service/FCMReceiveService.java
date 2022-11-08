@@ -1,6 +1,6 @@
 package edu.northeastern.numad22fateam26.service;
 
-
+import edu.northeastern.numad22fateam26.R;
 import static java.lang.String.valueOf;
 
 import android.app.NotificationChannel;
@@ -32,7 +32,7 @@ public class FCMReceiveService extends FirebaseMessagingService {
         Log.d(TAG, "From: " + remoteMessage.getFrom());
 
         // create customized channel
-//        createNotificationChannel();
+        createNotificationChannel();
 
         // check notification payload
         if (remoteMessage.getNotification() != null) {
@@ -71,7 +71,7 @@ public class FCMReceiveService extends FirebaseMessagingService {
 
         // set LargeIcon
         if (stickerBitmap != null) {
-            notification.setSmallIcon(android.R.drawable.stat_notify_chat)
+            notification.setSmallIcon(R.mipmap.ic_launcher)
                     .setStyle(new NotificationCompat
                             .BigPictureStyle()
                             .bigPicture(stickerBitmap)
@@ -81,7 +81,7 @@ public class FCMReceiveService extends FirebaseMessagingService {
 
         // add action bar
 //        notification.addAction(android.R.mipmap.sym_def_app_icon, "REPLY", pendingIntent);
-        notification.addAction(android.R.drawable.stat_notify_chat, "Take a look", pendingIntent);
+        notification.addAction(R.mipmap.ic_launcher, "Take a look", pendingIntent);
 
         // build the notification
         NotificationManagerCompat.from(this).notify(NOTIFICATION_UNIQUE_ID,notification.build());

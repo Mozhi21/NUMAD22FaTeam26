@@ -35,6 +35,7 @@ public class FCMSendService {
 //                    .penaltyDeath()
 //                    .build());
 //        }
+        Log.v(TAG, token+ "\n" + title + "\n" + message + "\n" + stickerId );
 
         RequestQueue queue = Volley.newRequestQueue(context);
 
@@ -49,7 +50,6 @@ public class FCMSendService {
             json.put("notification", notification);
             // sticker from resource folder
             JSONObject data = new JSONObject();
-            stickerId = "dsafasdf";
             data.put("stickerId", stickerId);
             json.put("data", data);
 
@@ -63,7 +63,7 @@ public class FCMSendService {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.v(TAG, error.getMessage());
+                            Log.e(TAG, error.getMessage());
                         }
                     }) {
                 @Override
