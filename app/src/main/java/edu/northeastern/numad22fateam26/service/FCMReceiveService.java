@@ -52,22 +52,22 @@ public class FCMReceiveService extends FirebaseMessagingService {
 
         // handling pre-defined stickers in resources
         String stickerId = remoteMessage.getData().get("stickerId");
-        int stickerResId = getResources().getIdentifier(stickerId, "drawable",getPackageName());
+        int stickerResId = getResources().getIdentifier(stickerId, "drawable", getPackageName());
         Bitmap stickerBitmap = BitmapFactory.decodeResource(getResources(), stickerResId);
 
         Intent activityIntent = new Intent(this, StickerHistoryActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,
-                0, activityIntent,PendingIntent.FLAG_MUTABLE);
+                0, activityIntent, PendingIntent.FLAG_MUTABLE);
 
 
         NotificationCompat.Builder notification = new NotificationCompat.Builder(this, CHANNEL_ID_MESSAGE)
                 .setContentTitle(title)
                 .setContentText(textMessage)
                 .setSmallIcon(android.R.drawable.stat_notify_chat)
-                           .setStyle(new NotificationCompat
-                .BigPictureStyle()
-                .bigPicture(stickerBitmap)
-                .bigLargeIcon(null))
+                .setStyle(new NotificationCompat
+                        .BigPictureStyle()
+                        .bigPicture(stickerBitmap)
+                        .bigLargeIcon(null))
                 .setLargeIcon(stickerBitmap)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent);
