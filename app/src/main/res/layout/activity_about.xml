@@ -20,22 +20,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lineanimation"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/groupText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/groupimage"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/line" />
-
     <ImageView
         android:id="@+id/groupimage"
         android:layout_width="wrap_content"
-        android:layout_height="160dp"
+        android:layout_height="120dp"
         android:src="@drawable/g26"
         app:layout_constraintBottom_toTopOf="@+id/groupText"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +38,7 @@
         android:fontFamily="@font/fuzzybubblesbold"
         android:text="Group 26 Members"
         android:textColor="@color/darkgrey"
-        android:textSize="22dp"
+        android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/xinyilinear"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -60,10 +48,10 @@
         android:layout_width="wrap_content"
         android:layout_height="80dp"
         android:layout_margin="30dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="28dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/groupText">
 
@@ -125,8 +113,8 @@
 
     <LinearLayout
         android:id="@+id/Jinglinear"
-        android:layout_width="wrap_content"
-        android:layout_height="80dp"
+        android:layout_width="330dp"
+        android:layout_height="75dp"
         android:layout_margin="30dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -263,6 +251,7 @@
         android:layout_height="80dp"
         android:layout_margin="30dp"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
