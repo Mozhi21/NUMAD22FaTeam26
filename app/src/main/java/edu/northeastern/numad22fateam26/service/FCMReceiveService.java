@@ -55,6 +55,7 @@ public class FCMReceiveService extends FirebaseMessagingService {
         int stickerResId = getResources().getIdentifier(stickerId, "drawable",getPackageName());
         Bitmap stickerBitmap = BitmapFactory.decodeResource(getResources(), stickerResId);
 
+
         Intent activityIntent = new Intent(this, StickerHistoryActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,
                 0, activityIntent,PendingIntent.FLAG_MUTABLE);
@@ -63,15 +64,20 @@ public class FCMReceiveService extends FirebaseMessagingService {
         NotificationCompat.Builder notification = new NotificationCompat.Builder(this, CHANNEL_ID_MESSAGE)
                 .setContentTitle(title)
                 .setContentText(textMessage)
-                .setSmallIcon(android.R.drawable.stat_notify_chat)
-                           .setStyle(new NotificationCompat
-                .BigPictureStyle()
-                .bigPicture(stickerBitmap)
-                .bigLargeIcon(null))
-                .setLargeIcon(stickerBitmap)
+
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent);
 
+
+        // set LargeIcon
+        if (stickerBitmap != null) {
+            notification.setSmallIcon(android.R.drawable.stat_notify_chat)
+                    .setStyle(new NotificationCompat
+                            .BigPictureStyle()
+                            .bigPicture(stickerBitmap)
+                            .bigLargeIcon(null))
+                    .setLargeIcon(stickerBitmap);
+        }
 
         // add action bar
 //        notification.addAction(android.R.mipmap.sym_def_app_icon, "REPLY", pendingIntent);
