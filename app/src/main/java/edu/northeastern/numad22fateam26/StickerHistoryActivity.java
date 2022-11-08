@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -83,9 +84,7 @@ public class StickerHistoryActivity extends AppCompatActivity {
 
         // set unread notifications recycler view
         unreadedRecyclerView.setAdapter(notificationAdapter);
-        GridLayoutManager layoutManager;
-        layoutManager = new GridLayoutManager(this, 3,
-                GridLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         unreadedRecyclerView.setLayoutManager(layoutManager);
         unreadedRecyclerView.setNestedScrollingEnabled(true);
 
@@ -130,7 +129,6 @@ public class StickerHistoryActivity extends AppCompatActivity {
         layoutManager = new GridLayoutManager(this, 3,
                 GridLayoutManager.VERTICAL, false);
         readedRecyclerView.setLayoutManager(layoutManager);
-        readedRecyclerView.setNestedScrollingEnabled(true);
 
         // set click listener
         notificationAdapter.setOnItemClickListener((view, position) -> {
