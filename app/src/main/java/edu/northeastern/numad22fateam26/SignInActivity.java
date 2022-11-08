@@ -23,17 +23,20 @@ import java.util.Objects;
 
 public class SignInActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
-    private FirebaseDatabase mDatabase;
-    private FirebaseMessaging mMessageing;
-    private TextInputLayout usernameInput;
-
     private static String TAG = "SignInActivity";
     private static String DEFAULT_EMAIL_SUFFIX = "@group26.com";
     private static String DEFAULT_PASSWORD = "group26";
     private static String DATABASE_USERS = "users";
     private static String DATABASE_USERNAME = "username";
     private static String DATABASE_FCMToken = "FCMToken";
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase mDatabase;
+    private FirebaseMessaging mMessageing;
+    private TextInputLayout usernameInput;
+
+    private static String wrapWithEmailSuffix(String username) {
+        return username + DEFAULT_EMAIL_SUFFIX;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,10 +109,6 @@ public class SignInActivity extends AppCompatActivity {
     private void transitionToSocialMediaActivity() {
         Intent intent = new Intent(this, StickerActivity.class);
         startActivity(intent);
-    }
-
-    private static String wrapWithEmailSuffix(String username) {
-        return username + DEFAULT_EMAIL_SUFFIX;
     }
 
     private void createUserInDatabase(String uid, String username) {

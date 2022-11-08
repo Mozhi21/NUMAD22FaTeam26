@@ -35,17 +35,16 @@ public class SpoonacularSearchActivity extends AppCompatActivity {
         numberSlider = findViewById(R.id.number_slider);
     }
 
-    public void back(View view){
+    public void back(View view) {
         SpoonacularSearchActivity.super.onBackPressed();
     }
-
 
 
     public void startSearch(View view) {
         ListRecipesRequest request = new ListRecipesRequest();
         request.setQuery(dishText.getText().toString());
-        request.setMaxCalories((int)calorieSlider.getValue());
-        request.setRecipeNumbers((int)numberSlider.getValue());
+        request.setMaxCalories((int) calorieSlider.getValue());
+        request.setRecipeNumbers((int) numberSlider.getValue());
         List<String> diet = new LinkedList<>();
         if (veganCheck.isChecked()) diet.add("Vegan");
         if (glutenCheck.isChecked()) diet.add("Gluten Free");

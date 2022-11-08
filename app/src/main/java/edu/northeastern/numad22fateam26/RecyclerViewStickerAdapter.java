@@ -19,10 +19,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import edu.northeastern.numad22fateam26.model.Sticker;
 
-public class RecyclerViewStickerAdapter extends RecyclerView.Adapter<RecyclerViewStickerAdapter.RecyclerViewHolder>{
+public class RecyclerViewStickerAdapter extends RecyclerView.Adapter<RecyclerViewStickerAdapter.RecyclerViewHolder> {
+    private static RecyclerViewStickerAdapter.ClickListener clickListener;
     private List<Sticker> stickers;
     private Context context;
-    private static RecyclerViewStickerAdapter.ClickListener clickListener;
 
     public RecyclerViewStickerAdapter(List<Sticker> stickers, Context context) {
         this.stickers = stickers;
@@ -54,11 +54,21 @@ public class RecyclerViewStickerAdapter extends RecyclerView.Adapter<RecyclerVie
         return stickers.size();
     }
 
+    public void setOnItemClickListener(RecyclerViewStickerAdapter.ClickListener clickListener) {
+        RecyclerViewStickerAdapter.clickListener = clickListener;
+    }
+
+
+    public interface ClickListener {
+        void onClick(View view, int position);
+    }
+
     static class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.stickerImage)
         ImageView stickerImage;
         @BindView(R.id.stickerCount)
         TextView stickerCount;
+
         RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -72,15 +82,5 @@ public class RecyclerViewStickerAdapter extends RecyclerView.Adapter<RecyclerVie
 
 //            Log.v("clicked sticker id: ", valueOf(id));
         }
-    }
-
-
-    public void setOnItemClickListener(RecyclerViewStickerAdapter.ClickListener clickListener) {
-        RecyclerViewStickerAdapter.clickListener = clickListener;
-    }
-
-
-    public interface ClickListener {
-        void onClick(View view, int position);
     }
 }

@@ -15,13 +15,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void toSearchActivity(View view){
+    public void toSearchActivity(View view) {
         startActivity(new Intent(MainActivity.this, SpoonacularSearchActivity.class));
     }
-    public void toSignInActivity(View view){
+
+    public void toSignInActivity(View view) {
         startActivity(new Intent(MainActivity.this, SignInActivity.class));
     }
-    public void toAboutActivity(View view){
+
+    public void toAboutActivity(View view) {
         startActivity(new Intent(MainActivity.this, AboutActivity.class));
     }
 }

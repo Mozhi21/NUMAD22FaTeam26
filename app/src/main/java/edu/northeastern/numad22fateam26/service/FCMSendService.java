@@ -19,6 +19,7 @@ public class FCMSendService {
     private static final String SERVER_KEY = "key=AAAA3CYsa5o:APA91bH1nIvPXwnVUIjXjjwDHIWChJg21gksjWkRDvalw-vFYO3nwBPtlRH3PtA5cNsBq-KCkq_p-CFbXgeYfB3u0Ty89qjbM9u5NYh6cI_GGnb_kOvX4uUfYQaaf0QmHhxD0uLVt4-f";
     private static final String BASE_URL = "https://fcm.googleapis.com/fcm/send";
     private static final String TAG = "FCMSendService: ";
+
     public static void sendNotification(Context context, String token, String title, String message, String stickerId) {
 //        if (BuildConfig.DEBUG) {
 //            //if debugging, turn on strict mode
@@ -35,7 +36,7 @@ public class FCMSendService {
 //                    .penaltyDeath()
 //                    .build());
 //        }
-        Log.v(TAG, token+ "\n" + title + "\n" + message + "\n" + stickerId );
+        Log.v(TAG, token + "\n" + title + "\n" + message + "\n" + stickerId);
 
         RequestQueue queue = Volley.newRequestQueue(context);
 
@@ -61,13 +62,13 @@ public class FCMSendService {
                             Log.v(TAG, response.toString());
                         }
                     }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Log.e(TAG, error.getMessage());
-                        }
-                    }) {
                 @Override
-                public Map<String, String>  getHeaders() throws AuthFailureError {
+                public void onErrorResponse(VolleyError error) {
+                    Log.e(TAG, error.getMessage());
+                }
+            }) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
                     return Map.of(
                             "Content-Type", "application/json",
                             "Authorization", SERVER_KEY);

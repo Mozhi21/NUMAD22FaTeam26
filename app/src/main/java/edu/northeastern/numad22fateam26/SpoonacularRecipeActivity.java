@@ -39,9 +39,9 @@ public class SpoonacularRecipeActivity extends AppCompatActivity {
 
         SpoonacularApi apiInterface = SpoonacularClient.getClient().create(SpoonacularApi.class);
         Call<ListRecipesResponse> call = apiInterface.listRecipes(request.getQuery(),
-                                                                  request.getMaxCalories(),
-                                                                  request.getRecipeNumbers(),
-                                                                  request.getDiet());
+                request.getMaxCalories(),
+                request.getRecipeNumbers(),
+                request.getDiet());
         call.enqueue(new Callback<ListRecipesResponse>() {
             @Override
             public void onResponse(Call<ListRecipesResponse> call, Response<ListRecipesResponse> response) {
@@ -88,7 +88,8 @@ public class SpoonacularRecipeActivity extends AppCompatActivity {
 //            startActivity(intent);
 //        });
     }
-    public void back(View view){
+
+    public void back(View view) {
         SpoonacularRecipeActivity.super.onBackPressed();
     }
 }

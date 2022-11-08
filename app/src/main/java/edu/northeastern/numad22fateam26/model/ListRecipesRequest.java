@@ -10,28 +10,28 @@ public class ListRecipesRequest {
         return query;
     }
 
-    public int getMaxCalories() {
-        return maxCalories;
-    }
-
-    public int getRecipeNumbers() {
-        return recipeNumbers;
-    }
-
-    public String getDiet() {
-        return diet;
-    }
-
     public void setQuery(String query) {
         this.query = query;
+    }
+
+    public int getMaxCalories() {
+        return maxCalories;
     }
 
     public void setMaxCalories(int maxCalories) {
         this.maxCalories = maxCalories;
     }
 
+    public int getRecipeNumbers() {
+        return recipeNumbers;
+    }
+
     public void setRecipeNumbers(int recipeNumbers) {
         this.recipeNumbers = recipeNumbers;
+    }
+
+    public String getDiet() {
+        return diet;
     }
 
     public void setDiet(String diet) {

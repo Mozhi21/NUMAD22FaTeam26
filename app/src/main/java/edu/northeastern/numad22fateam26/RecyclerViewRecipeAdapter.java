@@ -21,9 +21,9 @@ import edu.northeastern.numad22fateam26.model.Recipe;
 
 public class RecyclerViewRecipeAdapter extends RecyclerView.Adapter<RecyclerViewRecipeAdapter.RecyclerViewHolder> {
 
+    private static ClickListener clickListener;
     private List<Recipe> recipes;
     private Context context;
-    private static ClickListener clickListener;
 
     public RecyclerViewRecipeAdapter(List<Recipe> recipes, Context context) {
         this.recipes = recipes;
@@ -54,11 +54,21 @@ public class RecyclerViewRecipeAdapter extends RecyclerView.Adapter<RecyclerView
         return recipes.size();
     }
 
+    public void setOnItemClickListener(ClickListener clickListener) {
+        RecyclerViewRecipeAdapter.clickListener = clickListener;
+    }
+
+
+    public interface ClickListener {
+        void onClick(View view, int position);
+    }
+
     static class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.recipeImage)
         ImageView recipeImage;
         @BindView(R.id.recipeTitle)
         TextView recipeTitle;
+
         RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -68,17 +78,7 @@ public class RecyclerViewRecipeAdapter extends RecyclerView.Adapter<RecyclerView
         @Override
         public void onClick(View v) {
             //clickListener.onClick(v, getAdapterPosition());
-            Toast.makeText(v.getContext(), recipeTitle.getText().toString(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(v.getContext(), recipeTitle.getText().toString(), Toast.LENGTH_SHORT).show();
         }
-    }
-
-
-    public void setOnItemClickListener(ClickListener clickListener) {
-        RecyclerViewRecipeAdapter.clickListener = clickListener;
-    }
-
-
-    public interface ClickListener {
-        void onClick(View view, int position);
     }
 }

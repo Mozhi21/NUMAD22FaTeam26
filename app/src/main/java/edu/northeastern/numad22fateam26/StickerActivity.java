@@ -41,6 +41,7 @@ import edu.northeastern.numad22fateam26.service.FCMSendService;
 
 public class StickerActivity extends AppCompatActivity implements Dialog.DialogListener {
 
+    private static final List<String> STICKER_IDS = List.of("b01", "c01", "g01", "l01", "m01", "s01", "x01", "y01", "z01");
     private FirebaseAuth auth;
     private Spinner spinner;
     private DatabaseReference database;
@@ -52,7 +53,20 @@ public class StickerActivity extends AppCompatActivity implements Dialog.DialogL
     private RecyclerViewStickerAdapter stickerAdapter;
     private TextView userNameDisplay;
 
-    private static final List<String> STICKER_IDS = List.of("b01", "c01", "g01","l01","m01","s01","x01","y01","z01");
+    public static void displayUserName(TextView userNameDisplay) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+        mDatabase.getReference("users").child(user.getUid()).child("username").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    userNameDisplay.setText("Please Sign In!");
+                } else {
+                    userNameDisplay.setText("Welcome Back, " + String.valueOf(task.getResult().getValue()));
+                }
+            }
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +87,8 @@ public class StickerActivity extends AppCompatActivity implements Dialog.DialogL
     }
 
     @Override
-    public void applyTexts(String title, String message, int position){
-        User selectedUser = (User)spinner.getSelectedItem();
+    public void applyTexts(String title, String message, int position) {
+        User selectedUser = (User) spinner.getSelectedItem();
         FCMSendService.sendNotification(this, selectedUser.getFCMToken(), title, message, clickedStickerId);
 
         // update sticker count(+1)
@@ -102,26 +116,26 @@ public class StickerActivity extends AppCompatActivity implements Dialog.DialogL
         ref.setValue(notification);
     }
 
-    public void back(View view){
+    public void back(View view) {
         startActivity(new Intent(StickerActivity.this, MainActivity.class));
     }
 
-    public void openDialog(int position){
+    public void openDialog(int position) {
         Dialog dialog = new Dialog(position);
-        dialog.show(getSupportFragmentManager(),"Dialog");
+        dialog.show(getSupportFragmentManager(), "Dialog");
     }
 
-    public void logout(View view){
+    public void logout(View view) {
         FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(StickerActivity.this, MainActivity.class));
 
     }
 
-    public void toStickerHistoryActivity(View view){
+    public void toStickerHistoryActivity(View view) {
         startActivity(new Intent(StickerActivity.this, StickerHistoryActivity.class));
     }
 
-    public void BackToHomeActivity(View view){
+    public void BackToHomeActivity(View view) {
         startActivity(new Intent(StickerActivity.this, MainActivity.class));
     }
 
@@ -134,11 +148,11 @@ public class StickerActivity extends AppCompatActivity implements Dialog.DialogL
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 users.clear();
-                for(DataSnapshot dataSnapshot:snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     User user = dataSnapshot.getValue(User.class);
                     user.setUserId(dataSnapshot.getKey());
                     users.add(user);
-                    Collections.sort(users,Comparator.comparing(a -> a.getUserName().toLowerCase()));
+                    Collections.sort(users, Comparator.comparing(a -> a.getUserName().toLowerCase()));
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -178,7 +192,7 @@ public class StickerActivity extends AppCompatActivity implements Dialog.DialogL
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot:snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     String id = dataSnapshot.getKey();
                     String times = dataSnapshot.getValue().toString();
                     idToSticker.get(id).setCount(times);
@@ -192,25 +206,10 @@ public class StickerActivity extends AppCompatActivity implements Dialog.DialogL
         });
 
         // set click listener
-        stickerAdapter.setOnItemClickListener((view, position) ->  {
+        stickerAdapter.setOnItemClickListener((view, position) -> {
             clickedStickerId = stickers.get(position).getId();
             Log.v("sticker clicked: ", String.valueOf(stickers.get(position).getId()));
             openDialog(position);
-        });
-    }
-    public static void displayUserName(TextView userNameDisplay){
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-        mDatabase.getReference("users").child(user.getUid()).child("username").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (!task.isSuccessful()){
-                    userNameDisplay.setText("Please Sign In!");
-                }
-                else {
-                    userNameDisplay.setText("Welcome Back, " +String.valueOf(task.getResult().getValue()));
-                }
-            }
         });
     }
 }

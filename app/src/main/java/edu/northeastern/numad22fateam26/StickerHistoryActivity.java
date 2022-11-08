@@ -2,9 +2,7 @@ package edu.northeastern.numad22fateam26;
 
 import static edu.northeastern.numad22fateam26.StickerActivity.displayUserName;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,12 +21,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import edu.northeastern.numad22fateam26.model.Notification;
-import edu.northeastern.numad22fateam26.model.Sticker;
 
 
 public class StickerHistoryActivity extends AppCompatActivity {
@@ -72,7 +67,7 @@ public class StickerHistoryActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 notifications.clear();
-                for(DataSnapshot dataSnapshot:snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Notification notification = dataSnapshot.getValue(Notification.class);
                     if (!notification.isReviewed()) {
                         notifications.add(0, dataSnapshot.getValue(Notification.class));
@@ -96,7 +91,7 @@ public class StickerHistoryActivity extends AppCompatActivity {
 
 
         // set click listener
-        notificationAdapter.setOnItemClickListener((view, position) ->  {
+        notificationAdapter.setOnItemClickListener((view, position) -> {
             Notification notification = notifications.get(position);
             notification.setReviewed(true);
             DatabaseReference ref = database.getReference("notifications").child(auth.getCurrentUser().getUid());
@@ -115,7 +110,7 @@ public class StickerHistoryActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 notifications.clear();
-                for(DataSnapshot dataSnapshot:snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Notification notification = dataSnapshot.getValue(Notification.class);
                     if (notification.isReviewed()) {
                         notifications.add(0, dataSnapshot.getValue(Notification.class));
@@ -138,7 +133,7 @@ public class StickerHistoryActivity extends AppCompatActivity {
         readedRecyclerView.setNestedScrollingEnabled(true);
 
         // set click listener
-        notificationAdapter.setOnItemClickListener((view, position) ->  {
+        notificationAdapter.setOnItemClickListener((view, position) -> {
             Toast.makeText(this,
                     "Already read notification from " + notifications.get(position).getSenderName(),
                     Toast.LENGTH_SHORT).show();

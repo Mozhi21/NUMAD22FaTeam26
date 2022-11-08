@@ -53,6 +53,14 @@ public class RecyclerViewNotificationAdapter extends RecyclerView.Adapter<Recycl
         return notifications.size();
     }
 
+    public void setOnItemClickListener(RecyclerViewNotificationAdapter.ClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
+
+
+    public interface ClickListener {
+        void onClick(View view, int position);
+    }
 
     class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.imageView)
@@ -75,15 +83,5 @@ public class RecyclerViewNotificationAdapter extends RecyclerView.Adapter<Recycl
             clickListener.onClick(v, getAdapterPosition());
             //Toast.makeText(v.getContext(), stickerCount.getText().toString(),Toast.LENGTH_SHORT).show();
         }
-    }
-
-
-    public void setOnItemClickListener(RecyclerViewNotificationAdapter.ClickListener clickListener) {
-        this.clickListener = clickListener;
-    }
-
-
-    public interface ClickListener {
-        void onClick(View view, int position);
     }
 }

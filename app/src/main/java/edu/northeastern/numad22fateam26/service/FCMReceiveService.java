@@ -1,6 +1,5 @@
 package edu.northeastern.numad22fateam26.service;
 
-import edu.northeastern.numad22fateam26.R;
 import static java.lang.String.valueOf;
 
 import android.app.NotificationChannel;
@@ -19,6 +18,7 @@ import androidx.core.app.NotificationManagerCompat;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import edu.northeastern.numad22fateam26.R;
 import edu.northeastern.numad22fateam26.StickerHistoryActivity;
 
 public class FCMReceiveService extends FirebaseMessagingService {
@@ -52,13 +52,13 @@ public class FCMReceiveService extends FirebaseMessagingService {
 
         // handling pre-defined stickers in resources
         String stickerId = remoteMessage.getData().get("stickerId");
-        int stickerResId = getResources().getIdentifier(stickerId, "drawable",getPackageName());
+        int stickerResId = getResources().getIdentifier(stickerId, "drawable", getPackageName());
         Bitmap stickerBitmap = BitmapFactory.decodeResource(getResources(), stickerResId);
 
 
         Intent activityIntent = new Intent(this, StickerHistoryActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,
-                0, activityIntent,PendingIntent.FLAG_MUTABLE);
+                0, activityIntent, PendingIntent.FLAG_MUTABLE);
 
 
         NotificationCompat.Builder notification = new NotificationCompat.Builder(this, CHANNEL_ID_MESSAGE)
@@ -84,7 +84,7 @@ public class FCMReceiveService extends FirebaseMessagingService {
         notification.addAction(R.mipmap.ic_launcher, "Take a look", pendingIntent);
 
         // build the notification
-        NotificationManagerCompat.from(this).notify(NOTIFICATION_UNIQUE_ID,notification.build());
+        NotificationManagerCompat.from(this).notify(NOTIFICATION_UNIQUE_ID, notification.build());
 
         super.onMessageReceived(remoteMessage);
     }

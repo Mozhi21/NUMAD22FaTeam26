@@ -52,16 +52,17 @@ public class Dialog extends AppCompatDialogFragment {
     }
 
     @Override
-    public void onAttach(Context context){
+    public void onAttach(Context context) {
         super.onAttach(context);
         try {
             listener = (DialogListener) context;
-        }catch(ClassCastException e){
+        } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() + "must implement dialog listener");
         }
 
     }
-    public interface DialogListener{
+
+    public interface DialogListener {
         void applyTexts(String message, String senderName, int position);
     }
 }
