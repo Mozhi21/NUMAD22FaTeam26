@@ -43,10 +43,22 @@
         android:fontFamily="@font/fuzzybubblesbold"
         android:onClick="toSignInActivity"
         android:text="Stick It to 'Em"
-        app:layout_constraintBottom_toTopOf="@+id/about_button"
+        app:layout_constraintBottom_toTopOf="@+id/project_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />
+    <Button
+        android:id="@+id/project_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/project_button"
+        android:fontFamily="@font/fuzzybubblesbold"
+        android:onClick="toFinalProjectActivity"
+        android:text="FINAL PROJECT"
+        app:layout_constraintBottom_toTopOf="@+id/about_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stick_button" />
 
     <Button
         android:id="@+id/about_button"
@@ -101,7 +113,7 @@
         android:gravity="center"
         android:padding="10dp"
         android:text="@string/ournames"
-        android:textColor="@color/colorPrimaryLight"
+        android:textColor="@color/fog_red"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

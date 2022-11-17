@@ -6,6 +6,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -25,5 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void toAboutActivity(View view) {
         startActivity(new Intent(MainActivity.this, AboutActivity.class));
+    }
+    public void toFinalProjectActivity(View view) {
+        startActivity(new Intent(MainActivity.this, fpSplashScreenActivity.class));
     }
 }

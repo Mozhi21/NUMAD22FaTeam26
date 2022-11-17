@@ -7,11 +7,11 @@
     <color name="teal_700">#06A315</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="orange">#FF9800</color>
+    <color name="orange">#a81e32</color>
     <color name="darkgrey">#797571</color>
     <color name="colorPrimary">#BFF38104</color>
     <color name="colorPrimaryDark">#DD8707</color>
-    <color name="colorAccent">#D8211B</color>
+    <color name="colorAccent">#CA0600</color>
     <color name="colorNull">#00000000</color>
     <color name="colorIcons">#7C7F81</color>
     <color name="colorPrimaryText">#1e1e1e</color>
@@ -19,5 +19,13 @@
     <color name="colorWhiteDark">#DBDBDB</color>
     <color name="colorPrimaryLight">#CBFDA017</color>
     <color name="colorBackground">#28D5C8B0</color>
+    <color name="fog_red">#a81e32</color>
+    <color name="light_fog_red">#75A81E32</color>
+    <color name="hupo">#CA6924</color>
+    <color name="yanzhi">#9d2933</color>
+    <color name="kuhuang">#d3b17d</color>
+    <color name="zheshi">#845a33</color>
+    <color name="dailv">#426666</color>
+    <color name="bai">#f2ecde</color>
 
 </resources>
