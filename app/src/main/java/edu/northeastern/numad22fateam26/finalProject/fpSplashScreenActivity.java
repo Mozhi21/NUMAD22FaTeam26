@@ -1,4 +1,4 @@
-package edu.northeastern.numad22fateam26;
+package edu.northeastern.numad22fateam26.finalProject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +13,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import edu.northeastern.numad22fateam26.R;
 
 public class fpSplashScreenActivity extends AppCompatActivity {
     private static int SPLASH_SCREEN = 4000;

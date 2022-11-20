@@ -1,4 +1,4 @@
-package edu.northeastern.numad22fateam26;
+package edu.northeastern.numad22fateam26.sticker;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -34,10 +34,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import edu.northeastern.numad22fateam26.MainActivity;
+import edu.northeastern.numad22fateam26.R;
 import edu.northeastern.numad22fateam26.model.Notification;
 import edu.northeastern.numad22fateam26.model.Sticker;
 import edu.northeastern.numad22fateam26.model.User;
-import edu.northeastern.numad22fateam26.service.FCMSendService;
+import edu.northeastern.numad22fateam26.sticker.service.FCMSendService;
 
 public class StickerActivity extends AppCompatActivity implements Dialog.DialogListener {
 

@@ -1,4 +1,4 @@
-package edu.northeastern.numad22fateam26;
+package edu.northeastern.numad22fateam26.sticker;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,6 +14,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import edu.northeastern.numad22fateam26.R;
 import edu.northeastern.numad22fateam26.model.Notification;
 
 public class RecyclerViewNotificationAdapter extends RecyclerView.Adapter<RecyclerViewNotificationAdapter.RecyclerViewHolder> {

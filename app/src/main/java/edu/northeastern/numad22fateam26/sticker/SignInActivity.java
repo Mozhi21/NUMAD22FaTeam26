@@ -1,4 +1,4 @@
-package edu.northeastern.numad22fateam26;
+package edu.northeastern.numad22fateam26.sticker;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +20,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Objects;
+
+import edu.northeastern.numad22fateam26.R;
 
 public class SignInActivity extends AppCompatActivity {
 

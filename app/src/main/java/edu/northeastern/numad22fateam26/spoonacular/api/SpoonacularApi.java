@@ -1,4 +1,4 @@
-package edu.northeastern.numad22fateam26.api;
+package edu.northeastern.numad22fateam26.spoonacular.api;
 
 import edu.northeastern.numad22fateam26.model.ListRecipesResponse;
 import retrofit2.Call;

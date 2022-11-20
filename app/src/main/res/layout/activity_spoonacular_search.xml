@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:autofillHints="Food name"
-    tools:context=".SpoonacularSearchActivity">
+    tools:context=".spoonacular.SpoonacularSearchActivity">
 
     <EditText
         android:id="@+id/editTextTextDishName"

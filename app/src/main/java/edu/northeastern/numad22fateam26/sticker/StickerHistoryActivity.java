@@ -1,6 +1,6 @@
-package edu.northeastern.numad22fateam26;
+package edu.northeastern.numad22fateam26.sticker;
 
-import static edu.northeastern.numad22fateam26.StickerActivity.displayUserName;
+import static edu.northeastern.numad22fateam26.sticker.StickerActivity.displayUserName;
 
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.northeastern.numad22fateam26.R;
 import edu.northeastern.numad22fateam26.model.Notification;
 
 

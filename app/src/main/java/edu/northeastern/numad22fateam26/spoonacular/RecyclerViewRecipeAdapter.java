@@ -1,4 +1,4 @@
-package edu.northeastern.numad22fateam26;
+package edu.northeastern.numad22fateam26.spoonacular;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -17,6 +17,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import edu.northeastern.numad22fateam26.R;
 import edu.northeastern.numad22fateam26.model.Recipe;
 
 public class RecyclerViewRecipeAdapter extends RecyclerView.Adapter<RecyclerViewRecipeAdapter.RecyclerViewHolder> {

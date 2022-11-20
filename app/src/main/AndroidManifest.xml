@@ -22,10 +22,10 @@
             android:name=".ExploreActivity"
             android:exported="false" />
         <activity
-            android:name=".fpLogInActivity"
+            android:name=".finalProject.fpLogInActivity"
             android:exported="false" />
         <activity
-            android:name=".fpSplashScreenActivity"
+            android:name=".finalProject.fpSplashScreenActivity"
             android:exported="false" />
         <activity
             android:name=".SplashScreenActivity"
@@ -37,10 +37,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".StickerHistoryActivity"
+            android:name=".sticker.StickerHistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".SignInActivity"
+            android:name=".sticker.SignInActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
@@ -48,20 +48,20 @@
             android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
-            android:name=".StickerActivity"
+            android:name=".sticker.StickerActivity"
             android:exported="false" />
         <activity
-            android:name=".SpoonacularRecipeActivity"
+            android:name=".spoonacular.SpoonacularRecipeActivity"
             android:exported="false" />
         <activity
-            android:name=".SpoonacularSearchActivity"
+            android:name=".spoonacular.SpoonacularSearchActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
 
         <service
-            android:name=".service.FCMReceiveService"
+            android:name=".sticker.service.FCMReceiveService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

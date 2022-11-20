@@ -1,4 +1,4 @@
-package edu.northeastern.numad22fateam26.api;
+package edu.northeastern.numad22fateam26.spoonacular.api;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;

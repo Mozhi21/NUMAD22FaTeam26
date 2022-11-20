@@ -1,4 +1,4 @@
-package edu.northeastern.numad22fateam26;
+package edu.northeastern.numad22fateam26.spoonacular;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import java.util.LinkedList;
 import java.util.List;
 
+import edu.northeastern.numad22fateam26.R;
 import edu.northeastern.numad22fateam26.model.ListRecipesRequest;
 
 public class SpoonacularSearchActivity extends AppCompatActivity {

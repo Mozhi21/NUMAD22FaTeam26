@@ -1,4 +1,4 @@
-package edu.northeastern.numad22fateam26.service;
+package edu.northeastern.numad22fateam26.sticker.service;
 
 import android.content.Context;
 import android.util.Log;

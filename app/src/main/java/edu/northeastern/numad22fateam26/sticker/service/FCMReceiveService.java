@@ -1,4 +1,4 @@
-package edu.northeastern.numad22fateam26.service;
+package edu.northeastern.numad22fateam26.sticker.service;
 
 import static java.lang.String.valueOf;
 
@@ -19,7 +19,7 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import edu.northeastern.numad22fateam26.R;
-import edu.northeastern.numad22fateam26.StickerHistoryActivity;
+import edu.northeastern.numad22fateam26.sticker.StickerHistoryActivity;
 
 public class FCMReceiveService extends FirebaseMessagingService {
     private static final String TAG = "FCM Receive Service ";

@@ -1,4 +1,4 @@
-package edu.northeastern.numad22fateam26;
+package edu.northeastern.numad22fateam26.spoonacular;
 
 import android.os.Bundle;
 import android.view.View;
@@ -11,8 +11,9 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
-import edu.northeastern.numad22fateam26.api.SpoonacularApi;
-import edu.northeastern.numad22fateam26.api.SpoonacularClient;
+import edu.northeastern.numad22fateam26.R;
+import edu.northeastern.numad22fateam26.spoonacular.api.SpoonacularApi;
+import edu.northeastern.numad22fateam26.spoonacular.api.SpoonacularClient;
 import edu.northeastern.numad22fateam26.model.ListRecipesRequest;
 import edu.northeastern.numad22fateam26.model.ListRecipesResponse;
 import edu.northeastern.numad22fateam26.model.Recipe;

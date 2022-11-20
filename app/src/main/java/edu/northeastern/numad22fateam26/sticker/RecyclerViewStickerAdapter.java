@@ -1,4 +1,4 @@
-package edu.northeastern.numad22fateam26;
+package edu.northeastern.numad22fateam26.sticker;
 
 import static java.lang.String.valueOf;
 
@@ -17,6 +17,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import edu.northeastern.numad22fateam26.R;
 import edu.northeastern.numad22fateam26.model.Sticker;
 
 public class RecyclerViewStickerAdapter extends RecyclerView.Adapter<RecyclerViewStickerAdapter.RecyclerViewHolder> {
