@@ -33,7 +33,8 @@
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.17083333333333334" />
         <entry key="app/src/main/res/layout/activity_dish_display.xml" value="0.3170289855072464" />
         <entry key="app/src/main/res/layout/activity_fcmactivity.xml" value="0.3296875" />
-        <entry key="app/src/main/res/layout/activity_fp_splash_screen.xml" value="0.18333333333333332" />
+        <entry key="app/src/main/res/layout/activity_fp_log_in.xml" value="0.3182291666666667" />
+        <entry key="app/src/main/res/layout/activity_fp_splash_screen.xml" value="0.24589233398437502" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.39077758789062506" />
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.25" />
