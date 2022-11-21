@@ -61,6 +61,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.39077758789062506" />
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.32982076009114586" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.30416666666666664" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.35215606689453127" />
         <entry key="app/src/main/res/layout/activity_splash_screen_fp.xml" value="0.34427083333333336" />
         <entry key="app/src/main/res/layout/activity_spoonacular_recipe.xml" value="0.2152099609375" />
@@ -69,8 +70,11 @@
         <entry key="app/src/main/res/layout/activity_stick.xml" value="0.3037155151367188" />
         <entry key="app/src/main/res/layout/activity_sticker_history.xml" value="0.2530064900716146" />
         <entry key="app/src/main/res/layout/activity_story_add.xml" value="0.3182291666666667" />
+        <entry key="app/src/main/res/layout/comment_items.xml" value="0.10185185185185185" />
+        <entry key="app/src/main/res/layout/forgot_password.xml" value="0.3182291666666667" />
         <entry key="app/src/main/res/layout/fragment_add.xml" value="0.10185185185185185" />
         <entry key="app/src/main/res/layout/fragment_category.xml" value="0.18707885742187505" />
+        <entry key="app/src/main/res/layout/fragment_comment.xml" value="0.10185185185185185" />
         <entry key="app/src/main/res/layout/fragment_create_account.xml" value="0.3182291666666667" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2873392175745081" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.30416666666666664" />

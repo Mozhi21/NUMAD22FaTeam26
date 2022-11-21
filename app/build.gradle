@@ -36,6 +36,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:21.0.7'
     implementation 'com.google.firebase:firebase-database:20.0.5'
     implementation 'com.google.firebase:firebase-storage:19.1.1'
+    implementation 'com.google.firebase:firebase-firestore:24.4.1'
+    implementation 'com.google.android.gms:play-services-auth:20.4.0'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
@@ -68,5 +70,8 @@ dependencies {
 
     // HTTP library auto scheduling of networking requests
     implementation 'com.android.volley:volley:1.2.1'
+
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
 
 }

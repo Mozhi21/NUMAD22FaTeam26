@@ -6,6 +6,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import edu.northeastern.numad22fateam26.finalProject.SplashActivity;
 import edu.northeastern.numad22fateam26.sticker.SignInActivity;
 import edu.northeastern.numad22fateam26.spoonacular.SpoonacularSearchActivity;
 
@@ -31,6 +32,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(MainActivity.this, AboutActivity.class));
     }
     public void toFinalProjectActivity(View view) {
-        startActivity(new Intent(MainActivity.this, fpSplashScreenActivity.class));
+        startActivity(new Intent(MainActivity.this, SplashActivity.class));
     }
 }
