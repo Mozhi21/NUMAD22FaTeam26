@@ -7,7 +7,6 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import edu.northeastern.numad22fateam26.sticker.SignInActivity;
-import edu.northeastern.numad22fateam26.finalProject.fpSplashScreenActivity;
 import edu.northeastern.numad22fateam26.spoonacular.SpoonacularSearchActivity;
 
 

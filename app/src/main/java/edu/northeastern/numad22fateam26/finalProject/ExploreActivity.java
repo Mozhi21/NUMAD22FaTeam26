@@ -1,8 +1,10 @@
-package edu.northeastern.numad22fateam26;
+package edu.northeastern.numad22fateam26.finalProject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import edu.northeastern.numad22fateam26.R;
 
 public class ExploreActivity extends AppCompatActivity {
 
