@@ -8,10 +8,15 @@
         <entry key="app/src/main/res/drawable/back_ic.xml" value="0.1615" />
         <entry key="app/src/main/res/drawable/button.xml" value="0.2335" />
         <entry key="app/src/main/res/drawable/custom_input.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_add.xml" value="0.233" />
         <entry key="app/src/main/res/drawable/ic_arrow_drop_down.xml" value="0.264" />
         <entry key="app/src/main/res/drawable/ic_circle.xml" value="0.338" />
+        <entry key="app/src/main/res/drawable/ic_comment.xml" value="0.233" />
         <entry key="app/src/main/res/drawable/ic_favorite.xml" value="0.338" />
         <entry key="app/src/main/res/drawable/ic_favorite_border.xml" value="0.338" />
+        <entry key="app/src/main/res/drawable/ic_heart.xml" value="0.233" />
+        <entry key="app/src/main/res/drawable/ic_heart_fill.xml" value="0.233" />
+        <entry key="app/src/main/res/drawable/ic_heart_red.xml" value="0.233" />
         <entry key="app/src/main/res/drawable/ic_home.xml" value="0.264" />
         <entry key="app/src/main/res/drawable/ic_info.xml" value="0.1785" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.264" />
@@ -21,6 +26,7 @@
         <entry key="app/src/main/res/drawable/ic_play.xml" value="0.1785" />
         <entry key="app/src/main/res/drawable/ic_search_primary_light.xml" value="0.338" />
         <entry key="app/src/main/res/drawable/ic_send.xml" value="0.186" />
+        <entry key="app/src/main/res/drawable/ic_share.xml" value="0.233" />
         <entry key="app/src/main/res/drawable/project_button.xml" value="0.264" />
         <entry key="app/src/main/res/drawable/search_view_bg.xml" value="0.264" />
         <entry key="app/src/main/res/drawable/shdow_bottom_to_top.xml" value="0.338" />
@@ -32,6 +38,7 @@
         <entry key="app/src/main/res/layout/activity_category.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.17083333333333334" />
         <entry key="app/src/main/res/layout/activity_dish_display.xml" value="0.3170289855072464" />
+        <entry key="app/src/main/res/layout/activity_explore.xml" value="0.3182291666666667" />
         <entry key="app/src/main/res/layout/activity_fcmactivity.xml" value="0.3296875" />
         <entry key="app/src/main/res/layout/activity_fp_log_in.xml" value="0.3182291666666667" />
         <entry key="app/src/main/res/layout/activity_fp_splash_screen.xml" value="0.24589233398437502" />
@@ -47,6 +54,9 @@
         <entry key="app/src/main/res/layout/activity_stick.xml" value="0.3037155151367188" />
         <entry key="app/src/main/res/layout/activity_sticker_history.xml" value="0.2530064900716146" />
         <entry key="app/src/main/res/layout/fragment_category.xml" value="0.18707885742187505" />
+        <entry key="app/src/main/res/layout/fragment_notification.xml" value="0.3182291666666667" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.3182291666666667" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.3182291666666667" />
         <entry key="app/src/main/res/layout/item_recycler_category.xml" value="0.3170289855072464" />
         <entry key="app/src/main/res/layout/item_recycler_category_shimmer.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_recycler_meal.xml" value="0.1" />
