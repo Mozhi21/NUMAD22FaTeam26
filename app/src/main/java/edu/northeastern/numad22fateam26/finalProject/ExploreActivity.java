@@ -84,6 +84,7 @@ public class ExploreActivity extends AppCompatActivity {
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
+        // default shows home page
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_home_fill);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -109,6 +110,9 @@ public class ExploreActivity extends AppCompatActivity {
                     case 3:
                         tab.setIcon(R.drawable.ic_heart_fill);
                         break;
+
+                    case 4:
+                        tab.setIcon(android.R.drawable.ic_menu_help);
 
 
                 }
@@ -136,6 +140,10 @@ public class ExploreActivity extends AppCompatActivity {
                         tab.setIcon(R.drawable.ic_heart);
                         break;
 
+                    case 4:
+                        tab.setIcon(R.drawable.ic_heart_fill);
+                        break;
+
 
                 }
 
@@ -159,9 +167,11 @@ public class ExploreActivity extends AppCompatActivity {
                         break;
 
                     case 3:
-
                         tab.setIcon(R.drawable.ic_heart_fill);
                         break;
+
+                    case 4:
+                        tab.setIcon(android.R.drawable.ic_menu_help);
 
                 }
 

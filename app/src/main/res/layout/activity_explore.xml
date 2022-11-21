@@ -24,7 +24,6 @@
                android:layout_centerHorizontal = "true"
                android:text = "Yummy China"
                android:layout_centerVertical = "true"
-               android:textStyle = "Bold"
                android:textSize = "18sp"
                android:fontFamily = "@font/fuzzybubblesbold"
                android:textColor = "@color/fog_red"/>
