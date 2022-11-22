@@ -5,6 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -12,6 +16,10 @@ import com.google.firebase.auth.FirebaseUser;
 import edu.northeastern.numad22fateam26.R;
 
 public class SplashActivity extends AppCompatActivity {
+
+    Animation topAnim, bottomAnim;
+    ImageView logo;
+    TextView slogan;
 
 
     @Override
@@ -21,6 +29,16 @@ public class SplashActivity extends AppCompatActivity {
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
         final FirebaseUser user = auth.getCurrentUser();
+
+        logo = findViewById(R.id.logo);
+        slogan = findViewById(R.id.slogan);
+
+        topAnim = AnimationUtils.loadAnimation(this, R.anim.top_animation);
+        bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
+
+        //set animations
+        logo.setAnimation(topAnim);
+        slogan.setAnimation(bottomAnim);
 
         new Handler().postDelayed(new Runnable() {
             @Override
