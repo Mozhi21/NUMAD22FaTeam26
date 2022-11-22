@@ -190,7 +190,6 @@ public class ExploreActivity extends AppCompatActivity {
 
     }
 
-    @Override
     public void onChange(String uid) {
         USER_ID = uid;
         IS_SEARCHED_USER = true;

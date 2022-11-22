@@ -1,20 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:keepScreenOn="true"
     tools:context=".finalProject.ExploreActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_alignParentTop="true"
+        android:layout_width = "match_parent"
+        android:layout_height = "?attr/actionBarSize"
+        android:id="@+id/toolbar"
+        android:background ="@android:color/white"
+        android:elevation = "2dp">
+
+        <RelativeLayout
+            android:layout_width = "match_parent"
+            android:layout_height = "match_parent">
+            <TextView
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_centerHorizontal = "true"
+                android:text = "Yummy China"
+                android:layout_centerVertical = "true"
+                android:textSize = "18sp"
+                android:fontFamily = "@font/fuzzybubblesbold"
+                android:textColor = "@color/fog_red"/>
+            <ImageButton
+                android:contentDescription="@null"
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_alignParentEnd = "true"
+                android:layout_alignParentRight = "true"
+                android:layout_centerVertical= "true"
+                android:background = "@drawable/ic_send"
+                android:layout_margin = "12dp"
+                android:id="@+id/sendBtn"/>
+
+        </RelativeLayout>
+
+
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/tabLayout" />
+        android:layout_above="@id/tabLayout"
+        android:layout_below="@id/toolbar"/>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>
