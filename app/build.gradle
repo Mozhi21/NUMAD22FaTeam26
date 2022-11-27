@@ -84,4 +84,7 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer-dash:2.18.1'
     implementation 'com.google.android.exoplayer:exoplayer-ui:2.18.1'
     implementation 'com.github.MarsadMaqsood:StylishDialogs:0.1.7'
+
+    //implementation("com.vanniktech:android-image-cropper:4.5.0")
+    api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
 }

@@ -75,7 +75,7 @@
         <entry key="app/src/main/res/layout/chat_items.xml" value="0.3182291666666667" />
         <entry key="app/src/main/res/layout/comment_items.xml" value="0.10185185185185185" />
         <entry key="app/src/main/res/layout/forgot_password.xml" value="0.3182291666666667" />
-        <entry key="app/src/main/res/layout/fragment_add.xml" value="0.10185185185185185" />
+        <entry key="app/src/main/res/layout/fragment_add.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_category.xml" value="0.18707885742187505" />
         <entry key="app/src/main/res/layout/fragment_comment.xml" value="0.10185185185185185" />
         <entry key="app/src/main/res/layout/fragment_create_account.xml" value="0.3182291666666667" />

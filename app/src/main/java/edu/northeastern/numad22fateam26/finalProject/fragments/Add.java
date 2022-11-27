@@ -1,5 +1,7 @@
 package edu.northeastern.numad22fateam26.finalProject.fragments;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
@@ -39,6 +41,8 @@ import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -101,10 +105,10 @@ public class Add extends Fragment {
             public void onSend(Uri picUri) {
 
 
-//                CropImage.activity(picUri)
-//                        .setGuidelines(CropImageView.Guidelines.ON)
-//                        .setAspectRatio(4, 3)
-//                        .start(getContext(), Add.this);
+                CropImage.activity(picUri)
+                        .setGuidelines(CropImageView.Guidelines.ON)
+                        .setAspectRatio(4, 3)
+                        .start(getContext(), Add.this);
                 Toast.makeText(getContext(), "send image CropImage comment", Toast.LENGTH_SHORT).show();
 
             }
@@ -260,25 +264,25 @@ public class Add extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-//        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-//
-//            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-//
-//            if (resultCode == RESULT_OK) {
-//
-//                assert result != null;
-//                imageUri = result.getUri();
-//
-//                Glide.with(getContext())
-//                        .load(imageUri)
-//                        .into(imageView);
-//
-//                imageView.setVisibility(View.VISIBLE);
-//                nextBtn.setVisibility(View.VISIBLE);
-//
-//            }
-//
-//        }
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+
+            if (resultCode == RESULT_OK) {
+
+                assert result != null;
+                imageUri = result.getUri();
+
+                Glide.with(getContext())
+                        .load(imageUri)
+                        .into(imageView);
+
+                imageView.setVisibility(View.VISIBLE);
+                nextBtn.setVisibility(View.VISIBLE);
+
+            }
+
+        }
 
     }
 }
