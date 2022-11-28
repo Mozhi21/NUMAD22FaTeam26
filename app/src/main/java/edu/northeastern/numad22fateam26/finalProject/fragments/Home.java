@@ -36,6 +36,8 @@ import javax.annotation.Nullable;
 
 import edu.northeastern.numad22fateam26.R;
 import edu.northeastern.numad22fateam26.finalProject.adapter.HomeAdapter;
+import edu.northeastern.numad22fateam26.finalProject.adapter.StoriesAdapter;
+import edu.northeastern.numad22fateam26.finalProject.chat.ChatUsersActivity;
 import edu.northeastern.numad22fateam26.finalProject.model.HomeModel;
 import edu.northeastern.numad22fateam26.finalProject.model.StoriesModel;
 
@@ -44,7 +46,7 @@ public class Home extends Fragment {
     private final MutableLiveData<Integer> commentCount = new MutableLiveData<>();
     HomeAdapter adapter;
     RecyclerView storiesRecyclerView;
-   // StoriesAdapter storiesAdapter;
+    StoriesAdapter storiesAdapter;
     List<StoriesModel> storiesModelList;
     private RecyclerView recyclerView;
     private List<HomeModel> list;
@@ -116,7 +118,7 @@ public class Home extends Fragment {
                             .append(" comments");
 
                     textView.setText(builder);
-//                    textView.setText("See all " + commentCount.getValue() + " comments");
+                    textView.setText("See all " + commentCount.getValue() + " comments");
 
                 });
 
@@ -125,8 +127,8 @@ public class Home extends Fragment {
 
         view.findViewById(R.id.sendBtn).setOnClickListener(v -> {
 
-       //     Intent intent = new Intent(getActivity(), ChatUsersActivity.class);
-        //    startActivity(intent);
+            Intent intent = new Intent(getActivity(), ChatUsersActivity.class);
+            startActivity(intent);
 
         });
 
@@ -273,7 +275,7 @@ public class Home extends Fragment {
                 }
 
             }
-           // storiesAdapter.notifyDataSetChanged();
+            storiesAdapter.notifyDataSetChanged();
 
         });
 
