@@ -41,12 +41,12 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryH
                 .load(list.get(position).getPicUri())
                 .into(holder.imageView);
 
-//        holder.imageView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                chooseImage(list.get(position).getPicUri());
-//            }
-//        });
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chooseImage(list.get(position).getPicUri());
+            }
+        });
 
         holder.imageView.setOnClickListener(v -> chooseImage(list.get(position).getPicUri()));
     }

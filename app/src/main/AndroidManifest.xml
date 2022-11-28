@@ -8,7 +8,8 @@
         android:name="android.permission.POST_NOTIFICATIONS"
         tools:node="remove" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
 
     <application
@@ -22,13 +23,13 @@
         android:theme="@style/Theme.NUMAD22FaTeam26"
         tools:targetApi="31">
         <activity
-            android:name=".PostViewActivity"
+            android:name=".finalProject.PostViewActivity"
             android:exported="false" />
         <activity
-            android:name=".StoryAddActivity"
+            android:name=".finalProject.StoryAddActivity"
             android:exported="false" />
         <activity
-            android:name=".ViewStoryActivity"
+            android:name=".finalProject.ViewStoryActivity"
             android:exported="false" />
         <activity
             android:name=".finalProject.SplashActivity"

@@ -80,11 +80,13 @@ dependencies {
 
     implementation 'com.karumi:dexter:6.2.2'
 
-    implementation 'com.google.android.exoplayer:exoplayer-core:2.18.1'
-    implementation 'com.google.android.exoplayer:exoplayer-dash:2.18.1'
-    implementation 'com.google.android.exoplayer:exoplayer-ui:2.18.1'
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.18.2'
+    implementation 'com.google.android.exoplayer:exoplayer-dash:2.18.2'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.18.2'
     implementation 'com.github.MarsadMaqsood:StylishDialogs:0.1.7'
 
     //implementation("com.vanniktech:android-image-cropper:4.5.0")
     api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
+    implementation 'com.github.a914-gowtham:android-video-trimmer:1.7.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
 }

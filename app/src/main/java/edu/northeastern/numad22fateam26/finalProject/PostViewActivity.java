@@ -12,6 +12,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 
+import java.net.URL;
+
 import edu.northeastern.numad22fateam26.R;
 
 public class PostViewActivity extends AppCompatActivity {
@@ -32,7 +34,7 @@ public class PostViewActivity extends AppCompatActivity {
         String path = uri.getPath();
         String query = uri.getQuery();
 
-//            URL url = new URL(scheme + "://" + host + path.replace("Post Images", "Post%20Images") + "?" + query);
+          //  URL url = new URL(scheme + "://" + host + path.replace("Post Images", "Post%20Images") + "?" + query);
 
         FirebaseStorage.getInstance().getReference().child(uri.getLastPathSegment())
                 .getDownloadUrl()
