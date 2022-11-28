@@ -26,11 +26,13 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -210,31 +212,25 @@ public class Add extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-
                 Dexter.withContext(getContext())
                         .withPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE,
                                 Manifest.permission.READ_EXTERNAL_STORAGE)
                         .withListener(new MultiplePermissionsListener() {
                             @Override
                             public void onPermissionsChecked(MultiplePermissionsReport report) {
-
                                 if (report.areAllPermissionsGranted()) {
                                     File file = new File(Environment.getExternalStorageDirectory().toString() + "/Download");
-
                                     if (file.exists()) {
                                         File[] files = file.listFiles();
                                         assert files != null;
-
                                         list.clear();
 
                                         for (File file1 : files) {
 
-                                            if (file1.getAbsolutePath().endsWith(".jpg") || file1.getAbsolutePath().endsWith(".png")) {
-
+                                            if (file1.getAbsolutePath().endsWith(".jpg") || file1.getAbsolutePath().endsWith(".png") || file1.getAbsolutePath().endsWith(".jpeg")) {
                                                 list.add(new GalleryImages(Uri.fromFile(file1)));
                                                 adapter.notifyDataSetChanged();
 
@@ -251,7 +247,6 @@ public class Add extends Fragment {
 
                             @Override
                             public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
-
                             }
                         }).check();
 
