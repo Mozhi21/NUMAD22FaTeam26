@@ -151,8 +151,8 @@ public class Home extends Fragment {
 
         storiesModelList = new ArrayList<>();
         storiesModelList.add(new StoriesModel("", "", "", "", ""));
-     //   storiesAdapter = new StoriesAdapter(storiesModelList, getActivity());
-      //  storiesRecyclerView.setAdapter(storiesAdapter);
+        storiesAdapter = new StoriesAdapter(storiesModelList, getActivity());
+        storiesRecyclerView.setAdapter(storiesAdapter);
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();

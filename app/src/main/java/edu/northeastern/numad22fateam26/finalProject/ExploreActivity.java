@@ -70,18 +70,17 @@ public class ExploreActivity extends AppCompatActivity {
         drawableResList.add(R.drawable.ic_heart);
         drawableResList.add(R.drawable.ic_person);
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             tabLayout.addTab(tabLayout.newTab().setIcon(drawableResList.get(i)));
         }
 
-
-        SharedPreferences preferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
-        String directory = preferences.getString(PREF_DIRECTORY, "");
-
-        Bitmap bitmap = loadProfileImage(directory);
-        Drawable drawable = new BitmapDrawable(getResources(), bitmap);
-
-        tabLayout.addTab(tabLayout.newTab().setIcon(drawable));
+//        SharedPreferences preferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+//        String directory = preferences.getString(PREF_DIRECTORY, "");
+//
+//        Bitmap bitmap = loadProfileImage(directory);
+//        Drawable drawable = new BitmapDrawable(getResources(), bitmap);
+//
+//        tabLayout.addTab(tabLayout.newTab().setIcon(drawable));
 
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
@@ -102,7 +101,6 @@ public class ExploreActivity extends AppCompatActivity {
                 switch (tab.getPosition()) {
 
                     case 0:
-//                        tabLayout.getTabAt(0).setIcon(R.drawable.ic_home_fill);
                         tab.setIcon(R.drawable.ic_home_fill);
                         break;
 

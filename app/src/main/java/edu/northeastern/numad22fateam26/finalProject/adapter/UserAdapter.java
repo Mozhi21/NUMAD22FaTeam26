@@ -1,5 +1,6 @@
 package edu.northeastern.numad22fateam26.finalProject.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     OnUserClicked onUserClicked;
     List<Users> list;
+    Context context;
 
     public UserAdapter(List<Users> list) {
         this.list = list;
@@ -35,6 +37,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
     @Override
     public UserHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_items, parent, false);
+        context = parent.getContext();
         return new UserHolder(view);
     }
 
@@ -57,7 +60,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
                 .timeout(6500)
                 .into(holder.profileImage);
 
-        holder.itemView.setOnClickListener(v -> onUserClicked.onClicked(list.get(position).getUid()));
+        holder.itemView.setOnClickListener(v -> onUserClicked.onClicked(context, list.get(position).getUid()));
 
     }
 
@@ -71,7 +74,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
     }
 
     public interface OnUserClicked {
-        void onClicked(String uid);
+        void onClicked(Context context, String uid);
     }
 
     static class UserHolder extends RecyclerView.ViewHolder {
