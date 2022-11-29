@@ -2,6 +2,7 @@ package edu.northeastern.numad22fateam26.finalProject.fragments;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.northeastern.numad22fateam26.R;
+import edu.northeastern.numad22fateam26.finalProject.ExploreActivity;
+import edu.northeastern.numad22fateam26.finalProject.ReplacerActivity;
 import edu.northeastern.numad22fateam26.finalProject.adapter.UserAdapter;
 import edu.northeastern.numad22fateam26.finalProject.model.Users;
 
@@ -37,7 +40,6 @@ public class Search extends Fragment {
     RecyclerView recyclerView;
     UserAdapter adapter;
     CollectionReference reference;
-    OnDataPass onDataPass;
     private List<Users> list;
 
     public Search() {
@@ -47,9 +49,6 @@ public class Search extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-
-        //onDataPass = (OnDataPass) context;
-
     }
 
     @Override
@@ -78,8 +77,8 @@ public class Search extends Fragment {
 
         adapter.OnUserClicked(new UserAdapter.OnUserClicked() {
             @Override
-            public void onClicked(String uid) {
-                onDataPass.onChange(uid);
+            public void onClicked(Context context, String uid) {
+                ((ExploreActivity)getActivity()).onChange(uid);
             }
         });
 
@@ -166,10 +165,4 @@ public class Search extends Fragment {
         recyclerView.setAdapter(adapter);
 
     }
-
-    public interface OnDataPass {
-        void onChange( String uid);
-    }
-
-
 }
