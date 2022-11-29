@@ -36,11 +36,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".finalProject.StoryAddActivity"
-            android:exported="false" />
+            android:name=".finalProject.StoryAddActivity" />
         <activity
-            android:name=".finalProject.ViewStoryActivity"
-            android:exported="false" />
+            android:name=".finalProject.ViewStoryActivity" />
         <activity android:name=".finalProject.SplashActivity"
             android:exported="true">
             <intent-filter>
@@ -54,7 +52,13 @@
             android:exported="false" />
         <activity
             android:name=".finalProject.ExploreActivity"
-            android:exported="false" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".SplashScreenActivity"
             android:exported="true">
@@ -64,6 +68,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".finalProject.chat.ChatActivity"
+            android:exported="true" />
+        <activity
+            android:name=".finalProject.chat.ChatUsersActivity"
+            android:exported="true" />
         <activity
             android:name=".sticker.StickerHistoryActivity"
             android:exported="false" />
