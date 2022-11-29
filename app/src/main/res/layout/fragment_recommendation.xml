@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    tools:context=".finalProject.fragments.Recommendation"
+    tools:ignore="UnusedAttribute"
+    tools:targetApi="m">
+
+    <RelativeLayout
+        android:id="@+id/recommendation_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/fuzzybubblesbold"
+            android:text="Yummy China"
+            android:textColor="@color/fog_red"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/backBtn2"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_margin="4dp"
+            android:background="@drawable/ic_circle"
+            android:elevation="3dp"
+            android:foreground="?attr/selectableItemBackground"
+            android:padding="4dp"
+            android:src="@drawable/ic_back" />
+
+        <ImageButton
+            android:id="@+id/nextBtn2"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="4dp"
+            android:background="@drawable/ic_circle"
+            android:elevation="3dp"
+            android:foreground="?attr/selectableItemBackground"
+            android:padding="4dp"
+            android:src="@drawable/ic_next"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/recommendation_layout">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/culture_stories"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:background="@android:color/transparent"
+                android:hint="Culture stories"
+                android:minLines="12" />
+
+            <EditText
+                android:id="@+id/detailed_recipe"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below = "@id/culture_stories"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="0dp"
+                android:background="@android:color/transparent"
+                android:hint="Detailed recipe"
+                android:minLines="12" />
+
+            <View
+                android:id="@+id/view_rc"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/detailed_recipe"
+                android:layout_margin="6dp"
+                android:background="#000" />
+
+            <ImageView
+                android:id="@+id/imageView_rc"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_below="@id/view_rc"
+                android:background="@color/colorAccent"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop"
+                android:visibility="gone" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_rc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imageView_rc" />
+
+            <ImageView
+                android:id="@+id/dish_picture"
+                android:layout_width="198dp"
+                android:layout_height="146dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="155dp"
+                android:layout_marginEnd="0dp"
+                android:src="@drawable/c01" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
