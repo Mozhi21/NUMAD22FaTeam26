@@ -33,11 +33,11 @@ import edu.northeastern.numad22fateam26.finalProject.model.StoriesModel;
 public class StoriesAdapter extends RecyclerView.Adapter<StoriesAdapter.StoriesHolder> {
 
     List<StoriesModel> list;
-    Activity activity;
+    Activity context;
 
-    public StoriesAdapter(List<StoriesModel> list, Activity activity) {
+    public StoriesAdapter(List<StoriesModel> list, Activity context) {
         this.list = list;
-        this.activity = activity;
+        this.context = context;
     }
 
     @NonNull
@@ -52,22 +52,22 @@ public class StoriesAdapter extends RecyclerView.Adapter<StoriesAdapter.StoriesH
 
         if (position == 0) {
 
-            Glide.with(activity)
-                    .load(activity.getResources().getDrawable(R.drawable.ic_add))
+            Glide.with(context.getApplicationContext())
+                    .load(context.getResources().getDrawable(R.drawable.ic_add))
                     .into(holder.imageView);
 
             holder.imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    activity.startActivity(new Intent(activity, StoryAddActivity.class));
+                    context.startActivity(new Intent(context, StoryAddActivity.class));
 
                 }
             });
 
-        }else {
+        } else {
 
-            Glide.with(activity)
+            Glide.with(context.getApplicationContext())
                     .load(list.get(position).getUrl())
                     .timeout(6500)
                     .into(holder.imageView);
@@ -77,7 +77,7 @@ public class StoriesAdapter extends RecyclerView.Adapter<StoriesAdapter.StoriesH
                 if (position == 0) {
                     //new story
 
-                    Dexter.withContext(activity)
+                    Dexter.withContext(context)
                             .withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE,
                                     Manifest.permission.WRITE_EXTERNAL_STORAGE)
                             .withListener(new MultiplePermissionsListener() {
@@ -86,10 +86,10 @@ public class StoriesAdapter extends RecyclerView.Adapter<StoriesAdapter.StoriesH
 
                                     if (multiplePermissionsReport.areAllPermissionsGranted()) {
 
-                                        activity.startActivity(new Intent(activity, StoryAddActivity.class));
+                                        context.startActivity(new Intent(context, StoryAddActivity.class));
 
                                     } else {
-                                        Toast.makeText(activity, "Please allow permission from settings.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(context, "Please allow permission from settings.", Toast.LENGTH_SHORT).show();
                                     }
 
                                 }
@@ -102,10 +102,10 @@ public class StoriesAdapter extends RecyclerView.Adapter<StoriesAdapter.StoriesH
 
                 } else {
                     //open story
-                    Intent intent = new Intent(activity, ViewStoryActivity.class);
+                    Intent intent = new Intent(context, ViewStoryActivity.class);
                     intent.putExtra(VIDEO_URL_KEY, list.get(position).getUrl());
                     intent.putExtra(FILE_TYPE, list.get(position).getType());
-                    activity.startActivity(intent);
+                    context.startActivity(intent);
 
                 }
 

@@ -150,7 +150,6 @@ public class Home extends Fragment {
                 .setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
         storiesModelList = new ArrayList<>();
-        storiesModelList.add(new StoriesModel("", "", "", "", ""));
         storiesAdapter = new StoriesAdapter(storiesModelList, getActivity());
         storiesRecyclerView.setAdapter(storiesAdapter);
 
@@ -250,7 +249,6 @@ public class Home extends Fragment {
 
             // todo: fetch stories
             loadStories(uidList);
-
         });
 
     }
@@ -266,6 +264,9 @@ public class Home extends Fragment {
 
             if (value == null)
                 return;
+
+            storiesModelList.clear();
+            storiesModelList.add(new StoriesModel("", "", "", "", ""));
 
             for (QueryDocumentSnapshot snapshot : value) {
 
