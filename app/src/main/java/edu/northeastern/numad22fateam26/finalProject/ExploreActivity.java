@@ -6,12 +6,14 @@ import static edu.northeastern.numad22fateam26.finalProject.utils.Constants.PREF
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,8 +28,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import edu.northeastern.numad22fateam26.MainActivity;
 import edu.northeastern.numad22fateam26.R;
 import edu.northeastern.numad22fateam26.finalProject.adapter.ViewPagerAdapter;
+import edu.northeastern.numad22fateam26.finalProject.fragments.LoginFragment;
+import edu.northeastern.numad22fateam26.sticker.StickerActivity;
 
 public class ExploreActivity extends AppCompatActivity {
 
@@ -236,6 +241,5 @@ public class ExploreActivity extends AppCompatActivity {
                 .document(user.getUid())
                 .update(map);
     }
-
 
 }

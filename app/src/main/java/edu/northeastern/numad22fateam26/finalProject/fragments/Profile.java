@@ -10,6 +10,7 @@ import static edu.northeastern.numad22fateam26.finalProject.utils.Constants.PREF
 
 import android.os.Bundle;
 
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -23,7 +24,11 @@ import com.google.firebase.firestore.DocumentReference;
 
 import java.util.List;
 
+import edu.northeastern.numad22fateam26.MainActivity;
 import edu.northeastern.numad22fateam26.R;
+import edu.northeastern.numad22fateam26.finalProject.ExploreActivity;
+import edu.northeastern.numad22fateam26.finalProject.PostViewActivity;
+import edu.northeastern.numad22fateam26.finalProject.ReplacerActivity;
 import edu.northeastern.numad22fateam26.finalProject.chat.ChatActivity;
 import edu.northeastern.numad22fateam26.finalProject.model.PostImageModel;
 import android.content.Context;
@@ -94,6 +99,7 @@ import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import edu.northeastern.numad22fateam26.sticker.StickerActivity;
 
 public class Profile extends Fragment {
 
@@ -107,10 +113,12 @@ public class Profile extends Fragment {
     private TextView nameTv, toolbarNameTv, statusTv, followingCountTv, followersCountTv, postCountTv;
     private CircleImageView profileImage;
     private Button followBtn, startChatBtn;
+    private AppCompatImageButton signOutbtn;
     private RecyclerView recyclerView;
     private LinearLayout countLayout;
     private FirebaseUser user;
     private ImageButton editProfileBtn;
+    private FirebaseAuth auth;
 
 
     public Profile() {
@@ -197,6 +205,11 @@ public class Profile extends Fragment {
     }
 
     private void clickListener() {
+
+        signOutbtn.setOnClickListener(v -> {
+            auth.signOut();
+            startActivity(new Intent(getActivity(), ReplacerActivity.class));
+        });
 
 
         followBtn.setOnClickListener(v -> {
@@ -410,9 +423,10 @@ public class Profile extends Fragment {
         countLayout = view.findViewById(R.id.countLayout);
         editProfileBtn = view.findViewById(R.id.edit_profileImage);
         startChatBtn = view.findViewById(R.id.startChatBtn);
+        signOutbtn = view.findViewById(R.id.signOutbtn);
 
 
-        FirebaseAuth auth = FirebaseAuth.getInstance();
+        auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
 
     }
