@@ -8,6 +8,7 @@
 
 
     <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -20,9 +21,17 @@
 
     <LinearLayout
         android:id="@+id/ll1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="411dp"
+        android:layout_height="183dp"
+        android:layout_above="@+id/loginBtn"
+        android:layout_below="@+id/title"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_centerInParent="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="119dp"
+        android:layout_marginEnd="-2dp"
+        android:layout_marginBottom="54dp"
         android:orientation="vertical">
 
         <EditText
@@ -77,27 +86,39 @@
         android:text="Sign In"
         android:textColor="#fff" />
 
+
     <Button
         android:id="@+id/googleSignInBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/signUpTV"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="18dp"
+        android:layout_marginBottom="23dp"
         android:background="@drawable/btn_bg"
         android:text="Sign In with Google"
         android:textColor="#fff" />
-
 
     <TextView
         android:id="@+id/signUpTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/backTv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        android:text="Create Account, Sign Up"
+        android:textColor="@color/kuhuang"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/backTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="26dp"
-        android:text="Create Account, Sign Up"
+        android:layout_marginBottom="35dp"
+        android:text="Back To Main Page"
         android:textColor="@color/kuhuang"
         android:textStyle="bold" />
 
