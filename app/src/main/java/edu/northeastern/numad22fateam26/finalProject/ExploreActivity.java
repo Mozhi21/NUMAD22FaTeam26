@@ -52,6 +52,7 @@ public class ExploreActivity extends AppCompatActivity {
 
         addTabs();
 
+        setViewPagerInitItem(savedInstanceState);
     }
 
     private void init() {
@@ -188,6 +189,24 @@ public class ExploreActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void setViewPagerInitItem(Bundle savedInstanceState) {
+//        if (savedInstanceState != null && savedInstanceState.containsKey("init_view_pager_item")) {
+//            Bundle extras = getIntent().getExtras();
+//            if(extras == null) {
+//                newString= null;
+//            } else {
+//                newString= extras.getString("STRING_I_NEED");
+//            }
+//            int pos = savedInstanceState.
+//            viewPager.setCurrentItem(pos);
+//        }
+
+        Bundle extras = getIntent().getExtras();
+        if(extras != null && extras.containsKey("init_view_pager_item")) {
+            viewPager.setCurrentItem(extras.getInt("init_view_pager_item"));
+        }
     }
 
     private Bitmap loadProfileImage(String directory) {

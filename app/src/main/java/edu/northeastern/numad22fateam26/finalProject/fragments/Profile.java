@@ -110,7 +110,7 @@ public class Profile extends Fragment {
     boolean isFollowed;
     DocumentReference userRef, myRef;
     int count;
-    private TextView nameTv, toolbarNameTv, statusTv, followingCountTv, followersCountTv, postCountTv;
+    private TextView nameTv, toolbarNameTv, statusTv, followingCountTv, followersCountTv, postCountTv, switchTv;
     private CircleImageView profileImage;
     private Button followBtn, startChatBtn;
     private AppCompatImageButton signOutbtn;
@@ -143,14 +143,14 @@ public class Profile extends Fragment {
                 .document(user.getUid());
 
 
-        if (IS_SEARCHED_USER) {
+        if (IS_SEARCHED_USER && !USER_ID.equals(user.getUid())) {
             isMyProfile = false;
+            switchTv.setVisibility(View.VISIBLE);
             userUID = USER_ID;
-
             loadData();
-
         } else {
             isMyProfile = true;
+            switchTv.setVisibility(View.INVISIBLE);
             userUID = user.getUid();
         }
 
@@ -209,6 +209,15 @@ public class Profile extends Fragment {
         signOutbtn.setOnClickListener(v -> {
             auth.signOut();
             startActivity(new Intent(getActivity(), ReplacerActivity.class));
+        });
+
+        switchTv.setOnClickListener(v -> {
+            //getActivity().finish();
+            USER_ID = auth.getUid();
+            IS_SEARCHED_USER = false;
+            Intent intent = new Intent(getActivity(), ExploreActivity.class);
+            intent.putExtra("init_view_pager_item", 4);
+            startActivity(intent);
         });
 
 
@@ -417,6 +426,7 @@ public class Profile extends Fragment {
         followersCountTv = view.findViewById(R.id.followersCountTv);
         followingCountTv = view.findViewById(R.id.followingCountTv);
         postCountTv = view.findViewById(R.id.postCountTv);
+        switchTv = view.findViewById(R.id.switchTv);
         profileImage = view.findViewById(R.id.profileImage);
         followBtn = view.findViewById(R.id.followBtn);
         recyclerView = view.findViewById(R.id.recyclerView);
