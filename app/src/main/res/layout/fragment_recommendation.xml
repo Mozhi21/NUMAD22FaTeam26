@@ -61,7 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
+            <TextView
                 android:id="@+id/culture_stories"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
@@ -71,7 +71,7 @@
                 android:hint="Culture stories"
                 android:minLines="12" />
 
-            <EditText
+            <TextView
                 android:id="@+id/detailed_recipe"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"

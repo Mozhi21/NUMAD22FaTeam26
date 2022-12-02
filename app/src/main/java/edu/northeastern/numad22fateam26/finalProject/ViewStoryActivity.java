@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.exoplayer2.MediaItem;
@@ -12,6 +13,7 @@ import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.ui.PlayerView;
 
 import edu.northeastern.numad22fateam26.R;
+import edu.northeastern.numad22fateam26.finalProject.fragments.Recommendation;
 
 public class ViewStoryActivity extends AppCompatActivity {
 
@@ -72,6 +74,5 @@ public class ViewStoryActivity extends AppCompatActivity {
         imageView = findViewById(R.id.imageView);
 
     }
-
 
 }
