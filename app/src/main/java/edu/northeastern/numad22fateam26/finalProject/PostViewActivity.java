@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -15,13 +16,18 @@ import com.google.firebase.storage.FirebaseStorage;
 import java.net.URL;
 
 import edu.northeastern.numad22fateam26.R;
+import edu.northeastern.numad22fateam26.finalProject.fragments.Recommendation;
+import edu.northeastern.numad22fateam26.finalProject.model.PostImageModel;
 
 public class PostViewActivity extends AppCompatActivity {
+
+    TextView adminStory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_view);
+        adminStory = findViewById(R.id.culture_stories);
 
         Intent intent = getIntent();
 
@@ -50,6 +56,10 @@ public class PostViewActivity extends AppCompatActivity {
                     }
                 });
 
+
+
+        String lastPost = Recommendation.loadAdminPosts();
+        adminStory.setText(String.format("Topic for this Week: /n", lastPost));
     }
 
     @Override
