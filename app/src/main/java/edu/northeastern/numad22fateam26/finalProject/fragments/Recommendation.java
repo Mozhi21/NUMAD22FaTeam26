@@ -19,6 +19,7 @@ import java.util.List;
 import edu.northeastern.numad22fateam26.R;
 import edu.northeastern.numad22fateam26.finalProject.adapter.HomeAdapter;
 import edu.northeastern.numad22fateam26.finalProject.adapter.StoriesAdapter;
+import edu.northeastern.numad22fateam26.finalProject.adapter.UserAdapter;
 import edu.northeastern.numad22fateam26.finalProject.model.HomeModel;
 import edu.northeastern.numad22fateam26.finalProject.model.PostImageModel;
 import edu.northeastern.numad22fateam26.finalProject.model.StoriesModel;
@@ -48,11 +49,9 @@ import javax.annotation.Nullable;
 
 public class Recommendation extends Fragment {
 
-    private final MutableLiveData<Integer> commentCount = new MutableLiveData<>();
-    HomeAdapter adapter;
     static List<PostImageModel> postsModelList;
+    DocumentReference userRef;
     private RecyclerView recyclerView;
-    private List<HomeModel> list;
     private FirebaseUser user;
     Activity activity;
 
@@ -72,8 +71,6 @@ public class Recommendation extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        super.onViewCreated(view, savedInstanceState);
-
 
     }
 
@@ -85,7 +82,7 @@ public class Recommendation extends Fragment {
 
     public static String loadAdminPosts() {
         Query query = FirebaseFirestore.getInstance().collection("Users")
-                .document("qUs1aFODabPiCVLakZq1KmG0naJ3").collection("Post Images");;
+                .document("qUs1aFODabPiCVLakZq1KmG0naJ3").collection("Post Images");
         query.addSnapshotListener((value, error) -> {
 
             if (error != null) {
