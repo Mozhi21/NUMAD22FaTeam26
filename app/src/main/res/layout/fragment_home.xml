@@ -37,8 +37,11 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_margin="12dp"
-                android:background="@drawable/ic_send"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/ic_mail"
                 android:contentDescription="@null" />
 
         </RelativeLayout>
