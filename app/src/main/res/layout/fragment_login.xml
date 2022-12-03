@@ -92,6 +92,7 @@
         android:text="Sign In"
         android:textColor="#fff" />
 
+
     <Button
         android:id="@+id/googleSignInBtn"
         android:layout_width="match_parent"
