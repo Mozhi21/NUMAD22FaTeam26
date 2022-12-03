@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_background"
+    android:background="@drawable/bg8"
     tools:context=".finalProject.fragments.CreateAccountFragment">
 
     <TextView
@@ -13,52 +13,52 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="78dp"
         android:text="Create \nAccount"
-        android:textColor="@color/fog_red"
-        android:textSize="24sp"
+        android:textColor="@color/hupo"
+        android:textSize="36sp"
         android:textStyle="bold" />
 
     <LinearLayout
         android:id="@+id/ll1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
 
         <EditText
             android:id="@+id/nameET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="12dp"
             android:layout_margin="8dp"
             android:background="@drawable/text_box"
-            android:hint="Name"/>
+            android:hint="Name"
+            android:padding="12dp" />
 
         <EditText
             android:id="@+id/emailET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="12dp"
             android:layout_margin="8dp"
             android:background="@drawable/text_box"
-            android:hint="Email"/>
+            android:hint="Email"
+            android:padding="12dp" />
 
         <EditText
             android:id="@+id/passwordET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="12dp"
             android:layout_margin="8dp"
             android:background="@drawable/text_box"
-            android:hint="Password"/>
+            android:hint="Password"
+            android:padding="12dp" />
 
         <EditText
             android:id="@+id/confirmPassET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="12dp"
             android:layout_margin="8dp"
             android:background="@drawable/text_box"
-            android:hint="Confirm Password"/>
+            android:hint="Confirm Password"
+            android:padding="12dp" />
 
     </LinearLayout>
 
