@@ -170,6 +170,7 @@ public class Profile extends Fragment {
         userRef = FirebaseFirestore.getInstance().collection("Users").document(userUID);
 
         loadBasicData();
+        recyclerView.setItemAnimator(null);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
 
@@ -306,6 +307,7 @@ public class Profile extends Fragment {
 
         });
 
+        assert getContext() != null;
 
         editProfileBtn.setOnClickListener(v -> CropImage.activity()
                 .setGuidelines(CropImageView.Guidelines.ON)
@@ -625,17 +627,11 @@ public class Profile extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
-
             Uri uri = result.getUri();
-
             uploadImage(uri);
-
         }
-
     }
 
     private void uploadImage(Uri uri) {
