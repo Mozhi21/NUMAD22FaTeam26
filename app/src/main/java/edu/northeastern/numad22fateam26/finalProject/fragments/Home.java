@@ -211,7 +211,7 @@ public class Home extends Fragment {
 
                                             HomeModel model = snapshot1.toObject(HomeModel.class);
 
-                                            list.add(new HomeModel(
+                                            list.add(0, new HomeModel(
                                                     model.getName(),
                                                     model.getProfileImage(),
                                                     model.getImageUrl(),
