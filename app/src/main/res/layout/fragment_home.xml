@@ -93,7 +93,6 @@
             android:layout_marginRight="10dp"/>
 
     </LinearLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/storiesRecyclerView"
         android:layout_width="match_parent"
