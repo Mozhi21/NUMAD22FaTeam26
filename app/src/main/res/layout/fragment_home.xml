@@ -98,8 +98,7 @@
         android:id="@+id/storiesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar"
-        android:layout_marginTop="55dp" />
+        android:layout_below="@id/buttons" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewfp"
