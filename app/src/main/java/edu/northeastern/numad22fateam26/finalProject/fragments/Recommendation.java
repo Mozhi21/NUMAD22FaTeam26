@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -64,30 +65,35 @@ public class Recommendation extends Fragment {
         loadAdminPosts();
     }
 
-
     public void loadAdminPosts() {
         CollectionReference postRef = FirebaseFirestore.getInstance().collection("Users")
                 .document("qUs1aFODabPiCVLakZq1KmG0naJ3").collection("Post Images");
-        postRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        if (document.exists()) {
-                            PostImageModel model = document.toObject(PostImageModel.class);
-                            postsModelList.add(model);
+        postRef
+                .orderBy("timestamp", Query.Direction.DESCENDING)
+                .limit(1)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                if (document.exists()) {
+                                    PostImageModel model = document.toObject(PostImageModel.class);
+                                    postsModelList.add(model);
+                                }
+                            }
+                            if (!postsModelList.isEmpty()) {
+                                setPostView(postsModelList);
+                            }
+                        } else {
+                            Log.d(TAG, "get failed with ", task.getException());
                         }
                     }
-                    int n = postsModelList.size();
-                    if (n != 0) {
-                        adminStory.setText(String.format("Topic for this Week: %s\n",
-                                postsModelList.get(n - 1).getDescription()));
-                    }
-                } else {
-                    Log.d(TAG, "get failed with ", task.getException());
-                }
-            }
-        });
+                });
+    }
+
+    private void setPostView(List<PostImageModel> postsModelList) {
+        adminStory.setText(String.format("Topic for this Week: %s\n",
+                postsModelList.get(0).getDescription()));
     }
 
 }
