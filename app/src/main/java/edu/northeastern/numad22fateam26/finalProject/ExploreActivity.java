@@ -77,7 +77,7 @@ public class ExploreActivity extends AppCompatActivity {
         drawableResList.add(R.drawable.ic_search);
         drawableResList.add(R.drawable.ic_add);
         drawableResList.add(R.drawable.ic_heart);
-        drawableResList.add(R.drawable.ic_person);
+        drawableResList.add(R.drawable.ic_outline_person);
 
         for (int i = 0; i < 5; i++) {
             tabLayout.addTab(tabLayout.newTab().setIcon(drawableResList.get(i)));
@@ -126,7 +126,7 @@ public class ExploreActivity extends AppCompatActivity {
                         break;
 
                     case 4:
-                        tab.setIcon(R.drawable.ic_person);
+                        tab.setIcon(R.drawable.ic_outline_person);
                         break;
                 }
 
@@ -154,7 +154,7 @@ public class ExploreActivity extends AppCompatActivity {
                         break;
 
                     case 4:
-                        tab.setIcon(R.drawable.ic_person);
+                        tab.setIcon(R.drawable.ic_outline_person);
                         break;
 
 
@@ -185,7 +185,7 @@ public class ExploreActivity extends AppCompatActivity {
                         break;
 
                     case 4:
-                        tab.setIcon(R.drawable.ic_person);
+                        tab.setIcon(R.drawable.ic_outline_person);
                         break;
                 }
 
