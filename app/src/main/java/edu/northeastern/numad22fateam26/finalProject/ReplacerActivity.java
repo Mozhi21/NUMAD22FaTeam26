@@ -26,8 +26,11 @@ public class ReplacerActivity extends AppCompatActivity {
 
         boolean isComment = getIntent().getBooleanExtra("isComment", false);
 
-        setFragment(new LoginFragment());
-
+        if (isComment) {
+            setFragment(new Comment());
+        } else {
+            setFragment(new LoginFragment());
+        }
     }
 
     public void setFragment(Fragment fragment) {

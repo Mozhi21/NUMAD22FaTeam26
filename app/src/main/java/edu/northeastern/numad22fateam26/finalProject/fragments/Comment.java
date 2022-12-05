@@ -47,8 +47,7 @@ public class Comment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_comment, container, false);
     }
@@ -128,6 +127,8 @@ public class Comment extends Fragment {
                 Toast.makeText(getContext(), "No Comments", Toast.LENGTH_SHORT).show();
                 return;
             }
+
+            list.clear();
 
             for (DocumentSnapshot snapshot : value) {
 
