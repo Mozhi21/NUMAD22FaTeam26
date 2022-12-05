@@ -89,7 +89,7 @@ public class Search extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                reference.orderBy("search").startAt(query).endAt(query + "\uf8ff")
+                reference.orderBy("search")
                         .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -102,7 +102,9 @@ public class Search extends Fragment {
                                             return;
 
                                         Users users = snapshot.toObject(Users.class);
-                                        list.add(users);
+                                        if (users.getSearch().startsWith(query)) {
+                                            list.add(users);
+                                        }
 
                                     }
                                     adapter.notifyDataSetChanged();
