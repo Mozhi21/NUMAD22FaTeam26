@@ -3,10 +3,12 @@ package edu.northeastern.numad22fateam26.finalProject.model;
 import com.google.firebase.firestore.ServerTimestamp;
 
 import java.util.Date;
+import java.util.List;
 
 public class PostImageModel {
 
-    private String imageUrl, id, description, uid;
+    private String imageUrl, id, description, uid, name, profileImage;
+    private List<String> likes;
 
     @ServerTimestamp
     private Date timestamp;
@@ -60,5 +62,29 @@ public class PostImageModel {
 
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage() {
+        this.profileImage = profileImage;
+    }
+
+    public List<String> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<String> likes) {
+        this.likes = likes;
     }
 }

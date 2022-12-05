@@ -1,59 +1,42 @@
 package edu.northeastern.numad22fateam26.finalProject.fragments;
 
-import android.app.Activity;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.MutableLiveData;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.google.firebase.auth.FirebaseUser;
-
-import java.util.List;
-
-import edu.northeastern.numad22fateam26.R;
-import edu.northeastern.numad22fateam26.finalProject.adapter.HomeAdapter;
-import edu.northeastern.numad22fateam26.finalProject.adapter.StoriesAdapter;
-import edu.northeastern.numad22fateam26.finalProject.adapter.UserAdapter;
-import edu.northeastern.numad22fateam26.finalProject.model.HomeModel;
-import edu.northeastern.numad22fateam26.finalProject.model.PostImageModel;
-import edu.northeastern.numad22fateam26.finalProject.model.StoriesModel;
-
-import com.google.firebase.firestore.DocumentReference;
-
-import android.util.Log;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
-import com.google.firebase.auth.FirebaseAuth;
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-//import com.theartofdev.edmodo.cropper.CropImage;
-//import com.theartofdev.edmodo.cropper.CropImageView;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import javax.annotation.Nullable;
+
+import edu.northeastern.numad22fateam26.R;
+import edu.northeastern.numad22fateam26.finalProject.PostViewActivity;
+import edu.northeastern.numad22fateam26.finalProject.model.PostImageModel;
 
 
 public class Recommendation extends Fragment {
 
-    static List<PostImageModel> postsModelList;
-    DocumentReference userRef;
-    private RecyclerView recyclerView;
-    private FirebaseUser user;
-    Activity activity;
+    private static final String TAG = "Recommendation";
+    List<PostImageModel> postsModelList;
+    private TextView adminStory;
+    private TextView adminRecipe;
+    private ImageView adminPic;
 
 
     public Recommendation() {
@@ -71,41 +54,52 @@ public class Recommendation extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
+        init(view);
     }
 
 
     private void init(View view) {
+        adminStory = view.findViewById(R.id.dish_description);
+        adminRecipe = view.findViewById(R.id.detailed_recipe);
+        adminPic = view.findViewById(R.id.admin_pic);
 
+        postsModelList = new ArrayList<>();
+        loadAdminPosts();
     }
 
-
-    public static String loadAdminPosts() {
-        Query query = FirebaseFirestore.getInstance().collection("Users")
+    public void loadAdminPosts() {
+        CollectionReference postRef = FirebaseFirestore.getInstance().collection("Users")
                 .document("qUs1aFODabPiCVLakZq1KmG0naJ3").collection("Post Images");
-        query.addSnapshotListener((value, error) -> {
+        postRef
+                .orderBy("timestamp", Query.Direction.DESCENDING)
+                .limit(1)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                if (document.exists()) {
+                                    PostImageModel model = document.toObject(PostImageModel.class);
+                                    postsModelList.add(model);
+                                }
+                            }
+                            if (!postsModelList.isEmpty()) {
+                                setPostView(postsModelList);
+                            }
+                        } else {
+                            Log.d(TAG, "get failed with ", task.getException());
+                        }
+                    }
+                });
+    }
 
-            if (error != null) {
-                Log.d("Error: ", error.getMessage());
-            }
-
-            if (value == null)
-                return;
-
-            postsModelList.clear();
-
-            for (QueryDocumentSnapshot snapshot : value) {
-
-                if (!value.isEmpty()) {
-                    PostImageModel model = snapshot.toObject(PostImageModel.class);
-                    postsModelList.add(model);
-                }
-
-            }
-
-        });
-        int n = postsModelList.size();
-        return postsModelList.get(n-1).getDescription();
+    private void setPostView(List<PostImageModel> postsModelList) {
+        PostImageModel adminPost = postsModelList.get(0);
+        adminStory.setText(adminPost.getDescription());
+        Glide.with(this)
+                .load(adminPost.getImageUrl())
+                .timeout(6500)
+                .into(adminPic);
     }
 
 }
