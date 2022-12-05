@@ -36,6 +36,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.northeastern.numad22fateam26.MainActivity;
 import edu.northeastern.numad22fateam26.R;
 import edu.northeastern.numad22fateam26.finalProject.ExploreActivity;
 import edu.northeastern.numad22fateam26.finalProject.ReplacerActivity;
@@ -43,7 +44,7 @@ import edu.northeastern.numad22fateam26.finalProject.ReplacerActivity;
 public class LoginFragment extends Fragment {
 
     private EditText emailEt, passwordEt;
-    private TextView signUpTv, forgotPasswordTv;
+    private TextView signUpTv, forgotPasswordTv, backTv;
     private Button loginBtn, googleSignInBtn;
     private ProgressBar progressBar;
 
@@ -82,6 +83,7 @@ public class LoginFragment extends Fragment {
         googleSignInBtn = view.findViewById(R.id.googleSignInBtn);
         signUpTv = view.findViewById(R.id.signUpTV);
         forgotPasswordTv = view.findViewById(R.id.forgotTV);
+        backTv = view.findViewById(R.id.backTv);
         progressBar = view.findViewById(R.id.progressBar);
 
 
@@ -97,6 +99,10 @@ public class LoginFragment extends Fragment {
     }
 
     private void clickListener() {
+
+        backTv.setOnClickListener(v ->  {
+            startActivity(new Intent(getActivity(), MainActivity.class));
+        });
 
         forgotPasswordTv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -257,6 +263,4 @@ public class LoginFragment extends Fragment {
 
 
     }
-
-
 }

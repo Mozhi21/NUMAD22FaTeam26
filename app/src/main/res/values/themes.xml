@@ -6,7 +6,7 @@
         <item name="colorPrimaryVariant">@color/dailv</item>
         <item name="colorOnPrimary">@color/bai</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/hupo</item>
+        <item name="colorSecondary">@color/fog_red</item>
         <item name="colorSecondaryVariant">@color/kuhuang</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->

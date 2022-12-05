@@ -43,12 +43,13 @@
 
 <!--    </androidx.appcompat.widget.Toolbar>-->
 
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/tabLayout"
-        android:layout_below="@id/toolbar"/>
+        android:layout_above="@id/tabLayout" />
+<!--        android:layout_below="@id/toolbar" />-->
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"

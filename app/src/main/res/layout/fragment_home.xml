@@ -37,19 +37,67 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_margin="12dp"
-                android:background="@drawable/ic_send"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/ic_mail"
                 android:contentDescription="@null" />
 
         </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>
 
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_below="@id/toolbar">
+
+        <Button
+
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="follow"
+            android:textSize="9sp"
+            android:layout_marginLeft="10dp"
+            />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:text="like"
+            android:textColor="@color/bai"
+            android:textSize="9sp"
+            />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="For You"
+            android:textColor="@color/bai"
+            android:textSize="9sp"
+            android:layout_weight = "1"
+            android:layout_marginLeft="20dp"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Recipe"
+            android:textColor="@color/bai"
+            android:textSize="9sp"
+            android:layout_weight = "1"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"/>
+
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/storiesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar" />
+        android:layout_below="@id/buttons" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewfp"

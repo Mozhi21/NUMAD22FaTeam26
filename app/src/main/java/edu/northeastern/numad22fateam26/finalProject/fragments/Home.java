@@ -3,6 +3,11 @@ package edu.northeastern.numad22fateam26.finalProject.fragments;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,12 +17,6 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -192,7 +191,7 @@ public class Home extends Fragment {
 
                         for (QueryDocumentSnapshot snapshot : value1) {
 
-                            snapshot.getReference().collection("Post Images")
+                            snapshot.getReference().collection("Post Images").orderBy("timestamp", Query.Direction.DESCENDING)
                                     .addSnapshotListener((value11, error11) -> {
 
                                         if (error11 != null) {

@@ -3,20 +3,26 @@ package edu.northeastern.numad22fateam26.finalProject;
 import static edu.northeastern.numad22fateam26.finalProject.utils.Constants.PREF_DIRECTORY;
 import static edu.northeastern.numad22fateam26.finalProject.utils.Constants.PREF_NAME;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,8 +32,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import edu.northeastern.numad22fateam26.MainActivity;
 import edu.northeastern.numad22fateam26.R;
 import edu.northeastern.numad22fateam26.finalProject.adapter.ViewPagerAdapter;
+import edu.northeastern.numad22fateam26.finalProject.fragments.LoginFragment;
+import edu.northeastern.numad22fateam26.sticker.StickerActivity;
 
 public class ExploreActivity extends AppCompatActivity {
 
@@ -37,6 +46,7 @@ public class ExploreActivity extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private Button b1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +57,7 @@ public class ExploreActivity extends AppCompatActivity {
 
         addTabs();
 
+        setViewPagerInitItem(savedInstanceState);
     }
 
     private void init() {
@@ -68,7 +79,7 @@ public class ExploreActivity extends AppCompatActivity {
         drawableResList.add(R.drawable.ic_search);
         drawableResList.add(R.drawable.ic_add);
         drawableResList.add(R.drawable.ic_heart);
-        drawableResList.add(R.drawable.ic_person);
+        drawableResList.add(R.drawable.ic_outline_person);
 
         for (int i = 0; i < 5; i++) {
             tabLayout.addTab(tabLayout.newTab().setIcon(drawableResList.get(i)));
@@ -117,7 +128,7 @@ public class ExploreActivity extends AppCompatActivity {
                         break;
 
                     case 4:
-                        tab.setIcon(R.drawable.ic_person);
+                        tab.setIcon(R.drawable.ic_outline_person);
                         break;
                 }
 
@@ -145,7 +156,7 @@ public class ExploreActivity extends AppCompatActivity {
                         break;
 
                     case 4:
-                        tab.setIcon(R.drawable.ic_person);
+                        tab.setIcon(R.drawable.ic_outline_person);
                         break;
 
 
@@ -176,13 +187,31 @@ public class ExploreActivity extends AppCompatActivity {
                         break;
 
                     case 4:
-                        tab.setIcon(R.drawable.ic_person);
+                        tab.setIcon(R.drawable.ic_outline_person);
                         break;
                 }
 
             }
         });
 
+    }
+
+    private void setViewPagerInitItem(Bundle savedInstanceState) {
+//        if (savedInstanceState != null && savedInstanceState.containsKey("init_view_pager_item")) {
+//            Bundle extras = getIntent().getExtras();
+//            if(extras == null) {
+//                newString= null;
+//            } else {
+//                newString= extras.getString("STRING_I_NEED");
+//            }
+//            int pos = savedInstanceState.
+//            viewPager.setCurrentItem(pos);
+//        }
+
+        Bundle extras = getIntent().getExtras();
+        if(extras != null && extras.containsKey("init_view_pager_item")) {
+            viewPager.setCurrentItem(extras.getInt("init_view_pager_item"));
+        }
     }
 
     private Bitmap loadProfileImage(String directory) {
@@ -236,6 +265,5 @@ public class ExploreActivity extends AppCompatActivity {
                 .document(user.getUid())
                 .update(map);
     }
-
 
 }

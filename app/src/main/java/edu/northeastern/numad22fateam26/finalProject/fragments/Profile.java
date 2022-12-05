@@ -10,6 +10,7 @@ import static edu.northeastern.numad22fateam26.finalProject.utils.Constants.PREF
 
 import android.os.Bundle;
 
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -23,7 +24,11 @@ import com.google.firebase.firestore.DocumentReference;
 
 import java.util.List;
 
+import edu.northeastern.numad22fateam26.MainActivity;
 import edu.northeastern.numad22fateam26.R;
+import edu.northeastern.numad22fateam26.finalProject.ExploreActivity;
+import edu.northeastern.numad22fateam26.finalProject.PostViewActivity;
+import edu.northeastern.numad22fateam26.finalProject.ReplacerActivity;
 import edu.northeastern.numad22fateam26.finalProject.chat.ChatActivity;
 import edu.northeastern.numad22fateam26.finalProject.model.PostImageModel;
 import android.content.Context;
@@ -94,6 +99,7 @@ import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import edu.northeastern.numad22fateam26.sticker.StickerActivity;
 
 public class Profile extends Fragment {
 
@@ -104,13 +110,15 @@ public class Profile extends Fragment {
     boolean isFollowed;
     DocumentReference userRef, myRef;
     int count;
-    private TextView nameTv, toolbarNameTv, statusTv, followingCountTv, followersCountTv, postCountTv;
+    private TextView nameTv, toolbarNameTv, statusTv, followingCountTv, followersCountTv, postCountTv, switchTv;
     private CircleImageView profileImage;
     private Button followBtn, startChatBtn;
+    private AppCompatImageButton signOutbtn;
     private RecyclerView recyclerView;
     private LinearLayout countLayout;
     private FirebaseUser user;
     private ImageButton editProfileBtn;
+    private FirebaseAuth auth;
 
 
     public Profile() {
@@ -135,14 +143,14 @@ public class Profile extends Fragment {
                 .document(user.getUid());
 
 
-        if (IS_SEARCHED_USER) {
+        if (IS_SEARCHED_USER && !USER_ID.equals(user.getUid())) {
             isMyProfile = false;
+            switchTv.setVisibility(View.VISIBLE);
             userUID = USER_ID;
-
             loadData();
-
         } else {
             isMyProfile = true;
+            switchTv.setVisibility(View.INVISIBLE);
             userUID = user.getUid();
         }
 
@@ -162,6 +170,7 @@ public class Profile extends Fragment {
         userRef = FirebaseFirestore.getInstance().collection("Users").document(userUID);
 
         loadBasicData();
+        recyclerView.setItemAnimator(null);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
 
@@ -197,6 +206,20 @@ public class Profile extends Fragment {
     }
 
     private void clickListener() {
+
+        signOutbtn.setOnClickListener(v -> {
+            auth.signOut();
+            startActivity(new Intent(getActivity(), ReplacerActivity.class));
+        });
+
+        switchTv.setOnClickListener(v -> {
+            //getActivity().finish();
+            USER_ID = auth.getUid();
+            IS_SEARCHED_USER = false;
+            Intent intent = new Intent(getActivity(), ExploreActivity.class);
+            intent.putExtra("init_view_pager_item", 4);
+            startActivity(intent);
+        });
 
 
         followBtn.setOnClickListener(v -> {
@@ -284,6 +307,7 @@ public class Profile extends Fragment {
 
         });
 
+        assert getContext() != null;
 
         editProfileBtn.setOnClickListener(v -> CropImage.activity()
                 .setGuidelines(CropImageView.Guidelines.ON)
@@ -404,15 +428,17 @@ public class Profile extends Fragment {
         followersCountTv = view.findViewById(R.id.followersCountTv);
         followingCountTv = view.findViewById(R.id.followingCountTv);
         postCountTv = view.findViewById(R.id.postCountTv);
+        switchTv = view.findViewById(R.id.switchTv);
         profileImage = view.findViewById(R.id.profileImage);
         followBtn = view.findViewById(R.id.followBtn);
         recyclerView = view.findViewById(R.id.recyclerView);
         countLayout = view.findViewById(R.id.countLayout);
         editProfileBtn = view.findViewById(R.id.edit_profileImage);
         startChatBtn = view.findViewById(R.id.startChatBtn);
+        signOutbtn = view.findViewById(R.id.signOutbtn);
 
 
-        FirebaseAuth auth = FirebaseAuth.getInstance();
+        auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
 
     }
@@ -601,17 +627,11 @@ public class Profile extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
-
             Uri uri = result.getUri();
-
             uploadImage(uri);
-
         }
-
     }
 
     private void uploadImage(Uri uri) {
