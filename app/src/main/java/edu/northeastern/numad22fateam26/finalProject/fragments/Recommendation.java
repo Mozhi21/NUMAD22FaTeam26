@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -25,6 +26,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import edu.northeastern.numad22fateam26.R;
+import edu.northeastern.numad22fateam26.finalProject.PostViewActivity;
 import edu.northeastern.numad22fateam26.finalProject.model.PostImageModel;
 
 
@@ -57,7 +59,7 @@ public class Recommendation extends Fragment {
 
 
     private void init(View view) {
-        adminStory = view.findViewById(R.id.culture_stories);
+        adminStory = view.findViewById(R.id.dish_description);
         adminRecipe = view.findViewById(R.id.detailed_recipe);
         adminPic = view.findViewById(R.id.admin_pic);
 
@@ -92,8 +94,12 @@ public class Recommendation extends Fragment {
     }
 
     private void setPostView(List<PostImageModel> postsModelList) {
-        adminStory.setText(String.format("Topic for this Week: %s\n",
-                postsModelList.get(0).getDescription()));
+        PostImageModel adminPost = postsModelList.get(0);
+        adminStory.setText(adminPost.getDescription());
+        Glide.with(this)
+                .load(adminPost.getImageUrl())
+                .timeout(6500)
+                .into(adminPic);
     }
 
 }
