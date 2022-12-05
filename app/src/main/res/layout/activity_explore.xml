@@ -7,41 +7,41 @@
     android:keepScreenOn="true"
     tools:context=".finalProject.ExploreActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:layout_alignParentTop="true"
-        android:layout_width = "match_parent"
-        android:layout_height = "?attr/actionBarSize"
-        android:id="@+id/toolbar"
-        android:background ="@android:color/white"
-        android:elevation = "2dp">
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_width = "match_parent"-->
+<!--        android:layout_height = "?attr/actionBarSize"-->
+<!--        android:id="@+id/toolbar"-->
+<!--        android:background ="@android:color/white"-->
+<!--        android:elevation = "2dp">-->
 
-        <RelativeLayout
-            android:layout_width = "match_parent"
-            android:layout_height = "match_parent">
-            <TextView
-                android:layout_width = "wrap_content"
-                android:layout_height = "wrap_content"
-                android:layout_centerHorizontal = "true"
-                android:text = "Yummy China"
-                android:layout_centerVertical = "true"
-                android:textSize = "18sp"
-                android:fontFamily = "@font/fuzzybubblesbold"
-                android:textColor = "@color/fog_red"/>
-            <ImageButton
-                android:contentDescription="@null"
-                android:layout_width = "wrap_content"
-                android:layout_height = "wrap_content"
-                android:layout_alignParentEnd = "true"
-                android:layout_alignParentRight = "true"
-                android:layout_centerVertical= "true"
-                android:background = "@drawable/ic_send"
-                android:layout_margin = "12dp"
-                android:id="@+id/sendBtn"/>
+<!--        <RelativeLayout-->
+<!--            android:layout_width = "match_parent"-->
+<!--            android:layout_height = "match_parent">-->
+<!--            <TextView-->
+<!--                android:layout_width = "wrap_content"-->
+<!--                android:layout_height = "wrap_content"-->
+<!--                android:layout_centerHorizontal = "true"-->
+<!--                android:text = "Yummy China"-->
+<!--                android:layout_centerVertical = "true"-->
+<!--                android:textSize = "18sp"-->
+<!--                android:fontFamily = "@font/fuzzybubblesbold"-->
+<!--                android:textColor = "@color/fog_red"/>-->
+<!--            <ImageButton-->
+<!--                android:contentDescription="@null"-->
+<!--                android:layout_width = "wrap_content"-->
+<!--                android:layout_height = "wrap_content"-->
+<!--                android:layout_alignParentEnd = "true"-->
+<!--                android:layout_alignParentRight = "true"-->
+<!--                android:layout_centerVertical= "true"-->
+<!--                android:background = "@drawable/ic_send"-->
+<!--                android:layout_margin = "12dp"-->
+<!--                android:id="@+id/sendBtn"/>-->
 
-        </RelativeLayout>
+<!--        </RelativeLayout>-->
 
 
-    </androidx.appcompat.widget.Toolbar>
+<!--    </androidx.appcompat.widget.Toolbar>-->
 
 
     <androidx.viewpager.widget.ViewPager
