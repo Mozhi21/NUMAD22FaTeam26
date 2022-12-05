@@ -46,10 +46,12 @@ public class ReplacerActivity extends AppCompatActivity {
 
             String id = getIntent().getStringExtra("id");
             String uid = getIntent().getStringExtra("uid");
+            String imageUrl = getIntent().getStringExtra("imageUrl");
 
             Bundle bundle = new Bundle();
             bundle.putString("id", id);
             bundle.putString("uid", uid);
+            bundle.putString("imageUrl", imageUrl);
             fragment.setArguments(bundle);
         }
 

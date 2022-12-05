@@ -94,6 +94,7 @@ public class Add extends Fragment {
         list = new ArrayList<>();
         adapter = new GalleryAdapter(list);
 
+
         recyclerView.setAdapter(adapter);
 
         clickListener();

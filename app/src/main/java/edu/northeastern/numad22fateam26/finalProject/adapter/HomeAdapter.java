@@ -157,6 +157,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeHolder> {
                 intent.putExtra("id", id);
                 intent.putExtra("uid", uid);
                 intent.putExtra("isComment", true);
+                intent.putExtra("imageUrl", imageUrl);
 
                 context.startActivity(intent);
 
