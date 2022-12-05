@@ -7,11 +7,13 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import edu.northeastern.numad22fateam26.R;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
@@ -34,6 +36,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -43,17 +46,25 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import com.bumptech.glide.Glide;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import android.widget.ImageView;
+import android.widget.TextView;
 import javax.annotation.Nullable;
 
 
 public class Recommendation extends Fragment {
 
-    static List<PostImageModel> postsModelList;
+    private static final String TAG = "Recommendation";
+    List<PostImageModel> postsModelList;
     DocumentReference userRef;
     private RecyclerView recyclerView;
     private FirebaseUser user;
     Activity activity;
+    private TextView adminStory;
+    private TextView adminRecipe;
+    private ImageView adminPic;
 
 
     public Recommendation() {
@@ -71,40 +82,50 @@ public class Recommendation extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        init(view);
 
     }
 
 
     private void init(View view) {
+        adminStory = view.findViewById(R.id.culture_stories);
+        adminRecipe = view.findViewById(R.id.detailed_recipe);
+        adminPic = view.findViewById(R.id.admin_pic);
+
+        postsModelList = new ArrayList<>();
+        String lastPost = loadAdminPosts();
+        adminStory.setText(String.format("Topic for this Week: %s\n", lastPost));
 
     }
 
 
-    public static String loadAdminPosts() {
-        Query query = FirebaseFirestore.getInstance().collection("Users")
+    public String loadAdminPosts() {
+        CollectionReference query = FirebaseFirestore.getInstance().collection("Users")
                 .document("qUs1aFODabPiCVLakZq1KmG0naJ3").collection("Post Images");
-        query.addSnapshotListener((value, error) -> {
-
-            if (error != null) {
-                Log.d("Error: ", error.getMessage());
-            }
-
-            if (value == null)
-                return;
-
-            postsModelList.clear();
-
-            for (QueryDocumentSnapshot snapshot : value) {
-
-                if (!value.isEmpty()) {
-                    PostImageModel model = snapshot.toObject(PostImageModel.class);
-                    postsModelList.add(model);
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                System.out.println(task);
+                System.out.println(task.getResult());
+                System.out.println(task.getException());
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        System.out.println(document.getData());
+                        if (document.exists()) {
+                            PostImageModel model = document.toObject(PostImageModel.class);
+                            postsModelList.add(model);
+                        }
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
                 }
-
             }
-
         });
+
         int n = postsModelList.size();
+        if (n == 0) {
+            return null;
+        }
         return postsModelList.get(n-1).getDescription();
     }
 

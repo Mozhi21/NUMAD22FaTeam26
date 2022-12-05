@@ -21,13 +21,11 @@ import edu.northeastern.numad22fateam26.finalProject.model.PostImageModel;
 
 public class PostViewActivity extends AppCompatActivity {
 
-    TextView adminStory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_view);
-        adminStory = findViewById(R.id.culture_stories);
 
         Intent intent = getIntent();
 
@@ -57,9 +55,6 @@ public class PostViewActivity extends AppCompatActivity {
                 });
 
 
-
-        String lastPost = Recommendation.loadAdminPosts();
-        adminStory.setText(String.format("Topic for this Week: /n", lastPost));
     }
 
     @Override

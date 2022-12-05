@@ -109,7 +109,7 @@
                 android:layout_below="@id/imageView_rc" />
 
             <ImageView
-                android:id="@+id/dish_picture"
+                android:id="@+id/admin_pic"
                 android:layout_width="198dp"
                 android:layout_height="146dp"
                 android:layout_alignParentTop="true"
