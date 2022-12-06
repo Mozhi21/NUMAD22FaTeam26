@@ -163,6 +163,19 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeHolder> {
 
             });
 
+            // same as comment
+            imageView.setOnClickListener(v -> {
+
+                Intent intent = new Intent(context, ReplacerActivity.class);
+                intent.putExtra("id", id);
+                intent.putExtra("uid", uid);
+                intent.putExtra("isComment", true);
+                intent.putExtra("imageUrl", imageUrl);
+
+                context.startActivity(intent);
+
+            });
+
             likeCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> onPressed.onLiked(position, id, uid, likes, isChecked));
 
             shareBtn.setOnClickListener(v -> {
