@@ -2,6 +2,7 @@ package edu.northeastern.numad22fateam26.finalProject.chat;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -12,9 +13,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -34,6 +38,7 @@ import edu.northeastern.numad22fateam26.finalProject.model.ChatModel;
 public class ChatActivity extends AppCompatActivity {
 
     FirebaseUser user;
+    FirebaseFirestore firestore;
     CircleImageView imageView;
     TextView name, status;
     EditText chatET;
@@ -44,6 +49,7 @@ public class ChatActivity extends AppCompatActivity {
     List<ChatModel> list;
 
 
+    String oppositeUID;
     String chatID;
 
     @Override
@@ -57,6 +63,8 @@ public class ChatActivity extends AppCompatActivity {
 
         loadMessages();
 
+        maybeMarkRead();
+
         sendBtn.setOnClickListener(v -> {
 
             String message = chatET.getText().toString().trim();
@@ -65,13 +73,15 @@ public class ChatActivity extends AppCompatActivity {
                 return;
             }
 
-            CollectionReference reference = FirebaseFirestore.getInstance().collection("Messages");
+            CollectionReference reference = firestore.collection("Messages");
 
 
             Map<String, Object> map = new HashMap<>();
 
             map.put("lastMessage", message);
+            map.put("lastMessageTo",  oppositeUID);
             map.put("time", FieldValue.serverTimestamp());
+            map.put("unread", true);
 
 
             reference.document(chatID).update(map);
@@ -106,6 +116,8 @@ public class ChatActivity extends AppCompatActivity {
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
+        firestore = FirebaseFirestore.getInstance();
+        oppositeUID = getIntent().getStringExtra("uid");
 
         imageView = findViewById(R.id.profileImage);
         name = findViewById(R.id.nameTV);
@@ -125,9 +137,7 @@ public class ChatActivity extends AppCompatActivity {
 
     void loadUserData() {
 
-        String oppositeUID = getIntent().getStringExtra("uid");
-
-        FirebaseFirestore.getInstance().collection("Users").document(oppositeUID)
+        firestore.collection("Users").document(oppositeUID)
                 .addSnapshotListener((value, error) -> {
 
                     if (error != null)
@@ -158,7 +168,7 @@ public class ChatActivity extends AppCompatActivity {
         chatID = getIntent().getStringExtra("id");
 
 
-        CollectionReference reference = FirebaseFirestore.getInstance()
+        CollectionReference reference = firestore
                 .collection("Messages")
                 .document(chatID)
                 .collection("Messages");
@@ -185,4 +195,27 @@ public class ChatActivity extends AppCompatActivity {
 
     }
 
+    void maybeMarkRead() {
+        chatID = getIntent().getStringExtra("id");
+
+        DocumentReference reference = firestore
+                .collection("Messages")
+                .document(chatID);
+
+        reference.get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists() &&
+                    documentSnapshot.contains("lastMessageTo") &&
+                    documentSnapshot.contains("unread") &&
+                    documentSnapshot.get("lastMessageTo").equals(user.getUid()) &&
+                    documentSnapshot.getBoolean("unread")) {
+                reference.update("unread", false);
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ChatActivity.this, ChatUsersActivity.class);
+        startActivity(intent);
+    }
 }

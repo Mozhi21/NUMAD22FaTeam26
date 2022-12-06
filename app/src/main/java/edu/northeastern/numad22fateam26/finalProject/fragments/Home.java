@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -51,6 +52,7 @@ public class Home extends Fragment {
     private List<HomeModel> list;
     private FirebaseUser user;
     Activity activity;
+    ImageView circle;
 
     public Home() {
         // Required empty public constructor
@@ -76,6 +78,8 @@ public class Home extends Fragment {
         recyclerView.setAdapter(adapter);
 
         loadDataFromFirestore();
+
+        checkIfUnreadMessages();
 
         adapter.OnPressed(new HomeAdapter.OnPressed() {
             @Override
@@ -151,6 +155,8 @@ public class Home extends Fragment {
         storiesModelList = new ArrayList<>();
         storiesAdapter = new StoriesAdapter(storiesModelList, getActivity());
         storiesRecyclerView.setAdapter(storiesAdapter);
+
+        circle = view.findViewById(R.id.circle);
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
@@ -279,6 +285,24 @@ public class Home extends Fragment {
 
         });
 
+    }
+
+    private void checkIfUnreadMessages() {
+        Query query = FirebaseFirestore.getInstance().collection("Messages");
+        query.whereEqualTo("unread", true).whereEqualTo("lastMessageTo", user.getUid()).addSnapshotListener(((value, error) -> {
+            if (error != null) {
+                Log.d("Error: ", error.getMessage());
+            }
+
+            if (value == null)
+                return;
+
+            if (value.isEmpty()) {
+                circle.setVisibility(View.GONE);
+            } else {
+                circle.setVisibility(View.VISIBLE);
+            }
+        }));
     }
 
 }

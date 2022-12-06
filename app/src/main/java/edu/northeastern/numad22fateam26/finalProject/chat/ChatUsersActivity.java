@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.northeastern.numad22fateam26.R;
+import edu.northeastern.numad22fateam26.finalProject.ExploreActivity;
 import edu.northeastern.numad22fateam26.finalProject.adapter.ChatUsersAdapter;
 import edu.northeastern.numad22fateam26.finalProject.model.ChatUserModel;
 
@@ -63,6 +65,7 @@ public class ChatUsersActivity extends AppCompatActivity {
 
         CollectionReference reference = FirebaseFirestore.getInstance().collection("Messages");
         reference.whereArrayContains("uid", user.getUid())
+                .orderBy("time", Query.Direction.DESCENDING)
                 .addSnapshotListener((value, error) -> {
 
                     if (error != null)
@@ -116,4 +119,9 @@ public class ChatUsersActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ChatUsersActivity.this, ExploreActivity.class);
+        startActivity(intent);
+    }
 }

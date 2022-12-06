@@ -7,7 +7,8 @@ import java.util.List;
 
 public class ChatUserModel {
 
-    private String id, lastMessage;
+    private String id, lastMessage, lastMessageTo;
+    private boolean unread;
     private List<String> uid;
 
     @ServerTimestamp
@@ -17,9 +18,11 @@ public class ChatUserModel {
     public ChatUserModel() {
     }
 
-    public ChatUserModel(String id, String lastMessage, List<String> uid, Date time) {
+    public ChatUserModel(String id, String lastMessage, String lastMessageTo, boolean unread, List<String> uid, Date time) {
         this.id = id;
         this.lastMessage = lastMessage;
+        this.lastMessageTo = lastMessageTo;
+        this.unread = unread;
         this.uid = uid;
         this.time = time;
     }
@@ -54,5 +57,21 @@ public class ChatUserModel {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public String getLastMessageTo() {
+        return lastMessageTo;
+    }
+
+    public void setLastMessageTo(String lastMessageTo) {
+        this.lastMessageTo = lastMessageTo;
+    }
+
+    public boolean isUnread() {
+        return unread;
+    }
+
+    public void setUnread(boolean unread) {
+        this.unread = unread;
     }
 }
