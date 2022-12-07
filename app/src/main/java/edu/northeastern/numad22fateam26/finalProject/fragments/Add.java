@@ -54,6 +54,8 @@ import java.util.Map;
 
 import edu.northeastern.numad22fateam26.R;
 import edu.northeastern.numad22fateam26.finalProject.adapter.GalleryAdapter;
+import edu.northeastern.numad22fateam26.finalProject.chat.ChatActivity;
+import edu.northeastern.numad22fateam26.finalProject.chat.ChatUsersActivity;
 import edu.northeastern.numad22fateam26.finalProject.model.GalleryImages;
 
 
@@ -115,6 +117,10 @@ public class Add extends Fragment {
                 Toast.makeText(getContext(), "send image CropImage comment", Toast.LENGTH_SHORT).show();
 
             }
+        });
+
+        backBtn.setOnClickListener(view -> {
+            onBackPressed();
         });
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
@@ -279,6 +285,9 @@ public class Add extends Fragment {
             }
 
         }
+
+    }
+    public void onBackPressed() {
 
     }
 }

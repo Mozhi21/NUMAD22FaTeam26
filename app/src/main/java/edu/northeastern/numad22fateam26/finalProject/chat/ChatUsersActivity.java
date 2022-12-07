@@ -2,6 +2,7 @@ package edu.northeastern.numad22fateam26.finalProject.chat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,6 +29,7 @@ public class ChatUsersActivity extends AppCompatActivity {
     ChatUsersAdapter adapter;
     List<ChatUserModel> list;
     FirebaseUser user;
+    ImageButton backbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +42,16 @@ public class ChatUsersActivity extends AppCompatActivity {
 
         clickListener();
 
+        backbtn.setOnClickListener(view -> {
+            onBackPressed();
+        });
+
     }
 
     void init() {
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        backbtn = findViewById(R.id.backBtn);
 
 
         list = new ArrayList<>();

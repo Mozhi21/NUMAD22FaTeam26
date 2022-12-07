@@ -22,6 +22,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.DocumentReference;
 
+import java.util.Arrays;
 import java.util.List;
 
 import edu.northeastern.numad22fateam26.MainActivity;
@@ -30,6 +31,7 @@ import edu.northeastern.numad22fateam26.finalProject.ExploreActivity;
 import edu.northeastern.numad22fateam26.finalProject.PostViewActivity;
 import edu.northeastern.numad22fateam26.finalProject.ReplacerActivity;
 import edu.northeastern.numad22fateam26.finalProject.chat.ChatActivity;
+import edu.northeastern.numad22fateam26.finalProject.model.ChatUserModel;
 import edu.northeastern.numad22fateam26.finalProject.model.PostImageModel;
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -79,6 +81,7 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -329,33 +332,32 @@ public class Profile extends Fragment {
         alertDialog.show();
 
         CollectionReference reference = FirebaseFirestore.getInstance().collection("Messages");
-        reference.whereArrayContains("uid", userUID)
-                .get().addOnCompleteListener(task -> {
 
-                    if (task.isSuccessful()) {
+        reference.get().addOnCompleteListener(task -> {
 
-                        QuerySnapshot snapshot = task.getResult();
+            if (task.isSuccessful()) {
 
-                        if (snapshot.isEmpty()) {
-                            startChat(alertDialog);
-                        } else {
-                            //get chatId and pass
-                            alertDialog.dismissWithAnimation();
-                            for (DocumentSnapshot snapshotChat : snapshot) {
+                boolean chatExist = false;
 
-                                Intent intent = new Intent(getActivity(), ChatActivity.class);
-                                intent.putExtra("uid", userUID);
-                                intent.putExtra("id", snapshotChat.getId()); //return doc id
-                                startActivity(intent);
-                            }
+                for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                    ChatUserModel model = documentSnapshot.toObject(ChatUserModel.class);
+                    if (model.getUid().containsAll(List.of(userUID, user.getUid()))) {
+                        Intent intent = new Intent(getActivity(), ChatActivity.class);
+                        intent.putExtra("uid", userUID);
+                        intent.putExtra("id", documentSnapshot.getId()); //return doc id
+                        startActivity(intent);
+                        chatExist = true;
+                        break;
+                    }
+                }
 
-
-                        }
-
-                    } else
-                        alertDialog.dismissWithAnimation();
-
-                });
+                if (!chatExist) {
+                    startChat(alertDialog);
+                }
+            } else {
+                alertDialog.dismissWithAnimation();
+            }
+        });
 
     }
 

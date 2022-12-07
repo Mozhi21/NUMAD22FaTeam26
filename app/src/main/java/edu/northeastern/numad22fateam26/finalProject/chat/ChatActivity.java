@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +46,7 @@ public class ChatActivity extends AppCompatActivity {
     EditText chatET;
     ImageView sendBtn;
     RecyclerView recyclerView;
+    ImageButton backbtn;
 
     ChatAdapter adapter;
     List<ChatModel> list;
@@ -110,6 +113,10 @@ public class ChatActivity extends AppCompatActivity {
 
         });
 
+        backbtn.setOnClickListener(view -> {
+            onBackPressed();
+        });
+
     }
 
     void init() {
@@ -124,6 +131,7 @@ public class ChatActivity extends AppCompatActivity {
         status = findViewById(R.id.statusTV);
         chatET = findViewById(R.id.chatET);
         sendBtn = findViewById(R.id.sendBtn);
+        backbtn = findViewById(R.id.backBtn);
 
         recyclerView = findViewById(R.id.recyclerView);
 
