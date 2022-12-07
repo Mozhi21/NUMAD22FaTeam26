@@ -36,6 +36,7 @@ public class Recommendation extends Fragment {
     private static final String TAG = "Recommendation";
     List<PostImageModel> postsModelList;
     List<RecipeModel> recipeModelList;
+    List<PostImageModel> recommendedPostList;
     private TextView adminStory;
     private TextView adminRecipe;
     private ImageView adminPic;
@@ -57,6 +58,8 @@ public class Recommendation extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         init(view);
+        recommendedPostList = new ArrayList<>();
+        getRelatedPosts(adminStory.getText().toString());
     }
 
 
@@ -139,5 +142,29 @@ public class Recommendation extends Fragment {
         RecipeModel adRecipe = recipeModelList.get(0);
         adminRecipe.setText(adRecipe.getRecipe());
     }
+
+    private void getRelatedPosts(String description) {
+        FirebaseFirestore.getInstance().collectionGroup("Post Images")
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                if (document.exists()) {
+                                    PostImageModel model = document.toObject(PostImageModel.class);
+                                    recommendedPostList.add(model);
+                                }
+                            }
+                            if (!recommendedPostList.isEmpty()) {
+                                System.out.println(recommendedPostList);
+                            }
+                        } else {
+                            Log.d(TAG, "get failed with ", task.getException());
+                        }
+                    }
+                });
+    }
+
+    
 
 }
