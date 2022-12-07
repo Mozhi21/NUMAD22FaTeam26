@@ -57,6 +57,7 @@ import edu.northeastern.numad22fateam26.finalProject.adapter.GalleryAdapter;
 import edu.northeastern.numad22fateam26.finalProject.chat.ChatActivity;
 import edu.northeastern.numad22fateam26.finalProject.chat.ChatUsersActivity;
 import edu.northeastern.numad22fateam26.finalProject.model.GalleryImages;
+import io.grpc.internal.JsonUtil;
 
 
 public class Add extends Fragment {
@@ -104,11 +105,11 @@ public class Add extends Fragment {
     }
 
     private void clickListener() {
-
+        System.out.println("click listener");
         adapter.SendImage(new GalleryAdapter.SendImage() {
             @Override
             public void onSend(Uri picUri) {
-
+                System.out.println("on send");
 
                 CropImage.activity(picUri)
                         .setGuidelines(CropImageView.Guidelines.ON)
@@ -126,10 +127,8 @@ public class Add extends Fragment {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 FirebaseStorage storage = FirebaseStorage.getInstance();
                 final StorageReference storageReference = storage.getReference().child("Post Images/" + System.currentTimeMillis());
-
                 dialog.show();
 
                 storageReference.putFile(imageUri)
@@ -187,7 +186,6 @@ public class Add extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            System.out.println();
                             Toast.makeText(getContext(), "Uploaded", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getContext(), "Error: " + task.getException().getMessage(),
@@ -199,6 +197,7 @@ public class Add extends Fragment {
                 });
 
     }
+
 
     private void init(View view) {
 
@@ -214,6 +213,7 @@ public class Add extends Fragment {
         dialog.setContentView(R.layout.loading_dialog);
         dialog.getWindow().setBackgroundDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.dialog_bg, null));
         dialog.setCancelable(false);
+
     }
 
     @Override

@@ -14,6 +14,16 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/fuzzybubblesbold"
+            android:text="Yummy China"
+            android:textColor="@color/fog_red"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
         <ImageButton
             android:id="@+id/backBtn"
             android:layout_width="34dp"
@@ -40,7 +50,7 @@
             android:foreground="?attr/selectableItemBackground"
             android:padding="4dp"
             android:src="@drawable/ic_send"
-            android:visibility="gone" />
+             />
 
     </RelativeLayout>
 
@@ -53,13 +63,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+
             <EditText
                 android:id="@+id/descriptionET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:hint="Add Something About This Post"
-                android:minLines="12" />
+                android:minLines="8" />
 
             <View
                 android:id="@+id/view"
