@@ -28,12 +28,14 @@ import javax.annotation.Nullable;
 import edu.northeastern.numad22fateam26.R;
 import edu.northeastern.numad22fateam26.finalProject.PostViewActivity;
 import edu.northeastern.numad22fateam26.finalProject.model.PostImageModel;
+import edu.northeastern.numad22fateam26.finalProject.model.RecipeModel;
 
 
 public class Recommendation extends Fragment {
 
     private static final String TAG = "Recommendation";
     List<PostImageModel> postsModelList;
+    List<RecipeModel> recipeModelList;
     private TextView adminStory;
     private TextView adminRecipe;
     private ImageView adminPic;
@@ -69,7 +71,7 @@ public class Recommendation extends Fragment {
 
     public void loadAdminPosts() {
         CollectionReference postRef = FirebaseFirestore.getInstance().collection("Users")
-                .document("qUs1aFODabPiCVLakZq1KmG0naJ3").collection("Post Images");
+                .document("YvXGXIeL8IXd8FJiPRJJPzWU2gF3").collection("Post Images");
         postRef
                 .orderBy("timestamp", Query.Direction.DESCENDING)
                 .limit(1)
@@ -91,6 +93,32 @@ public class Recommendation extends Fragment {
                         }
                     }
                 });
+
+//        CollectionReference recipeRef = FirebaseFirestore.getInstance().collection("Users")
+//                .document("YvXGXIeL8IXd8FJiPRJJPzWU2gF3").collection("Recipe");
+//        recipeRef
+//                .orderBy("timestamp", Query.Direction.DESCENDING)
+//                .limit(1)
+//                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if (task.isSuccessful()) {
+//                            for (QueryDocumentSnapshot document : task.getResult()) {
+//                                if (document.exists()) {
+//                                    RecipeModel model = document.toObject(RecipeModel.class);
+//                                    recipeModelList.add(model);
+//                                }
+//                            }
+//                            if (!recipeModelList.isEmpty()) {
+//                                setRecipeView(recipeModelList);
+//                            }
+//                        } else {
+//                            Log.d(TAG, "get failed with ", task.getException());
+//                        }
+//                    }
+//                });
+
+
     }
 
     private void setPostView(List<PostImageModel> postsModelList) {
@@ -100,6 +128,11 @@ public class Recommendation extends Fragment {
                 .load(adminPost.getImageUrl())
                 .timeout(6500)
                 .into(adminPic);
+    }
+
+    private void setRecipeView(List<RecipeModel> recipeModelList) {
+        RecipeModel adRecipe = recipeModelList.get(0);
+        adminRecipe.setText(adRecipe.getRecipe());
     }
 
 }
