@@ -55,6 +55,7 @@ import java.util.Map;
 import edu.northeastern.numad22fateam26.R;
 import edu.northeastern.numad22fateam26.finalProject.adapter.GalleryAdapter;
 import edu.northeastern.numad22fateam26.finalProject.model.GalleryImages;
+import io.grpc.internal.JsonUtil;
 
 
 public class Add extends Fragment {
@@ -64,6 +65,7 @@ public class Add extends Fragment {
     Dialog dialog;
 
     private EditText descET;
+    private EditText addRecipe;
     private ImageView imageView;
     private RecyclerView recyclerView;
     private ImageButton backBtn, nextBtn;
@@ -102,11 +104,11 @@ public class Add extends Fragment {
     }
 
     private void clickListener() {
-
+        System.out.println("click listener");
         adapter.SendImage(new GalleryAdapter.SendImage() {
             @Override
             public void onSend(Uri picUri) {
-
+                System.out.println("on send");
 
                 CropImage.activity(picUri)
                         .setGuidelines(CropImageView.Guidelines.ON)
@@ -120,10 +122,8 @@ public class Add extends Fragment {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 FirebaseStorage storage = FirebaseStorage.getInstance();
                 final StorageReference storageReference = storage.getReference().child("Post Images/" + System.currentTimeMillis());
-
                 dialog.show();
 
                 storageReference.putFile(imageUri)
@@ -156,10 +156,13 @@ public class Add extends Fragment {
 
         CollectionReference reference = FirebaseFirestore.getInstance().collection("Users")
                 .document(user.getUid()).collection("Post Images");
+        CollectionReference recipeRef = FirebaseFirestore.getInstance().collection("Users")
+                .document(user.getUid()).collection("Recipe");
 
         String id = reference.document().getId();
 
         String description = descET.getText().toString();
+        String recipe = addRecipe.getText().toString();
 
         List<String> list = new ArrayList<>();
 
@@ -181,7 +184,32 @@ public class Add extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            System.out.println();
+                            Toast.makeText(getContext(), "Uploaded", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getContext(), "Error: " + task.getException().getMessage(),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        dialog.dismiss();
+
+                    }
+                });
+
+        Map<String, Object> map2 = new HashMap<>();
+        map2.put("id", id);
+        map2.put("description", description);
+        map2.put("recipe", recipe);
+        map2.put("imageUrl", imageURL);
+        map2.put("timestamp", FieldValue.serverTimestamp());
+        map2.put("name", user.getDisplayName());
+        map2.put("profileImage", String.valueOf(user.getPhotoUrl()));
+        map2.put("likes", list);
+        map2.put("uid", user.getUid());
+
+        recipeRef.document(id).set(map2)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
                             Toast.makeText(getContext(), "Uploaded", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getContext(), "Error: " + task.getException().getMessage(),
@@ -208,6 +236,7 @@ public class Add extends Fragment {
         dialog.setContentView(R.layout.loading_dialog);
         dialog.getWindow().setBackgroundDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.dialog_bg, null));
         dialog.setCancelable(false);
+
     }
 
     @Override
