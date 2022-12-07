@@ -19,4 +19,7 @@
     <string name="JasonGithub"><a href="https://github.com/HaozheZhang0818">Github link</a></string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dish_of_the_day">Dish of The Day</string>
+    <string name="detailed_recipe">Detailed Recipe</string>
+    <string name="yummy_china">Yummy China</string>
 </resources>

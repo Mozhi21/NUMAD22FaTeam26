@@ -20,11 +20,10 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:fontFamily="@font/fuzzybubblesbold"
-            android:text="Yummy China"
+            android:text="@string/yummy_china"
             android:textColor="@color/fog_red"
             android:textSize="18sp"
             android:textStyle="bold" />
-
 
         <ImageButton
             android:id="@+id/backBtn2"
@@ -42,7 +41,6 @@
             android:layout_width="34dp"
             android:layout_height="34dp"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:layout_margin="4dp"
             android:background="@drawable/ic_circle"
             android:elevation="3dp"
@@ -66,9 +64,9 @@
                 android:id="@+id/dish_topic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dish of the week"
+                android:text="@string/dish_of_the_day"
                 android:textColor="@color/black"
-                android:textSize="14dp"
+                android:textSize="14sp"
                 android:fontFamily="@font/fuzzybubblesbold"
                 android:textStyle="bold" />
 
@@ -87,19 +85,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/dish_description"
-                android:text="Detailed recipe"
+                android:text="@string/detailed_recipe"
                 android:textColor="@color/black"
-                android:textSize="14dp"
+                android:textSize="14sp"
                 android:fontFamily="@font/fuzzybubblesbold"
                 android:textStyle="bold" />
 
-            <TextView
+            <ListView
                 android:id="@+id/detailed_recipe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/dish_recipe"
                 android:layout_alignParentStart="true"
-                android:layout_toLeftOf="@id/admin_pic"
+                android:layout_toStartOf="@id/admin_pic"
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="0dp"
                 android:background="@android:color/transparent"
