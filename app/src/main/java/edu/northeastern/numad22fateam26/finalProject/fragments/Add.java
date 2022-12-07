@@ -120,9 +120,6 @@ public class Add extends Fragment {
             }
         });
 
-        backBtn.setOnClickListener(view -> {
-            onBackPressed();
-        });
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -285,9 +282,6 @@ public class Add extends Fragment {
             }
 
         }
-
-    }
-    public void onBackPressed() {
 
     }
 }

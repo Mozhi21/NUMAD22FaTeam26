@@ -578,7 +578,7 @@ public class Profile extends Fragment {
 
         DocumentReference reference = FirebaseFirestore.getInstance().collection("Users").document(userUID);
 
-        Query query = reference.collection("Post Images");
+        Query query = reference.collection("Post Images").orderBy("timestamp", Query.Direction.DESCENDING);
 
         FirestoreRecyclerOptions<PostImageModel> options = new FirestoreRecyclerOptions.Builder<PostImageModel>()
                 .setQuery(query, PostImageModel.class)
