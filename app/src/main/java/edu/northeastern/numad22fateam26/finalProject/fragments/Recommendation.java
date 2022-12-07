@@ -66,7 +66,9 @@ public class Recommendation extends Fragment {
         adminPic = view.findViewById(R.id.admin_pic);
 
         postsModelList = new ArrayList<>();
+        recipeModelList = new ArrayList<>();
         loadAdminPosts();
+        loadAdminRecipe();
     }
 
     public void loadAdminPosts() {
@@ -93,30 +95,33 @@ public class Recommendation extends Fragment {
                         }
                     }
                 });
-
-//        CollectionReference recipeRef = FirebaseFirestore.getInstance().collection("Users")
-//                .document("YvXGXIeL8IXd8FJiPRJJPzWU2gF3").collection("Recipe");
-//        recipeRef
-//                .orderBy("timestamp", Query.Direction.DESCENDING)
-//                .limit(1)
-//                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful()) {
-//                            for (QueryDocumentSnapshot document : task.getResult()) {
-//                                if (document.exists()) {
-//                                    RecipeModel model = document.toObject(RecipeModel.class);
-//                                    recipeModelList.add(model);
-//                                }
-//                            }
-//                            if (!recipeModelList.isEmpty()) {
-//                                setRecipeView(recipeModelList);
-//                            }
-//                        } else {
-//                            Log.d(TAG, "get failed with ", task.getException());
-//                        }
-//                    }
-//                });
+    }
+    public void loadAdminRecipe() {
+        CollectionReference recipeRef = FirebaseFirestore.getInstance().collection("Users")
+                .document("YvXGXIeL8IXd8FJiPRJJPzWU2gF3").collection("Recipe");
+        recipeRef
+                .orderBy("timestamp", Query.Direction.DESCENDING)
+                .limit(1)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                if (document.exists()) {
+                                    System.out.println(document);
+                                    System.out.println(document.getData());
+                                    RecipeModel model = document.toObject(RecipeModel.class);
+                                    recipeModelList.add(model);
+                                }
+                            }
+                            if (!recipeModelList.isEmpty()) {
+                                setRecipeView(recipeModelList);
+                            }
+                        } else {
+                            Log.d(TAG, "get failed with ", task.getException());
+                        }
+                    }
+                });
 
 
     }
