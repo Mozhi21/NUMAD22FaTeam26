@@ -48,6 +48,7 @@ public class ChatActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ImageButton backbtn;
 
+
     ChatAdapter adapter;
     List<ChatModel> list;
 
@@ -111,12 +112,18 @@ public class ChatActivity extends AppCompatActivity {
                         }
                     });
 
+//                recyclerView.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                    recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
+//                    }
+//                }, 1000);
+
         });
 
         backbtn.setOnClickListener(view -> {
             onBackPressed();
         });
-
     }
 
     void init() {
@@ -198,6 +205,7 @@ public class ChatActivity extends AppCompatActivity {
 
                     }
                     adapter.notifyDataSetChanged();
+                    recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
 
                 });
 
