@@ -13,12 +13,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
 import edu.northeastern.numad22fateam26.R;
@@ -27,13 +30,13 @@ import edu.northeastern.numad22fateam26.finalProject.ReplacerActivity;
 
 public class ForgotPassword extends Fragment {
 
-    private TextView loginTv;
+    private ImageView loginTv;
     private Button recoverBtn;
-    private EditText emailEt;
+    private TextInputLayout emailEt;
 
     private FirebaseAuth auth;
 
-    private ProgressBar progressBar;
+    private RelativeLayout progressBar;
 
     public ForgotPassword() {
         // Required empty public constructor
@@ -58,7 +61,7 @@ public class ForgotPassword extends Fragment {
 
     private void init(View view){
 
-        loginTv = view.findViewById(R.id.loginTV);
+        loginTv = view.findViewById(R.id.forget_password_back_btn);
         emailEt = view.findViewById(R.id.emailET);
         recoverBtn = view.findViewById(R.id.recoverBtn);
         progressBar = view.findViewById(R.id.progressBar);
@@ -80,7 +83,7 @@ public class ForgotPassword extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String email = emailEt.getText().toString();
+                String email = emailEt.getEditText().getText().toString().trim();
 
                 if (email.isEmpty() || !email.matches(EMAIL_REGEX)){
                     emailEt.setError("Input valid email");
@@ -97,7 +100,7 @@ public class ForgotPassword extends Fragment {
                                 if (task.isSuccessful()){
                                     Toast.makeText(getContext(), "Password reset email send successfully",
                                             Toast.LENGTH_SHORT).show();
-                                    emailEt.setText("");
+                                 //   emailEt.setText("");
                                 }else {
                                     String errMsg = task.getException().getMessage();
                                     Toast.makeText(getContext(), "Error: "+errMsg, Toast.LENGTH_SHORT).show();
