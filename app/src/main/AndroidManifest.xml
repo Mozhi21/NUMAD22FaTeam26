@@ -18,6 +18,7 @@
         </intent> <!-- Gallery -->
         <intent>
             <action android:name="android.intent.action.GET_CONTENT" />
+
             <data android:mimeType="image/*" />
         </intent>
     </queries>
@@ -51,7 +52,7 @@
         <activity android:name=".finalProject.ViewStoryActivity" />
         <activity
             android:name=".finalProject.SplashActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".finalProject.ReplacerActivity"
             android:exported="false" />
