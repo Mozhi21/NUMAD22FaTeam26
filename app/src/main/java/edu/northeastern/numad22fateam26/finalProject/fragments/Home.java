@@ -195,6 +195,8 @@ public class Home extends Fragment {
                         if (value1 == null)
                             return;
 
+                        list.clear();
+
                         for (QueryDocumentSnapshot snapshot : value1) {
 
                             snapshot.getReference().collection("Post Images").orderBy("timestamp", Query.Direction.DESCENDING)
@@ -206,8 +208,6 @@ public class Home extends Fragment {
 
                                         if (value11 == null)
                                             return;
-
-                                        list.clear();
 
                                         for (final QueryDocumentSnapshot snapshot1 : value11) {
 
@@ -225,6 +225,8 @@ public class Home extends Fragment {
                                                     model.getId(),
                                                     model.getTimestamp(),
                                                     model.getLikes()));
+
+                                            adapter.notifyDataSetChanged();
 
                                             snapshot1.getReference().collection("Comments").get()
                                                     .addOnCompleteListener(task -> {
@@ -244,11 +246,13 @@ public class Home extends Fragment {
                                                     });
 
                                         }
-                                        adapter.notifyDataSetChanged();
+
 
                                     });
 
                         }
+
+
 
                     });
 

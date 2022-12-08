@@ -109,7 +109,6 @@ public class Add extends Fragment {
         adapter.SendImage(new GalleryAdapter.SendImage() {
             @Override
             public void onSend(Uri picUri) {
-                System.out.println("on send");
 
                 CropImage.activity(picUri)
                         .setGuidelines(CropImageView.Guidelines.ON)

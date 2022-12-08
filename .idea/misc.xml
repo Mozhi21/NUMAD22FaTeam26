@@ -33,6 +33,7 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.264" />
         <entry key="app/src/main/res/drawable/ic_link.xml" value="0.1785" />
         <entry key="app/src/main/res/drawable/ic_logout.xml" value="0.2285" />
+        <entry key="app/src/main/res/drawable/ic_mail.xml" value="0.152" />
         <entry key="app/src/main/res/drawable/ic_menu.xml" value="0.11" />
         <entry key="app/src/main/res/drawable/ic_message.xml" value="0.264" />
         <entry key="app/src/main/res/drawable/ic_next.xml" value="0.233" />
@@ -46,7 +47,7 @@
         <entry key="app/src/main/res/drawable/ic_send.xml" value="0.186" />
         <entry key="app/src/main/res/drawable/ic_send_white.xml" value="0.233" />
         <entry key="app/src/main/res/drawable/ic_share.xml" value="0.233" />
-        <entry key="app/src/main/res/drawable/left_chat.xml" value="0.233" />
+        <entry key="app/src/main/res/drawable/left_chat.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/project_button.xml" value="0.264" />
         <entry key="app/src/main/res/drawable/right_chat.xml" value="0.233" />
         <entry key="app/src/main/res/drawable/search_view_bg.xml" value="0.264" />
@@ -84,7 +85,7 @@
         <entry key="app/src/main/res/layout/activity_sticker_history.xml" value="0.2530064900716146" />
         <entry key="app/src/main/res/layout/activity_story_add.xml" value="0.3182291666666667" />
         <entry key="app/src/main/res/layout/activity_view_story.xml" value="0.10840911865234376" />
-        <entry key="app/src/main/res/layout/chat_items.xml" value="0.3182291666666667" />
+        <entry key="app/src/main/res/layout/chat_items.xml" value="0.37640482584635415" />
         <entry key="app/src/main/res/layout/chat_user_items.xml" value="0.3171875" />
         <entry key="app/src/main/res/layout/comment_items.xml" value="0.10185185185185185" />
         <entry key="app/src/main/res/layout/forgot_password.xml" value="0.3182291666666667" />
