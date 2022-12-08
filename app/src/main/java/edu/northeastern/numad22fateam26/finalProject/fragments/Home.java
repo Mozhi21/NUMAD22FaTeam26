@@ -19,13 +19,14 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,6 +52,7 @@ public class Home extends Fragment {
     private RecyclerView recyclerView;
     private List<HomeModel> list;
     private FirebaseUser user;
+    private FirebaseFirestore fireStore;
     Activity activity;
     ImageView circle;
 
@@ -160,15 +162,14 @@ public class Home extends Fragment {
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
+        fireStore = FirebaseFirestore.getInstance();
 
     }
 
     private void loadDataFromFirestore() {
 
-        final DocumentReference reference = FirebaseFirestore.getInstance().collection("Users")
+        final DocumentReference reference = fireStore.collection("Users")
                 .document(user.getUid());
-
-        final CollectionReference collectionReference = FirebaseFirestore.getInstance().collection("Users");
 
         reference.addSnapshotListener((value, error) -> {
 
@@ -185,75 +186,48 @@ public class Home extends Fragment {
             if (uidList == null || uidList.isEmpty())
                 return;
 
-            collectionReference.whereIn("uid", uidList)
-                    .addSnapshotListener((value1, error1) -> {
+            fireStore
+                    .collectionGroup("Post Images")
+                    .whereIn("uid", uidList)
+                    .orderBy("timestamp", Query.Direction.DESCENDING)
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                            list.clear();
+                            for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                HomeModel model = documentSnapshot.toObject(HomeModel.class);
 
-                        if (error1 != null) {
-                            Log.d("Error: ", error1.getMessage());
-                        }
+                                list.add(new HomeModel(
+                                        model.getName(),
+                                        model.getProfileImage(),
+                                        model.getImageUrl(),
+                                        model.getUid(),
+                                        model.getDescription(),
+                                        model.getId(),
+                                        model.getTimestamp(),
+                                        model.getLikes()));
 
-                        if (value1 == null)
-                            return;
+                                adapter.notifyDataSetChanged();
 
-                        list.clear();
+                                documentSnapshot.getReference().collection("Comments").get()
+                                        .addOnCompleteListener(task -> {
 
-                        for (QueryDocumentSnapshot snapshot : value1) {
+                                            if (task.isSuccessful()) {
 
-                            snapshot.getReference().collection("Post Images").orderBy("timestamp", Query.Direction.DESCENDING)
-                                    .addSnapshotListener((value11, error11) -> {
+                                                Map<String, Object> map = new HashMap<>();
+                                                for (QueryDocumentSnapshot commentSnapshot : task
+                                                        .getResult()) {
+                                                    map = commentSnapshot.getData();
+                                                }
 
-                                        if (error11 != null) {
-                                            Log.d("Error: ", error11.getMessage());
-                                        }
+                                                commentCount.setValue(map.size());
+                                            }
 
-                                        if (value11 == null)
-                                            return;
-
-                                        for (final QueryDocumentSnapshot snapshot1 : value11) {
-
-                                            if (!snapshot1.exists())
-                                                return;
-
-                                            HomeModel model = snapshot1.toObject(HomeModel.class);
-
-                                            list.add(new HomeModel(
-                                                    model.getName(),
-                                                    model.getProfileImage(),
-                                                    model.getImageUrl(),
-                                                    model.getUid(),
-                                                    model.getDescription(),
-                                                    model.getId(),
-                                                    model.getTimestamp(),
-                                                    model.getLikes()));
-
-                                            adapter.notifyDataSetChanged();
-
-                                            snapshot1.getReference().collection("Comments").get()
-                                                    .addOnCompleteListener(task -> {
-
-                                                        if (task.isSuccessful()) {
-
-                                                            Map<String, Object> map = new HashMap<>();
-                                                            for (QueryDocumentSnapshot commentSnapshot : task
-                                                                    .getResult()) {
-                                                                map = commentSnapshot.getData();
-                                                            }
-
-                                                            commentCount.setValue(map.size());
-
-                                                        }
-
-                                                    });
-
-                                        }
-
-
-                                    });
+                                        });
+                            }
 
                         }
-
-
-
                     });
 
             // todo: fetch stories
