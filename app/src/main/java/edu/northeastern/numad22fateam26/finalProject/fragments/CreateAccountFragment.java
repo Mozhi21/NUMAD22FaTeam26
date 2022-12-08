@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -38,10 +39,9 @@ import edu.northeastern.numad22fateam26.finalProject.ReplacerActivity;
 public class CreateAccountFragment extends Fragment {
 
     public static final String EMAIL_REGEX = "^(.+)@(.+)$";
-    private EditText nameEt, emailEt, passwordEt, confirmPasswordEt;
-    private ProgressBar progressBar;
-    private TextView loginTv;
-    private Button signUpBtn;
+    private TextInputLayout nameEt, emailEt, passwordEt;
+    //private ProgressBar progressBar;
+    private Button signup_login_button, nextBtn,signup_back_button;
     private FirebaseAuth auth;
 
     public CreateAccountFragment() {
@@ -67,13 +67,12 @@ public class CreateAccountFragment extends Fragment {
 
     private void init(View view) {
 
-        nameEt = view.findViewById(R.id.nameET);
-        emailEt = view.findViewById(R.id.emailET);
-        passwordEt = view.findViewById(R.id.passwordET);
-        confirmPasswordEt = view.findViewById(R.id.confirmPassET);
-        loginTv = view.findViewById(R.id.loginTV);
-        signUpBtn = view.findViewById(R.id.signUpBtn);
-        progressBar = view.findViewById(R.id.progressBar);
+        nameEt = view.findViewById(R.id.signup_username);
+        emailEt = view.findViewById(R.id.signup_email);
+        passwordEt = view.findViewById(R.id.signup_password);
+        signup_login_button = view.findViewById(R.id.signup_login_button);
+        nextBtn = view.findViewById(R.id.signup_next_button);
+       // progressBar = view.findViewById(R.id.progressBar);
 
         auth = FirebaseAuth.getInstance();
 
@@ -81,21 +80,20 @@ public class CreateAccountFragment extends Fragment {
 
     private void clickListener() {
 
-        loginTv.setOnClickListener(new View.OnClickListener() {
+        signup_login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((ReplacerActivity) getActivity()).setFragment(new LoginFragment());
             }
         });
 
-        signUpBtn.setOnClickListener(new View.OnClickListener() {
+        nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String name = nameEt.getText().toString();
-                String email = emailEt.getText().toString();
-                String password = passwordEt.getText().toString();
-                String confirmPassword = confirmPasswordEt.getText().toString();
+                String name = nameEt.getEditText().getText().toString().trim();
+                String email = emailEt.getEditText().getText().toString().trim();
+                String password = passwordEt.getEditText().getText().toString().trim();
 
                 if (name.isEmpty() || name.equals(" ")) {
                     nameEt.setError("Please input valid name");
@@ -112,15 +110,9 @@ public class CreateAccountFragment extends Fragment {
                     return;
                 }
 
-                if (!password.equals(confirmPassword)) {
-                    confirmPasswordEt.setError("Password not match");
-                    return;
-                }
-
-                progressBar.setVisibility(View.VISIBLE);
+               // progressBar.setVisibility(View.VISIBLE);
 
                 createAccount(name, email, password);
-
 
             }
         });
@@ -158,7 +150,7 @@ public class CreateAccountFragment extends Fragment {
                             uploadUser(user, name, email);
 
                         } else {
-                            progressBar.setVisibility(View.GONE);
+                           // progressBar.setVisibility(View.GONE);
                             String exception = task.getException().getMessage();
                             Toast.makeText(getContext(), "Error: " + exception, Toast.LENGTH_SHORT).show();
                         }
@@ -194,12 +186,12 @@ public class CreateAccountFragment extends Fragment {
 
                         if (task.isSuccessful()) {
                             assert getActivity() != null;
-                            progressBar.setVisibility(View.GONE);
+                           // progressBar.setVisibility(View.GONE);
                             startActivity(new Intent(getActivity().getApplicationContext(), ExploreActivity.class));
                             getActivity().finish();
 
                         } else {
-                            progressBar.setVisibility(View.GONE);
+                        //    progressBar.setVisibility(View.GONE);
                             Toast.makeText(getContext(), "Error: " + task.getException().getMessage(),
                                     Toast.LENGTH_SHORT).show();
                         }
