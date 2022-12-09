@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -34,6 +35,7 @@ import java.util.Map;
 
 import edu.northeastern.numad22fateam26.R;
 import edu.northeastern.numad22fateam26.finalProject.ExploreActivity;
+import edu.northeastern.numad22fateam26.finalProject.OnBoardingActivity;
 import edu.northeastern.numad22fateam26.finalProject.ReplacerActivity;
 
 
@@ -42,7 +44,8 @@ public class CreateAccountFragment extends Fragment {
     public static final String EMAIL_REGEX = "^(.+)@(.+)$";
     private TextInputLayout nameEt, emailEt, passwordEt;
     private RelativeLayout progressBar;
-    private Button signup_login_button, nextBtn,signup_back_button;
+    private Button signup_login_button, nextBtn;
+    private ImageView signup_back_button;
     private FirebaseAuth auth;
 
     public CreateAccountFragment() {
@@ -74,12 +77,20 @@ public class CreateAccountFragment extends Fragment {
         signup_login_button = view.findViewById(R.id.signup_login_button);
         nextBtn = view.findViewById(R.id.signup_next_button);
         progressBar = view.findViewById(R.id.progressBar);
+        signup_back_button = view.findViewById(R.id.signup_back_button);
 
         auth = FirebaseAuth.getInstance();
 
     }
 
     private void clickListener() {
+
+        signup_back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((ReplacerActivity) getActivity()).setFragment(new LoginFragment());
+            }
+        });
 
         signup_login_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -188,7 +199,7 @@ public class CreateAccountFragment extends Fragment {
                         if (task.isSuccessful()) {
                             assert getActivity() != null;
                             progressBar.setVisibility(View.GONE);
-                            startActivity(new Intent(getActivity().getApplicationContext(), ExploreActivity.class));
+                            startActivity(new Intent(getActivity().getApplicationContext(), OnBoardingActivity.class));
                             getActivity().finish();
 
                         } else {

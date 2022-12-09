@@ -23,19 +23,19 @@ public class SliderAdapter extends PagerAdapter {
         this.context = context;
     }
 
-    int images[] = {
+    static int[] images = {
             R.drawable.cuisine_all,
-            R.drawable.chat_friends,
+            R.drawable.chat_friend,
             R.drawable.recipe,
     };
 
-    int headings[] = {
+    static int[] headings = {
             R.string.first_slide_title,
             R.string.second_slide_title,
             R.string.third_slide_title,
     };
 
-    int descriptions[] = {
+    static int[] descriptions = {
             R.string.first_slide_desc,
             R.string.second_slide_desc,
             R.string.third_slide_desc,

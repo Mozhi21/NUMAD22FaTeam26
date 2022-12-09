@@ -61,7 +61,7 @@ public class OnBoardingActivity extends AppCompatActivity {
 
     private void addDots(int position) {
 
-        dots = new TextView[4];
+        dots = new TextView[3];
         dotsLayout.removeAllViews();
 
         for (int i = 0; i < dots.length; i++) {
@@ -89,11 +89,7 @@ public class OnBoardingActivity extends AppCompatActivity {
             addDots(position);
             currentPos = position;
 
-            if (position == 0) {
-                letsGetStarted.setVisibility(View.INVISIBLE);
-            } else if (position == 1) {
-                letsGetStarted.setVisibility(View.INVISIBLE);
-            } else if (position == 2) {
+            if (position < 2) {
                 letsGetStarted.setVisibility(View.INVISIBLE);
             } else {
                 animation = AnimationUtils.loadAnimation(OnBoardingActivity.this, R.anim.bottom_animation);
