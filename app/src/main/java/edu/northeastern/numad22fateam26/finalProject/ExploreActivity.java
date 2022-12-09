@@ -78,7 +78,7 @@ public class ExploreActivity extends AppCompatActivity {
         drawableResList.add(R.drawable.ic_home);
         drawableResList.add(R.drawable.ic_search);
         drawableResList.add(R.drawable.ic_add);
-        drawableResList.add(R.drawable.ic_heart);
+        drawableResList.add(R.drawable.ic_baseline_star_outline_24);
         drawableResList.add(R.drawable.ic_outline_person);
 
         for (int i = 0; i < 5; i++) {
@@ -124,7 +124,7 @@ public class ExploreActivity extends AppCompatActivity {
                         break;
 
                     case 3:
-                        tab.setIcon(R.drawable.ic_heart_fill);
+                        tab.setIcon(R.drawable.ic_baseline_star_24);
                         break;
 
                     case 4:
@@ -152,7 +152,7 @@ public class ExploreActivity extends AppCompatActivity {
                         break;
 
                     case 3:
-                        tab.setIcon(R.drawable.ic_heart);
+                        tab.setIcon(R.drawable.ic_baseline_star_outline_24);
                         break;
 
                     case 4:
@@ -183,7 +183,7 @@ public class ExploreActivity extends AppCompatActivity {
 
                     case 3:
 
-                        tab.setIcon(R.drawable.ic_heart_fill);
+                        tab.setIcon(R.drawable.ic_baseline_star_24);
                         break;
 
                     case 4:
