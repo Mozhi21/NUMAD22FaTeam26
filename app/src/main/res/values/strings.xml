@@ -22,4 +22,5 @@
     <string name="dish_of_the_day">Dish of The Day</string>
     <string name="detailed_recipe">Detailed Recipe</string>
     <string name="yummy_china">Yummy China</string>
+    <string name="dish_of_the_day_pic">Dish of the day pic</string>
 </resources>
