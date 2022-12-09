@@ -44,6 +44,16 @@
                 android:background="@drawable/ic_mail"
                 android:contentDescription="@null" />
 
+            <ImageView
+                android:id="@+id/circle"
+                android:visibility="gone"
+                android:layout_width="14dp"
+                android:layout_height="12dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="7dp"
+                android:src="@drawable/ic_circle_notification" />
         </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>
@@ -93,6 +103,7 @@
             android:layout_marginRight="10dp"/>
 
     </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/storiesRecyclerView"
         android:layout_width="match_parent"

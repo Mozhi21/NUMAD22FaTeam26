@@ -50,15 +50,16 @@
 
     <TextView
         android:id="@+id/messageCountTV"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
+        android:layout_width="10dp"
+        android:layout_height="11dp"
         android:layout_below="@id/timeTv"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="4dp"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="15dp"
         android:background="@drawable/ic_circle"
         android:backgroundTint="@color/fog_red"
         android:gravity="center"
-        android:text="2"
         android:textColor="@color/white"
         tools:targetApi="lollipop" />
 

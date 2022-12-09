@@ -2,6 +2,7 @@ package edu.northeastern.numad22fateam26.finalProject.chat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.northeastern.numad22fateam26.R;
+import edu.northeastern.numad22fateam26.finalProject.ExploreActivity;
 import edu.northeastern.numad22fateam26.finalProject.adapter.ChatUsersAdapter;
 import edu.northeastern.numad22fateam26.finalProject.model.ChatUserModel;
 
@@ -26,6 +29,7 @@ public class ChatUsersActivity extends AppCompatActivity {
     ChatUsersAdapter adapter;
     List<ChatUserModel> list;
     FirebaseUser user;
+    ImageButton backbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +42,16 @@ public class ChatUsersActivity extends AppCompatActivity {
 
         clickListener();
 
+        backbtn.setOnClickListener(view -> {
+            onBackPressed();
+        });
+
     }
 
     void init() {
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        backbtn = findViewById(R.id.backBtn);
 
 
         list = new ArrayList<>();
@@ -63,6 +72,7 @@ public class ChatUsersActivity extends AppCompatActivity {
 
         CollectionReference reference = FirebaseFirestore.getInstance().collection("Messages");
         reference.whereArrayContains("uid", user.getUid())
+                .orderBy("time", Query.Direction.DESCENDING)
                 .addSnapshotListener((value, error) -> {
 
                     if (error != null)
@@ -116,4 +126,9 @@ public class ChatUsersActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ChatUsersActivity.this, ExploreActivity.class);
+        startActivity(intent);
+    }
 }

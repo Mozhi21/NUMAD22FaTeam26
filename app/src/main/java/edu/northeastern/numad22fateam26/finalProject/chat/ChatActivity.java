@@ -2,8 +2,11 @@ package edu.northeastern.numad22fateam26.finalProject.chat;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,9 +15,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -34,16 +40,20 @@ import edu.northeastern.numad22fateam26.finalProject.model.ChatModel;
 public class ChatActivity extends AppCompatActivity {
 
     FirebaseUser user;
+    FirebaseFirestore firestore;
     CircleImageView imageView;
     TextView name, status;
     EditText chatET;
     ImageView sendBtn;
     RecyclerView recyclerView;
+    ImageButton backbtn;
+
 
     ChatAdapter adapter;
     List<ChatModel> list;
 
 
+    String oppositeUID;
     String chatID;
 
     @Override
@@ -57,6 +67,8 @@ public class ChatActivity extends AppCompatActivity {
 
         loadMessages();
 
+        maybeMarkRead();
+
         sendBtn.setOnClickListener(v -> {
 
             String message = chatET.getText().toString().trim();
@@ -65,13 +77,15 @@ public class ChatActivity extends AppCompatActivity {
                 return;
             }
 
-            CollectionReference reference = FirebaseFirestore.getInstance().collection("Messages");
+            CollectionReference reference = firestore.collection("Messages");
 
 
             Map<String, Object> map = new HashMap<>();
 
             map.put("lastMessage", message);
+            map.put("lastMessageTo",  oppositeUID);
             map.put("time", FieldValue.serverTimestamp());
+            map.put("unread", true);
 
 
             reference.document(chatID).update(map);
@@ -98,20 +112,33 @@ public class ChatActivity extends AppCompatActivity {
                         }
                     });
 
+//                recyclerView.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                    recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
+//                    }
+//                }, 1000);
+
         });
 
+        backbtn.setOnClickListener(view -> {
+            onBackPressed();
+        });
     }
 
     void init() {
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
+        firestore = FirebaseFirestore.getInstance();
+        oppositeUID = getIntent().getStringExtra("uid");
 
         imageView = findViewById(R.id.profileImage);
         name = findViewById(R.id.nameTV);
         status = findViewById(R.id.statusTV);
         chatET = findViewById(R.id.chatET);
         sendBtn = findViewById(R.id.sendBtn);
+        backbtn = findViewById(R.id.backBtn);
 
         recyclerView = findViewById(R.id.recyclerView);
 
@@ -125,9 +152,7 @@ public class ChatActivity extends AppCompatActivity {
 
     void loadUserData() {
 
-        String oppositeUID = getIntent().getStringExtra("uid");
-
-        FirebaseFirestore.getInstance().collection("Users").document(oppositeUID)
+        firestore.collection("Users").document(oppositeUID)
                 .addSnapshotListener((value, error) -> {
 
                     if (error != null)
@@ -158,7 +183,7 @@ public class ChatActivity extends AppCompatActivity {
         chatID = getIntent().getStringExtra("id");
 
 
-        CollectionReference reference = FirebaseFirestore.getInstance()
+        CollectionReference reference = firestore
                 .collection("Messages")
                 .document(chatID)
                 .collection("Messages");
@@ -180,9 +205,33 @@ public class ChatActivity extends AppCompatActivity {
 
                     }
                     adapter.notifyDataSetChanged();
+                    recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
 
                 });
 
     }
 
+    void maybeMarkRead() {
+        chatID = getIntent().getStringExtra("id");
+
+        DocumentReference reference = firestore
+                .collection("Messages")
+                .document(chatID);
+
+        reference.get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists() &&
+                    documentSnapshot.contains("lastMessageTo") &&
+                    documentSnapshot.contains("unread") &&
+                    documentSnapshot.get("lastMessageTo").equals(user.getUid()) &&
+                    documentSnapshot.getBoolean("unread")) {
+                reference.update("unread", false);
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ChatActivity.this, ChatUsersActivity.class);
+        startActivity(intent);
+    }
 }

@@ -6,11 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".finalProject.chat.ChatActivity">
 
+    <ImageButton
+        android:id="@+id/backBtn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/ic_circle"
+        android:elevation="4dp"
+        android:foreground="?attr/selectableItemBackground"
+        android:padding="4dp"
+        android:src="@drawable/ic_back" />
+
     <RelativeLayout
-        android:layout_marginTop="12dp"
         android:id="@+id/topLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
         android:padding="8dp">
 
 
@@ -44,8 +58,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Online"
-                android:textSize="12sp"
                 android:textColor="@color/colorGreen"
+                android:textSize="12sp"
                 android:textStyle="bold" />
 
 
@@ -59,7 +73,10 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/chatLayout"
         android:layout_below="@id/topLayout"
-        android:layout_margin="8dp" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp" />
 
 
     <RelativeLayout

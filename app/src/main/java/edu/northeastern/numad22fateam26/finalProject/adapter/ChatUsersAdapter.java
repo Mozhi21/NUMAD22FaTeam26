@@ -50,15 +50,23 @@ public class ChatUsersAdapter extends RecyclerView.Adapter<ChatUsersAdapter.Chat
     @Override
     public void onBindViewHolder(@NonNull ChatUserHolder holder, int position) {
 
-        fetchImageUrl(list.get(position).getUid(), holder);
+        ChatUserModel chatUser = list.get(position);
+
+        fetchImageUrl(chatUser.getUid(), holder);
 
 
-        holder.time.setText(calculateTime(list.get(position).getTime()));
+        holder.time.setText(calculateTime(chatUser.getTime()));
 
-        holder.lastMessage.setText(list.get(position).getLastMessage());
+        holder.lastMessage.setText(chatUser.getLastMessage());
 
         holder.itemView.setOnClickListener(v ->
-                startChat.clicked(position, list.get(position).getUid(), list.get(position).getId()));
+                startChat.clicked(position, chatUser.getUid(), chatUser.getId()));
+
+        if (chatUser.isUnread() && chatUser.getLastMessageTo().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+            holder.count.setVisibility(View.VISIBLE);
+        } else {
+            holder.count.setVisibility(View.GONE);
+        }
 
     }
 
@@ -132,7 +140,6 @@ public class ChatUsersAdapter extends RecyclerView.Adapter<ChatUsersAdapter.Chat
             count = itemView.findViewById(R.id.messageCountTV);
 
             count.setVisibility(View.GONE);
-
         }
     }
 

@@ -13,7 +13,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:src="@drawable/ic_person"
-        app:civ_border_color="#434343"
+        app:civ_border_color="#00434343"
         app:civ_border_width="1dp" />
 
     <LinearLayout
@@ -60,9 +60,18 @@
         <CheckBox
             android:id="@+id/likeBtn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="0dp"
             android:button="@drawable/heart_check" />
+
+        <TextView
+            android:id="@+id/likeCountTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="100 likes"
+            android:textStyle="bold" />
 
         <ImageButton
             android:id="@+id/commentBtn"
@@ -79,6 +88,7 @@
             android:background="@drawable/ic_share" />
 
 
+
     </LinearLayout>
 
     <TextView
@@ -86,28 +96,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/linearLayout"
-        android:text ="description here..."
-        android:paddingStart="8dp"
+        android:paddingStart="10dp"
         android:paddingEnd="8dp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/likeCountTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/descTv"
-        android:text ="100 likes"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
+        android:paddingBottom="15dp"
+        android:text="description here..."
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/commentTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/likeCountTv"
         android:padding="8dp"
         android:text="View all comment"
+        android:textColor ="#00FF4343"
         android:visibility="gone" />
 
 

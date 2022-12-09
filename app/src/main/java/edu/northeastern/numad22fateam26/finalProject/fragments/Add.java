@@ -54,6 +54,8 @@ import java.util.Map;
 
 import edu.northeastern.numad22fateam26.R;
 import edu.northeastern.numad22fateam26.finalProject.adapter.GalleryAdapter;
+import edu.northeastern.numad22fateam26.finalProject.chat.ChatActivity;
+import edu.northeastern.numad22fateam26.finalProject.chat.ChatUsersActivity;
 import edu.northeastern.numad22fateam26.finalProject.model.GalleryImages;
 import io.grpc.internal.JsonUtil;
 
@@ -95,6 +97,7 @@ public class Add extends Fragment {
         list = new ArrayList<>();
         adapter = new GalleryAdapter(list);
 
+
         recyclerView.setAdapter(adapter);
 
         clickListener();
@@ -106,7 +109,6 @@ public class Add extends Fragment {
         adapter.SendImage(new GalleryAdapter.SendImage() {
             @Override
             public void onSend(Uri picUri) {
-                System.out.println("on send");
 
                 CropImage.activity(picUri)
                         .setGuidelines(CropImageView.Guidelines.ON)
@@ -116,6 +118,7 @@ public class Add extends Fragment {
 
             }
         });
+
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -15,7 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +28,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,10 +46,11 @@ import edu.northeastern.numad22fateam26.finalProject.ReplacerActivity;
 
 public class LoginFragment extends Fragment {
 
-    private EditText emailEt, passwordEt;
-    private TextView signUpTv, forgotPasswordTv, backTv;
+    private TextInputLayout emailEt, passwordEt;
+    private Button signUpBtn, forget_password;
     private Button loginBtn, googleSignInBtn;
-    private ProgressBar progressBar;
+    private RelativeLayout progressBar;
+    private ImageView backBtn;
 
     private static final int RC_SIGN_IN = 1;
     GoogleSignInClient mGoogleSignInClient;
@@ -78,13 +82,13 @@ public class LoginFragment extends Fragment {
     private void init(View view) {
 
         emailEt = view.findViewById(R.id.emailET);
-        passwordEt = view.findViewById(R.id.passwordET);
-        loginBtn = view.findViewById(R.id.loginBtn);
+        passwordEt = view.findViewById(R.id.login_password);
+        loginBtn = view.findViewById(R.id.letTheUserLogIn);
         googleSignInBtn = view.findViewById(R.id.googleSignInBtn);
-        signUpTv = view.findViewById(R.id.signUpTV);
-        forgotPasswordTv = view.findViewById(R.id.forgotTV);
-        backTv = view.findViewById(R.id.backTv);
-        progressBar = view.findViewById(R.id.progressBar);
+        signUpBtn = view.findViewById(R.id.SignUpBtn);
+        forget_password = view.findViewById(R.id.forget_password);
+        backBtn = view.findViewById(R.id.login_back_button);
+        progressBar = view.findViewById(R.id.login_progress_bar);
 
 
         auth = FirebaseAuth.getInstance();
@@ -100,11 +104,11 @@ public class LoginFragment extends Fragment {
 
     private void clickListener() {
 
-        backTv.setOnClickListener(v ->  {
+        backBtn.setOnClickListener(v ->  {
             startActivity(new Intent(getActivity(), MainActivity.class));
         });
 
-        forgotPasswordTv.setOnClickListener(new View.OnClickListener() {
+        forget_password.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((ReplacerActivity) getActivity()).setFragment(new ForgotPassword());
@@ -116,8 +120,8 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String email = emailEt.getText().toString();
-                String password = passwordEt.getText().toString();
+                String email = emailEt.getEditText().getText().toString().trim();
+                String password = passwordEt.getEditText().getText().toString().trim();
 
                 if (email.isEmpty() || !email.matches(EMAIL_REGEX)) {
                     emailEt.setError("Input valid email");
@@ -163,7 +167,7 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        signUpTv.setOnClickListener(new View.OnClickListener() {
+        signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((ReplacerActivity) getActivity()).setFragment(new CreateAccountFragment());

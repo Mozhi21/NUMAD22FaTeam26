@@ -4,7 +4,6 @@
     android:padding="12dp"
     android:layout_height="wrap_content">
 
-
     <TextView
         android:id="@+id/leftChat"
         android:layout_width="wrap_content"

@@ -3,6 +3,7 @@ package edu.northeastern.numad22fateam26.finalProject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.animation.Animation;
@@ -20,6 +21,7 @@ public class SplashActivity extends AppCompatActivity {
     Animation topAnim, bottomAnim;
     ImageView logo;
     TextView slogan;
+    SharedPreferences onBoardingScreen;
 
 
     @Override
@@ -43,16 +45,29 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                onBoardingScreen = getSharedPreferences("onBoardingScreen", MODE_PRIVATE);
+                boolean isFirstTime = onBoardingScreen.getBoolean("firstTime", true);
 
-                if (user == null) {
-                    startActivity(new Intent(SplashActivity.this, ReplacerActivity.class));
 
-                } else {
-                    startActivity(new Intent(SplashActivity.this, ExploreActivity.class));
+//                if (user == null || isFirstTime) {
+//                    SharedPreferences.Editor editor = onBoardingScreen.edit();
+//                    editor.putBoolean("firstTime", false);
+//                    editor.commit();
+//
+//                    Intent intent = new Intent(getApplicationContext(), OnBoardingActivity.class);
+//                    startActivity(intent);
+//                    finish();
+                    if (user == null) {
+                        startActivity(new Intent(SplashActivity.this, ReplacerActivity.class));
 
-                }
+                    } else {
+                        startActivity(new Intent(SplashActivity.this, ExploreActivity.class));
+
+                    }
+//                }else {
+//                    startActivity(new Intent(SplashActivity.this, ExploreActivity.class));
+//                }
                 finish();
-
             }
         }, 2500);
 

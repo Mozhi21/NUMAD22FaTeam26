@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,13 +19,14 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,7 +52,9 @@ public class Home extends Fragment {
     private RecyclerView recyclerView;
     private List<HomeModel> list;
     private FirebaseUser user;
+    private FirebaseFirestore fireStore;
     Activity activity;
+    ImageView circle;
 
     public Home() {
         // Required empty public constructor
@@ -76,6 +80,8 @@ public class Home extends Fragment {
         recyclerView.setAdapter(adapter);
 
         loadDataFromFirestore();
+
+        checkIfUnreadMessages();
 
         adapter.OnPressed(new HomeAdapter.OnPressed() {
             @Override
@@ -152,17 +158,18 @@ public class Home extends Fragment {
         storiesAdapter = new StoriesAdapter(storiesModelList, getActivity());
         storiesRecyclerView.setAdapter(storiesAdapter);
 
+        circle = view.findViewById(R.id.circle);
+
         FirebaseAuth auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
+        fireStore = FirebaseFirestore.getInstance();
 
     }
 
     private void loadDataFromFirestore() {
 
-        final DocumentReference reference = FirebaseFirestore.getInstance().collection("Users")
+        final DocumentReference reference = fireStore.collection("Users")
                 .document(user.getUid());
-
-        final CollectionReference collectionReference = FirebaseFirestore.getInstance().collection("Users");
 
         reference.addSnapshotListener((value, error) -> {
 
@@ -179,71 +186,48 @@ public class Home extends Fragment {
             if (uidList == null || uidList.isEmpty())
                 return;
 
-            collectionReference.whereIn("uid", uidList)
-                    .addSnapshotListener((value1, error1) -> {
+            fireStore
+                    .collectionGroup("Post Images")
+                    .whereIn("uid", uidList)
+                    .orderBy("timestamp", Query.Direction.DESCENDING)
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                            list.clear();
+                            for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                HomeModel model = documentSnapshot.toObject(HomeModel.class);
 
-                        if (error1 != null) {
-                            Log.d("Error: ", error1.getMessage());
-                        }
+                                list.add(new HomeModel(
+                                        model.getName(),
+                                        model.getProfileImage(),
+                                        model.getImageUrl(),
+                                        model.getUid(),
+                                        model.getDescription(),
+                                        model.getId(),
+                                        model.getTimestamp(),
+                                        model.getLikes()));
 
-                        if (value1 == null)
-                            return;
+                                adapter.notifyDataSetChanged();
 
-                        for (QueryDocumentSnapshot snapshot : value1) {
+                                documentSnapshot.getReference().collection("Comments").get()
+                                        .addOnCompleteListener(task -> {
 
-                            snapshot.getReference().collection("Post Images").orderBy("timestamp", Query.Direction.DESCENDING)
-                                    .addSnapshotListener((value11, error11) -> {
+                                            if (task.isSuccessful()) {
 
-                                        if (error11 != null) {
-                                            Log.d("Error: ", error11.getMessage());
-                                        }
+                                                Map<String, Object> map = new HashMap<>();
+                                                for (QueryDocumentSnapshot commentSnapshot : task
+                                                        .getResult()) {
+                                                    map = commentSnapshot.getData();
+                                                }
 
-                                        if (value11 == null)
-                                            return;
+                                                commentCount.setValue(map.size());
+                                            }
 
-                                        list.clear();
-
-                                        for (final QueryDocumentSnapshot snapshot1 : value11) {
-
-                                            if (!snapshot1.exists())
-                                                return;
-
-                                            HomeModel model = snapshot1.toObject(HomeModel.class);
-
-                                            list.add(new HomeModel(
-                                                    model.getName(),
-                                                    model.getProfileImage(),
-                                                    model.getImageUrl(),
-                                                    model.getUid(),
-                                                    model.getDescription(),
-                                                    model.getId(),
-                                                    model.getTimestamp(),
-                                                    model.getLikes()));
-
-                                            snapshot1.getReference().collection("Comments").get()
-                                                    .addOnCompleteListener(task -> {
-
-                                                        if (task.isSuccessful()) {
-
-                                                            Map<String, Object> map = new HashMap<>();
-                                                            for (QueryDocumentSnapshot commentSnapshot : task
-                                                                    .getResult()) {
-                                                                map = commentSnapshot.getData();
-                                                            }
-
-                                                            commentCount.setValue(map.size());
-
-                                                        }
-
-                                                    });
-
-                                        }
-                                        adapter.notifyDataSetChanged();
-
-                                    });
+                                        });
+                            }
 
                         }
-
                     });
 
             // todo: fetch stories
@@ -279,6 +263,24 @@ public class Home extends Fragment {
 
         });
 
+    }
+
+    private void checkIfUnreadMessages() {
+        Query query = FirebaseFirestore.getInstance().collection("Messages");
+        query.whereEqualTo("unread", true).whereEqualTo("lastMessageTo", user.getUid()).addSnapshotListener(((value, error) -> {
+            if (error != null) {
+                Log.d("Error: ", error.getMessage());
+            }
+
+            if (value == null)
+                return;
+
+            if (value.isEmpty()) {
+                circle.setVisibility(View.GONE);
+            } else {
+                circle.setVisibility(View.VISIBLE);
+            }
+        }));
     }
 
 }

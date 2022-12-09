@@ -211,6 +211,8 @@ public class StoryAddActivity extends AppCompatActivity {
 
             Uri uri = data.getData();
 
+            System.out.println("huici uri:" + uri.toString());
+
             if (uri.toString().contains("image")) {
                 //image selected
                 videoView.setVisibility(View.GONE);
