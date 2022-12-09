@@ -34,6 +34,7 @@ import java.util.Map;
 
 import edu.northeastern.numad22fateam26.R;
 import edu.northeastern.numad22fateam26.finalProject.ExploreActivity;
+import edu.northeastern.numad22fateam26.finalProject.OnBoardingActivity;
 import edu.northeastern.numad22fateam26.finalProject.ReplacerActivity;
 
 
@@ -188,7 +189,7 @@ public class CreateAccountFragment extends Fragment {
                         if (task.isSuccessful()) {
                             assert getActivity() != null;
                             progressBar.setVisibility(View.GONE);
-                            startActivity(new Intent(getActivity().getApplicationContext(), ExploreActivity.class));
+                            startActivity(new Intent(getActivity().getApplicationContext(), OnBoardingActivity.class));
                             getActivity().finish();
 
                         } else {

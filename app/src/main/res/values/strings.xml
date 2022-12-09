@@ -20,11 +20,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="first_slide_title">Explore endless Chinese authentic cuisines</string>
+    <string name="first_slide_title">Explore Chinese authentic cuisines</string>
     <string name="second_slide_title">Find and follow your foodie mates</string>
     <string name="third_slide_title">Discover cuisines</string>
 
-    <string name="first_slide_desc">There is more dishes far beyond your imagination! Check the recommendation page to see the food story!</string>
+    <string name="first_slide_desc">Endless dishes far beyond your imagination! </string>
     <string name="second_slide_desc">Follow your foodie friends, see what they are posting!</string>
-    <string name="third_slide_desc">You want to prepare your own Chinese food for your family? Lets do it!</string>
+    <string name="third_slide_desc">Want to cook your own Chinese food? Lets do it!</string>
 </resources>
