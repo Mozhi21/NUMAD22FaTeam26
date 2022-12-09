@@ -20,10 +20,10 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="dish_of_the_day">Dish of The Day</string>
+    <string name="cuisine_of_the_day">Cuisine of The Day</string>
     <string name="detailed_recipe">Detailed Recipe</string>
     <string name="yummy_china">Yummy China</string>
-    <string name="dish_of_the_day_pic">Dish of the day pic</string>
+    <string name="cuisine_of_the_day_pic">Cuisine of the day pic</string>
 
 
     <string name="first_slide_title">Explore endless Chinese authentic cuisines</string>
@@ -33,5 +33,6 @@
     <string name="first_slide_desc">There is more dishes far beyond your imagination! Check the recommendation page to see the food story!</string>
     <string name="second_slide_desc">Follow your foodie friends, see what they are posting!</string>
     <string name="third_slide_desc">You want to prepare your own Chinese food for your family? Lets do it!</string>
+    <string name="no_recipe_found">No recipe found!</string>
 
 </resources>

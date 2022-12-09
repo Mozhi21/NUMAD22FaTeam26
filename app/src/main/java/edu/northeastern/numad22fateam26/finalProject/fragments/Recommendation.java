@@ -5,8 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -49,15 +49,16 @@ public class Recommendation extends Fragment {
     private static final String ADMIN_ID = "YvXGXIeL8IXd8FJiPRJJPzWU2gF3";
     private final MutableLiveData<Integer> commentCount = new MutableLiveData<>();
 
-    private HomeAdapter adapter;
+    private HomeAdapter postAdapter;
     private List<PostImageModel> adminPosts;
     private List<HomeModel> relevantPostList;
-    private RecyclerView relevantPostView;
     private List<RecipeModel> recipeModelList;
+    private List<String> recipeSteps;
     private TextView adminStory;
     private ImageView adminPic;
+    private TextView adminRecipeSteps;
     private FirebaseUser user;
-    private ListView adminRecipeSteps;
+    private ArrayAdapter<String> recipeStepAdapter;
 
     public Recommendation() {
         // Required empty public constructor
@@ -79,52 +80,23 @@ public class Recommendation extends Fragment {
         initRecommendations(view);
     }
 
-
     private void initDailyPanel(View view) {
         adminStory = view.findViewById(R.id.dish_description);
         adminRecipeSteps = view.findViewById(R.id.detailed_recipe);
         adminPic = view.findViewById(R.id.admin_pic);
-        loadAdminPosts();
-        loadAdminRecipe();
-    }
-
-    public void loadAdminPosts() {
-        adminPosts = new ArrayList<>();
-        CollectionReference postRef = FirebaseFirestore.getInstance().collection("Users")
-                .document(ADMIN_ID).collection("Post Images");
-        postRef
-                .orderBy("timestamp", Query.Direction.DESCENDING)
-                .limit(1)
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                if (document.exists()) {
-                                    PostImageModel model = document.toObject(PostImageModel.class);
-                                    adminPosts.add(model);
-                                }
-                            }
-                            if (!adminPosts.isEmpty()) {
-                                setPostView(adminPosts);
-                            }
-                        } else {
-                            Log.d(TAG, "get failed with ", task.getException());
-                        }
-                    }
-                });
+        loadAdminPost();
     }
 
     private void initRecommendations(View view) {
         relevantPostList = new ArrayList<>();
-        relevantPostView = view.findViewById(R.id.recyclerView_rc);
+        RecyclerView relevantPostView = view.findViewById(R.id.recyclerView_rc);
         relevantPostView.setHasFixedSize(true);
         relevantPostView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        adapter = new HomeAdapter(relevantPostList, getActivity());
-        relevantPostView.setAdapter(adapter);
+        postAdapter = new HomeAdapter(relevantPostList, getActivity());
+        relevantPostView.setAdapter(postAdapter);
 
-        adapter.OnPressed(new HomeAdapter.OnPressed() {
+        postAdapter.OnPressed(new HomeAdapter.OnPressed() {
             @Override
             public void onLiked(int position, String id, String uid, List<String> likeList, boolean isChecked) {
 
@@ -186,14 +158,41 @@ public class Recommendation extends Fragment {
                 });
     }
 
-    public void loadAdminRecipe() {
-        recipeModelList = new ArrayList<>();
-        CollectionReference recipeRef = FirebaseFirestore.getInstance().collection("Users")
-                .document(ADMIN_ID).collection("Recipe");
-        recipeRef
+    public void loadAdminPost() {
+        adminPosts = new ArrayList<>();
+        CollectionReference postRef = FirebaseFirestore.getInstance().collection("Users")
+                .document(ADMIN_ID).collection("Post Images");
+        postRef
                 .orderBy("timestamp", Query.Direction.DESCENDING)
                 .limit(1)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                if (document.exists()) {
+                                    PostImageModel model = document.toObject(PostImageModel.class);
+                                    adminPosts.add(model);
+                                }
+                            }
+                            if (!adminPosts.isEmpty()) {
+                                setPostView(adminPosts);
+                                loadAdminRecipe();
+                            }
+                        } else {
+                            Log.d(TAG, "get failed with ", task.getException());
+                        }
+                    }
+                });
+    }
+
+    public void loadAdminRecipe() {
+        recipeModelList = new ArrayList<>();
+        String adminPostId = adminPosts.get(0).getId();
+        Query query = FirebaseFirestore.getInstance().collection("Users")
+                .document(ADMIN_ID).collection("Recipe").whereEqualTo("postId", adminPostId);
+        query.get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
@@ -204,7 +203,7 @@ public class Recommendation extends Fragment {
                                 }
                             }
                             if (!recipeModelList.isEmpty()) {
-                                setRecipeView(recipeModelList);
+                                setRecipeView(recipeModelList.get(0));
                             }
                         } else {
                             Log.d(TAG, "get failed with ", task.getException());
@@ -222,9 +221,20 @@ public class Recommendation extends Fragment {
                 .into(adminPic);
     }
 
-    private void setRecipeView(List<RecipeModel> recipeModelList) {
-        RecipeModel adminRecipe = recipeModelList.get(0);
-        // set adminRecipeSteps
+    private void setRecipeView(RecipeModel adminRecipe) {
+        List<String> steps = adminRecipe.getSteps();
+        List<String> recipeSteps = new ArrayList<>();
+        String recipeString;
+
+        if (steps == null || steps.isEmpty()) {
+            recipeString = "No recipe found!";
+        } else {
+            for (int i = 0; i < steps.size(); i++) {
+                recipeSteps.add(String.format("%s. %s", i + 1, steps.get(i)));
+            }
+            recipeString = String.join(System.getProperty("line.separator"), recipeSteps);
+        }
+        adminRecipeSteps.setText(recipeString);
     }
 
     private void loadRelevantPosts(PostImageModel adminPost) {
@@ -251,7 +261,7 @@ public class Recommendation extends Fragment {
                             }
                             if (!relevantPostList.isEmpty()) {
                                 sortByRelevancy(adminPost.getDescription());
-                                adapter.notifyDataSetChanged();
+                                postAdapter.notifyDataSetChanged();
                             }
                         } else {
                             Log.d(TAG, "get failed with ", task.getException());

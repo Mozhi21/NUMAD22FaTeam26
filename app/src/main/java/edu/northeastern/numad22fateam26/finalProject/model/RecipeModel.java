@@ -1,38 +1,27 @@
 package edu.northeastern.numad22fateam26.finalProject.model;
 
-import com.google.firebase.firestore.ServerTimestamp;
-
-import java.util.Date;
 import java.util.List;
 
 public class RecipeModel {
 
-    private String id, uid, recipe;
+    private String postId;
+    private String uid;
+    private List<String> steps;
 
-    @ServerTimestamp
-    private Date timestamp;
+    public RecipeModel() {}
 
-    public RecipeModel() {
-    }
-
-    public RecipeModel( String id, String uid, Date timestamp, String recipe) {
-        this.id = id;
-        this.timestamp = timestamp;
+    public RecipeModel(String postId, String uid, List<String> steps) {
+        this.postId = postId;
         this.uid = uid;
-        this.recipe = recipe;
-    }
-    public String getRecipe() { return recipe; }
-
-    public void setRecipe(String recipe) {
-        this.recipe= recipe;
+        this.steps = steps;
     }
 
-    public String getId() {
-        return id;
+    public String getPostId() {
+        return postId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setPostId(String postId) {
+        this.postId = postId;
     }
 
     public String getUid() {
@@ -43,12 +32,11 @@ public class RecipeModel {
         this.uid = uid;
     }
 
-    public Date getTimestamp() {
-        return timestamp;
+    public List<String> getSteps() {
+        return steps;
     }
 
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
+    public void setSteps(List<String> steps) {
+        this.steps = steps;
     }
-
 }
