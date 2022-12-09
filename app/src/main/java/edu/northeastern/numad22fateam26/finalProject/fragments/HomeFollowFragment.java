@@ -1,61 +1,58 @@
 package edu.northeastern.numad22fateam26.finalProject.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.MutableLiveData;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import edu.northeastern.numad22fateam26.R;
+import edu.northeastern.numad22fateam26.finalProject.adapter.HomeFollowAdapter;
+import edu.northeastern.numad22fateam26.finalProject.adapter.StoriesAdapter;
+import edu.northeastern.numad22fateam26.finalProject.model.HomeModel;
+import edu.northeastern.numad22fateam26.finalProject.model.StoriesModel;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomeFollowFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class HomeFollowFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private final MutableLiveData<Integer> commentCount = new MutableLiveData<>();
+    HomeFollowAdapter adapter;
+    RecyclerView storiesRecyclerView;
+    StoriesAdapter storiesAdapter;
+    List<StoriesModel> storiesModelList;
+    private RecyclerView recyclerView;
+    private List<HomeModel> list;
+    private FirebaseUser user;
+    Activity activity;
 
     public HomeFollowFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFollowFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static HomeFollowFragment newInstance(String param1, String param2) {
-        HomeFollowFragment fragment = new HomeFollowFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,4 +60,219 @@ public class HomeFollowFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home_follow, container, false);
     }
+
+//    @Override
+//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+//        super.onViewCreated(view, savedInstanceState);
+//
+//        activity = getActivity();
+//
+//        init(view);
+//
+//        list = new ArrayList<>();
+//        adapter = new HomeFollowAdapter(list, getActivity());
+//        recyclerView.setAdapter(adapter);
+//
+//        loadDataFromFirestore();
+//
+//        adapter.OnPressed(new HomeFollowAdapter.OnPressed() {
+//            @Override
+//            public void onLiked(int position, String id, String uid, List<String> likeList, boolean isChecked) {
+//
+//                DocumentReference reference = FirebaseFirestore.getInstance().collection("Users")
+//                        .document(uid)
+//                        .collection("Post Images")
+//                        .document(id);
+//
+//                if (likeList.contains(user.getUid())) {
+//                    likeList.remove(user.getUid()); // unlike
+//                } else {
+//                    likeList.add(user.getUid()); // like
+//                }
+//
+//                Map<String, Object> map = new HashMap<>();
+//                map.put("likes", likeList);
+//
+//                reference.update(map);
+//
+//            }
+//
+//            @Override
+//            public void setCommentCount(final TextView textView) {
+//
+//                commentCount.observe((LifecycleOwner) activity, integer -> {
+//
+//                    assert commentCount.getValue() != null;
+//                    try {
+//                        if (commentCount.getValue() == 0) {
+//                            textView.setVisibility(View.GONE);
+//                        } else
+//                            textView.setVisibility(View.VISIBLE);
+//
+//                        StringBuilder builder = new StringBuilder();
+//                        builder.append("See all")
+//                                .append(commentCount.getValue())
+//                                .append(" comments");
+//
+//                        textView.setText(builder);
+//                        textView.setText("See all " + commentCount.getValue() + " comments");
+//                    }   catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                });
+//
+//            }
+//        });
+//
+//
+//    }
+//
+//    private void init(View view) {
+//
+//        Toolbar toolbar = view.findViewById(R.id.toolbar);
+//        if (getActivity() != null)
+//            ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+//
+//        recyclerView = view.findViewById(R.id.recyclerViewfp);
+//        recyclerView.setHasFixedSize(true);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//
+//        storiesRecyclerView = view.findViewById(R.id.storiesRecyclerView);
+//        storiesRecyclerView.setHasFixedSize(true);
+//        storiesRecyclerView
+//                .setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+//
+//        storiesModelList = new ArrayList<>();
+//        storiesAdapter = new StoriesAdapter(storiesModelList, getActivity());
+//        storiesRecyclerView.setAdapter(storiesAdapter);
+//
+//        FirebaseAuth auth = FirebaseAuth.getInstance();
+//        user = auth.getCurrentUser();
+//
+//    }
+//
+//    private void loadDataFromFirestore() {
+//
+//        final DocumentReference reference = FirebaseFirestore.getInstance().collection("Users")
+//                .document(user.getUid());
+//
+//        final CollectionReference collectionReference = FirebaseFirestore.getInstance().collection("Users");
+//
+//        reference.addSnapshotListener((value, error) -> {
+//
+//            if (error != null) {
+//                Log.d("Error: ", error.getMessage());
+//                return;
+//            }
+//
+//            if (value == null)
+//                return;
+//
+//            List<String> uidList = (List<String>) value.get("following");
+//
+//            if (uidList == null || uidList.isEmpty())
+//                return;
+//
+//            collectionReference.whereIn("uid", uidList)
+//                    .addSnapshotListener((value1, error1) -> {
+//
+//                        if (error1 != null) {
+//                            Log.d("Error: ", error1.getMessage());
+//                        }
+//
+//                        if (value1 == null)
+//                            return;
+//
+//                        for (QueryDocumentSnapshot snapshot : value1) {
+//
+//                            snapshot.getReference().collection("Post Images").orderBy("timestamp", Query.Direction.DESCENDING)
+//                                    .addSnapshotListener((value11, error11) -> {
+//
+//                                        if (error11 != null) {
+//                                            Log.d("Error: ", error11.getMessage());
+//                                        }
+//
+//                                        if (value11 == null)
+//                                            return;
+//
+//                                        list.clear();
+//
+//                                        for (final QueryDocumentSnapshot snapshot1 : value11) {
+//
+//                                            if (!snapshot1.exists())
+//                                                return;
+//
+//                                            HomeModel model = snapshot1.toObject(HomeModel.class);
+//
+//                                            list.add(new HomeModel(
+//                                                    model.getName(),
+//                                                    model.getProfileImage(),
+//                                                    model.getImageUrl(),
+//                                                    model.getUid(),
+//                                                    model.getDescription(),
+//                                                    model.getId(),
+//                                                    model.getTimestamp(),
+//                                                    model.getLikes()));
+//
+//                                            snapshot1.getReference().collection("Comments").get()
+//                                                    .addOnCompleteListener(task -> {
+//
+//                                                        if (task.isSuccessful()) {
+//
+//                                                            Map<String, Object> map = new HashMap<>();
+//                                                            for (QueryDocumentSnapshot commentSnapshot : task
+//                                                                    .getResult()) {
+//                                                                map = commentSnapshot.getData();
+//                                                            }
+//
+//                                                            commentCount.setValue(map.size());
+//
+//                                                        }
+//
+//                                                    });
+//
+//                                        }
+//                                        adapter.notifyDataSetChanged();
+//
+//                                    });
+//
+//                        }
+//
+//                    });
+//
+//            // todo: fetch stories
+//            loadStories(uidList);
+//        });
+//
+//    }
+//
+//    void loadStories(List<String> followingList) {
+//
+//        Query query = FirebaseFirestore.getInstance().collection("Stories");
+//        query.whereIn("uid", followingList).addSnapshotListener((value, error) -> {
+//
+//            if (error != null) {
+//                Log.d("Error: ", error.getMessage());
+//            }
+//
+//            if (value == null)
+//                return;
+//
+//            storiesModelList.clear();
+//            storiesModelList.add(new StoriesModel("", "", "", "", ""));
+//
+//            for (QueryDocumentSnapshot snapshot : value) {
+//
+//                if (!value.isEmpty()) {
+//                    StoriesModel model = snapshot.toObject(StoriesModel.class);
+//                    storiesModelList.add(model);
+//                }
+//
+//            }
+//            storiesAdapter.notifyDataSetChanged();
+//
+//        });
+//
+//    }
 }

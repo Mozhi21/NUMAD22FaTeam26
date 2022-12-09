@@ -1,16 +1,13 @@
 package edu.northeastern.numad22fateam26.finalProject.adapter;
 
-import android.support.v4.media.RatingCompat;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import edu.northeastern.numad22fateam26.finalProject.fragments.Add;
-import edu.northeastern.numad22fateam26.finalProject.fragments.Home;
-import edu.northeastern.numad22fateam26.finalProject.fragments.Notification;
+import edu.northeastern.numad22fateam26.finalProject.fragments.HomeParentFragment;
 import edu.northeastern.numad22fateam26.finalProject.fragments.Profile;
 import edu.northeastern.numad22fateam26.finalProject.fragments.Search;
 import edu.northeastern.numad22fateam26.finalProject.fragments.Recommendation;
@@ -25,10 +22,6 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         this.noOfTabs = noOfTabs;
     }
 
-    public ViewPagerAdapter(FragmentManager childFragmentManager) {
-        super(childFragmentManager,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-    }
-
     @NonNull
     @Override
     public Fragment getItem(int position) {
@@ -37,7 +30,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
             default:
             case 0:
-                return new Home();
+                return new HomeParentFragment();
 
             case 1:
                 return new Search();

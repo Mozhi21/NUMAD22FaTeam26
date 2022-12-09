@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".finalProject.fragments.Home">
+    tools:context=".finalProject.fragments.HomeParentFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -52,46 +52,9 @@
         android:id="@+id/preferenceTabLayout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal"
+        android:layout_below="@id/toolbar"
         android:gravity="center"
-        android:layout_below="@id/toolbar">
-
-<!--        <Button-->
-
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_weight="1"-->
-<!--            android:text="follow"-->
-<!--            android:textSize="9sp"-->
-<!--            android:layout_marginLeft="10dp"-->
-<!--            />-->
-<!--        <Button-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_marginLeft="20dp"-->
-<!--            android:layout_weight="1"-->
-<!--            android:text="like"-->
-<!--            android:textColor="@color/bai"-->
-<!--            android:textSize="9sp"-->
-<!--            />-->
-<!--        <Button-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:text="For You"-->
-<!--            android:textColor="@color/bai"-->
-<!--            android:textSize="9sp"-->
-<!--            android:layout_weight = "1"-->
-<!--            android:layout_marginLeft="20dp"/>-->
-<!--        <Button-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:text="Recipe"-->
-<!--            android:textColor="@color/bai"-->
-<!--            android:textSize="9sp"-->
-<!--            android:layout_weight = "1"-->
-<!--            android:layout_marginLeft="20dp"-->
-<!--            android:layout_marginRight="10dp"/>-->
-
+        android:orientation="horizontal">
 
     </com.google.android.material.tabs.TabLayout>
 
@@ -99,19 +62,7 @@
         android:id="@+id/preferenceViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/preferenceTabLayout"
-        android:layout_marginBottom="50dp"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/storiesRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/preferenceTabLayout" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewfp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/storiesRecyclerView" />
+        android:layout_below="@id/preferenceTabLayout" >
+    </androidx.viewpager.widget.ViewPager>
 
 </RelativeLayout>
