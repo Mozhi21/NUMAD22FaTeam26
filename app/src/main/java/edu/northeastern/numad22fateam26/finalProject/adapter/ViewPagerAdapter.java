@@ -5,6 +5,7 @@ import android.support.v4.media.RatingCompat;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import edu.northeastern.numad22fateam26.finalProject.fragments.Add;
@@ -15,13 +16,17 @@ import edu.northeastern.numad22fateam26.finalProject.fragments.Search;
 import edu.northeastern.numad22fateam26.finalProject.fragments.Recommendation;
 
 
-public class ViewPagerAdapter extends FragmentStatePagerAdapter {
+public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     int noOfTabs;
 
     public ViewPagerAdapter(@NonNull FragmentManager fm, int noOfTabs) {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         this.noOfTabs = noOfTabs;
+    }
+
+    public ViewPagerAdapter(FragmentManager childFragmentManager) {
+        super(childFragmentManager,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
     }
 
     @NonNull
@@ -55,4 +60,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return noOfTabs;
     }
+
+
 }

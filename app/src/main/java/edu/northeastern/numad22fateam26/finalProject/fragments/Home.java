@@ -7,17 +7,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
+
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -35,13 +40,17 @@ import javax.annotation.Nullable;
 
 import edu.northeastern.numad22fateam26.R;
 import edu.northeastern.numad22fateam26.finalProject.adapter.HomeAdapter;
+import edu.northeastern.numad22fateam26.finalProject.adapter.PreferenceTabViewPagerAdapter;
 import edu.northeastern.numad22fateam26.finalProject.adapter.StoriesAdapter;
+import edu.northeastern.numad22fateam26.finalProject.adapter.ViewPagerAdapter;
 import edu.northeastern.numad22fateam26.finalProject.chat.ChatUsersActivity;
 import edu.northeastern.numad22fateam26.finalProject.model.HomeModel;
 import edu.northeastern.numad22fateam26.finalProject.model.StoriesModel;
 
 
 public class Home extends Fragment {
+    TabLayout preferenceTabLayout;
+    ViewPager preferenceViewPager;
     private final MutableLiveData<Integer> commentCount = new MutableLiveData<>();
     HomeAdapter adapter;
     RecyclerView storiesRecyclerView;
@@ -60,7 +69,19 @@ public class Home extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view =  inflater.inflate(R.layout.fragment_home, container, false);
+        addFragment(view);
+        return view;
+    }
+
+    private void addFragment(View view) {
+        preferenceTabLayout = view.findViewById(R.id.preferenceTabLayout);
+        preferenceViewPager = view.findViewById(R.id.preferenceViewPager);
+        PreferenceTabViewPagerAdapter adapter = new PreferenceTabViewPagerAdapter(getChildFragmentManager());
+        adapter.addFragment(new HomeLikeFragment(), "Like");
+        adapter.addFragment(new HomeFollowFragment(), "Follow");
+        preferenceViewPager.setAdapter(adapter);
+        preferenceTabLayout.setupWithViewPager(preferenceViewPager);
     }
 
     @Override
@@ -130,7 +151,6 @@ public class Home extends Fragment {
             startActivity(intent);
 
         });
-
     }
 
     private void init(View view) {

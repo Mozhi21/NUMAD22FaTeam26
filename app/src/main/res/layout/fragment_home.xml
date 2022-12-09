@@ -48,56 +48,65 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <LinearLayout
-        android:id="@+id/buttons"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/preferenceTabLayout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:gravity="center"
         android:layout_below="@id/toolbar">
 
-        <Button
+<!--        <Button-->
 
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="follow"
-            android:textSize="9sp"
-            android:layout_marginLeft="10dp"
-            />
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_weight="1"
-            android:text="like"
-            android:textColor="@color/bai"
-            android:textSize="9sp"
-            />
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="For You"
-            android:textColor="@color/bai"
-            android:textSize="9sp"
-            android:layout_weight = "1"
-            android:layout_marginLeft="20dp"/>
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Recipe"
-            android:textColor="@color/bai"
-            android:textSize="9sp"
-            android:layout_weight = "1"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp"/>
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            android:text="follow"-->
+<!--            android:textSize="9sp"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            />-->
+<!--        <Button-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:text="like"-->
+<!--            android:textColor="@color/bai"-->
+<!--            android:textSize="9sp"-->
+<!--            />-->
+<!--        <Button-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:text="For You"-->
+<!--            android:textColor="@color/bai"-->
+<!--            android:textSize="9sp"-->
+<!--            android:layout_weight = "1"-->
+<!--            android:layout_marginLeft="20dp"/>-->
+<!--        <Button-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:text="Recipe"-->
+<!--            android:textColor="@color/bai"-->
+<!--            android:textSize="9sp"-->
+<!--            android:layout_weight = "1"-->
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:layout_marginRight="10dp"/>-->
 
-    </LinearLayout>
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/preferenceViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/preferenceTabLayout"
+        android:layout_marginBottom="50dp"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/storiesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/buttons" />
+        android:layout_below="@id/preferenceTabLayout" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewfp"

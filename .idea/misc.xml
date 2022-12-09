@@ -61,7 +61,7 @@
         <entry key="app/src/main/res/layout/activity_chat_users.xml" value="0.30416666666666664" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.17083333333333334" />
         <entry key="app/src/main/res/layout/activity_dish_display.xml" value="0.3170289855072464" />
-        <entry key="app/src/main/res/layout/activity_explore.xml" value="0.3182291666666667" />
+        <entry key="app/src/main/res/layout/activity_explore.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_fcmactivity.xml" value="0.3296875" />
         <entry key="app/src/main/res/layout/activity_fp_log_in.xml" value="0.3182291666666667" />
         <entry key="app/src/main/res/layout/activity_fp_splash_screen.xml" value="0.24589233398437502" />
@@ -90,7 +90,14 @@
         <entry key="app/src/main/res/layout/fragment_category.xml" value="0.18707885742187505" />
         <entry key="app/src/main/res/layout/fragment_comment.xml" value="0.2677682947229456" />
         <entry key="app/src/main/res/layout/fragment_create_account.xml" value="0.3182291666666667" />
+<<<<<<< Updated upstream
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.22" />
+=======
+        <entry key="app/src/main/res/layout/fragment_create_account2.xml" value="0.34375" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_home_follow.xml" value="0.3442028985507246" />
+        <entry key="app/src/main/res/layout/fragment_home_like.xml" value="0.3442028985507246" />
+>>>>>>> Stashed changes
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.30416666666666664" />
         <entry key="app/src/main/res/layout/fragment_notification.xml" value="0.3182291666666667" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.3182291666666667" />
