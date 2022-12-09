@@ -259,7 +259,7 @@ public class Home extends Fragment {
                             }
                         });
             } else if (SEARCH_CONTENT == 1) { // like
-                
+
             } else if (SEARCH_CONTENT == 2) { // for you
 
             }
