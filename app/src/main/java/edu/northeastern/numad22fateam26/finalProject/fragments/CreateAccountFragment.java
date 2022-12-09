@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,7 +41,7 @@ public class CreateAccountFragment extends Fragment {
 
     public static final String EMAIL_REGEX = "^(.+)@(.+)$";
     private TextInputLayout nameEt, emailEt, passwordEt;
-    //private ProgressBar progressBar;
+    private RelativeLayout progressBar;
     private Button signup_login_button, nextBtn,signup_back_button;
     private FirebaseAuth auth;
 
@@ -72,7 +73,7 @@ public class CreateAccountFragment extends Fragment {
         passwordEt = view.findViewById(R.id.signup_password);
         signup_login_button = view.findViewById(R.id.signup_login_button);
         nextBtn = view.findViewById(R.id.signup_next_button);
-       // progressBar = view.findViewById(R.id.progressBar);
+        progressBar = view.findViewById(R.id.progressBar);
 
         auth = FirebaseAuth.getInstance();
 
@@ -110,7 +111,7 @@ public class CreateAccountFragment extends Fragment {
                     return;
                 }
 
-               // progressBar.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.VISIBLE);
 
                 createAccount(name, email, password);
 
@@ -150,7 +151,7 @@ public class CreateAccountFragment extends Fragment {
                             uploadUser(user, name, email);
 
                         } else {
-                           // progressBar.setVisibility(View.GONE);
+                            progressBar.setVisibility(View.GONE);
                             String exception = task.getException().getMessage();
                             Toast.makeText(getContext(), "Error: " + exception, Toast.LENGTH_SHORT).show();
                         }
@@ -186,12 +187,12 @@ public class CreateAccountFragment extends Fragment {
 
                         if (task.isSuccessful()) {
                             assert getActivity() != null;
-                           // progressBar.setVisibility(View.GONE);
+                            progressBar.setVisibility(View.GONE);
                             startActivity(new Intent(getActivity().getApplicationContext(), ExploreActivity.class));
                             getActivity().finish();
 
                         } else {
-                        //    progressBar.setVisibility(View.GONE);
+                            progressBar.setVisibility(View.GONE);
                             Toast.makeText(getContext(), "Error: " + task.getException().getMessage(),
                                     Toast.LENGTH_SHORT).show();
                         }
