@@ -41,6 +41,7 @@ import edu.northeastern.numad22fateam26.sticker.StickerActivity;
 public class ExploreActivity extends AppCompatActivity {
 
     public static String USER_ID;
+    public static Integer SEARCH_CONTENT = 0;
     public static boolean IS_SEARCHED_USER = false;
     ViewPagerAdapter pagerAdapter;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -52,6 +53,11 @@ public class ExploreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explore);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null && extras.containsKey("search_content")) {
+            SEARCH_CONTENT = extras.getInt("search_content");
+        }
 
         init();
 

@@ -1,5 +1,7 @@
 package edu.northeastern.numad22fateam26.finalProject.fragments;
 
+import static edu.northeastern.numad22fateam26.finalProject.ExploreActivity.SEARCH_CONTENT;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,6 +41,7 @@ import java.util.Map;
 import javax.annotation.Nullable;
 
 import edu.northeastern.numad22fateam26.R;
+import edu.northeastern.numad22fateam26.finalProject.ExploreActivity;
 import edu.northeastern.numad22fateam26.finalProject.adapter.HomeAdapter;
 import edu.northeastern.numad22fateam26.finalProject.adapter.StoriesAdapter;
 import edu.northeastern.numad22fateam26.finalProject.chat.ChatUsersActivity;
@@ -53,6 +59,8 @@ public class Home extends Fragment {
     private List<HomeModel> list;
     private FirebaseUser user;
     private FirebaseFirestore fireStore;
+    Button followBtn, likeBtn, forYouBtn;
+    ImageButton sendBtn;
     Activity activity;
     ImageView circle;
 
@@ -130,11 +138,27 @@ public class Home extends Fragment {
             }
         });
 
-        view.findViewById(R.id.sendBtn).setOnClickListener(v -> {
-
+        sendBtn.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), ChatUsersActivity.class);
             startActivity(intent);
+        });
 
+        followBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), ExploreActivity.class);
+            intent.putExtra("search_content", 0);
+            startActivity(intent);
+        });
+
+        likeBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), ExploreActivity.class);
+            intent.putExtra("search_content", 1);
+            startActivity(intent);
+        });
+
+        forYouBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), ExploreActivity.class);
+            intent.putExtra("search_content", 2);
+            startActivity(intent);
         });
 
     }
@@ -164,6 +188,10 @@ public class Home extends Fragment {
         user = auth.getCurrentUser();
         fireStore = FirebaseFirestore.getInstance();
 
+        sendBtn = view.findViewById(R.id.sendBtn);
+        followBtn = view.findViewById(R.id.followBtn);
+        likeBtn = view.findViewById(R.id.likeBtn);
+        forYouBtn = view.findViewById(R.id.forYouBtn);
     }
 
     private void loadDataFromFirestore() {
@@ -186,49 +214,57 @@ public class Home extends Fragment {
             if (uidList == null || uidList.isEmpty())
                 return;
 
-            fireStore
-                    .collectionGroup("Post Images")
-                    .whereIn("uid", uidList)
-                    .orderBy("timestamp", Query.Direction.DESCENDING)
-                    .get()
-                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                        @Override
-                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                            list.clear();
-                            for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                                HomeModel model = documentSnapshot.toObject(HomeModel.class);
+            if (SEARCH_CONTENT == 0) { // follow
+                fireStore
+                        .collectionGroup("Post Images")
+                        .whereIn("uid", uidList)
+                        .orderBy("timestamp", Query.Direction.DESCENDING)
+                        .get()
+                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                list.clear();
+                                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                    HomeModel model = documentSnapshot.toObject(HomeModel.class);
 
-                                list.add(new HomeModel(
-                                        model.getName(),
-                                        model.getProfileImage(),
-                                        model.getImageUrl(),
-                                        model.getUid(),
-                                        model.getDescription(),
-                                        model.getId(),
-                                        model.getTimestamp(),
-                                        model.getLikes()));
+                                    list.add(new HomeModel(
+                                            model.getName(),
+                                            model.getProfileImage(),
+                                            model.getImageUrl(),
+                                            model.getUid(),
+                                            model.getDescription(),
+                                            model.getId(),
+                                            model.getTimestamp(),
+                                            model.getLikes()));
 
-                                adapter.notifyDataSetChanged();
+                                    adapter.notifyDataSetChanged();
 
-                                documentSnapshot.getReference().collection("Comments").get()
-                                        .addOnCompleteListener(task -> {
+                                    documentSnapshot.getReference().collection("Comments").get()
+                                            .addOnCompleteListener(task -> {
 
-                                            if (task.isSuccessful()) {
+                                                if (task.isSuccessful()) {
 
-                                                Map<String, Object> map = new HashMap<>();
-                                                for (QueryDocumentSnapshot commentSnapshot : task
-                                                        .getResult()) {
-                                                    map = commentSnapshot.getData();
+                                                    Map<String, Object> map = new HashMap<>();
+                                                    for (QueryDocumentSnapshot commentSnapshot : task
+                                                            .getResult()) {
+                                                        map = commentSnapshot.getData();
+                                                    }
+
+                                                    commentCount.setValue(map.size());
                                                 }
 
-                                                commentCount.setValue(map.size());
-                                            }
+                                            });
+                                }
 
-                                        });
                             }
+                        });
+            } else if (SEARCH_CONTENT == 1) { // like
+                
+            } else if (SEARCH_CONTENT == 2) { // for you
 
-                        }
-                    });
+            }
+            
+
 
             // todo: fetch stories
             loadStories(uidList);
