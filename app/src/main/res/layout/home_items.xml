@@ -68,7 +68,6 @@
             android:id="@+id/likeCountTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:text="100 likes"
             android:textStyle="bold" />

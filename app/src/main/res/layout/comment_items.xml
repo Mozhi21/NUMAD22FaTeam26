@@ -9,25 +9,34 @@
         android:id="@+id/profileImage"
         android:layout_width="52dp"
         android:layout_height="52dp"
-        app:civ_border_color="@color/fog_red"
+        app:civ_border_color="@color/kuhuang"
         app:civ_border_width="2dp" />
 
     <TextView
         android:id="@+id/nameTV"
-        android:padding="6dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft = "8dp"
         android:layout_toEndOf="@id/profileImage"
-        android:layout_toRightOf="@id/profileImage" />
+        android:layout_toRightOf="@id/profileImage"
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/commentTV"
-        android:padding="6dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/nameTV"
+        android:layout_marginLeft = "8dp"
         android:layout_toEndOf="@id/profileImage"
         android:layout_toRightOf="@id/profileImage" />
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/commentTV"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="#C8C8C8" />
 
 
 </RelativeLayout>
