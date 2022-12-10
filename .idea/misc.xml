@@ -53,6 +53,8 @@
         <entry key="app/src/main/res/drawable/left_chat.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/project_button.xml" value="0.264" />
         <entry key="app/src/main/res/drawable/right_chat.xml" value="0.233" />
+        <entry key="app/src/main/res/drawable/search_content_button_bg.xml" value="0.2985" />
+        <entry key="app/src/main/res/drawable/search_content_button_bg_color.xml" value="0.5305" />
         <entry key="app/src/main/res/drawable/search_view_bg.xml" value="0.264" />
         <entry key="app/src/main/res/drawable/shdow_bottom_to_top.xml" value="0.338" />
         <entry key="app/src/main/res/drawable/spinner_background.xml" value="0.1305" />

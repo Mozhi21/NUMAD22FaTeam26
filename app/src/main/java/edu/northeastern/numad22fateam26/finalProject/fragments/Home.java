@@ -270,7 +270,7 @@ public class Home extends Fragment {
                                 list.clear();
                                 for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                                     HomeModel model = documentSnapshot.toObject(HomeModel.class);
-                                    if (model.getLikes().contains(user.getUid())) {
+                                    if (!model.getLikes().contains(user.getUid())) {
                                         list.add(new HomeModel(
                                                 model.getName(),
                                                 model.getProfileImage(),
