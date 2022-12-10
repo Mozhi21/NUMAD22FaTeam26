@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,12 +28,17 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import edu.northeastern.numad22fateam26.R;
 import edu.northeastern.numad22fateam26.finalProject.ExploreActivity;
@@ -47,6 +54,10 @@ public class CreateAccountFragment extends Fragment {
     private Button signup_login_button, nextBtn;
     private ImageView signup_back_button;
     private FirebaseAuth auth;
+    private FirebaseDatabase database;
+    private FirebaseMessaging messaging;
+
+    private static final String TAG = "Create Account";
 
     public CreateAccountFragment() {
         // Required empty public constructor
@@ -67,6 +78,7 @@ public class CreateAccountFragment extends Fragment {
 
         clickListener();
 
+
     }
 
     private void init(View view) {
@@ -80,6 +92,8 @@ public class CreateAccountFragment extends Fragment {
         signup_back_button = view.findViewById(R.id.signup_back_button);
 
         auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        messaging = FirebaseMessaging.getInstance();
 
     }
 
@@ -131,7 +145,7 @@ public class CreateAccountFragment extends Fragment {
 
     }
 
-    private void createAccount(final String name, final String email, String password) {
+    private void createAccount(final String username, final String email, String password) {
 
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -145,7 +159,7 @@ public class CreateAccountFragment extends Fragment {
                             String image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwp--EwtYaxkfsSPIpoSPucdbxAo6PancQX1gw6ETSKI6_pGNCZY4ts1N6BV5ZcN3wPbA&usqp=CAU";
 
                             UserProfileChangeRequest.Builder request = new UserProfileChangeRequest.Builder();
-                            request.setDisplayName(name);
+                            request.setDisplayName(username);
                             request.setPhotoUri(Uri.parse(image));
 
                             user.updateProfile(request.build());
@@ -159,7 +173,9 @@ public class CreateAccountFragment extends Fragment {
                                             }
                                         }
                                     });
-                            uploadUser(user, name, email);
+                            uploadUser(user, username, email);
+                            String uid = Objects.requireNonNull(task.getResult().getUser()).getUid();
+                            createUserInRealTimeDatabase(uid, username);
 
                         } else {
                             progressBar.setVisibility(View.GONE);
@@ -172,13 +188,33 @@ public class CreateAccountFragment extends Fragment {
 
     }
 
+    private void createUserInRealTimeDatabase(String uid, String username) {
+        messaging.getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+
+                        DatabaseReference userRef = database.getReference("users").child(uid);
+                        userRef.child("username").setValue(username);
+                        userRef.child("FCMToken").setValue(token);
+                        userRef.child("google_sign_in").setValue("no");
+                    }
+                });
+    }
+
     private void uploadUser(FirebaseUser user, String name, String email) {
 
         List<String> list = new ArrayList<>();
         List<String> list1 = new ArrayList<>();
 
         Map<String, Object> map = new HashMap<>();
-
         map.put("name", name);
         map.put("email", email);
         map.put("profileImage", " ");

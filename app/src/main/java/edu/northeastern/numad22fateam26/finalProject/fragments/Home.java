@@ -24,7 +24,9 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -270,7 +272,7 @@ public class Home extends Fragment {
                                 list.clear();
                                 for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                                     HomeModel model = documentSnapshot.toObject(HomeModel.class);
-                                    if (!model.getLikes().contains(user.getUid())) {
+                                    if (model.getLikes().contains(user.getUid())) { // if user have not clicked like to a post, the post will not be added to view
                                         list.add(new HomeModel(
                                                 model.getName(),
                                                 model.getProfileImage(),
@@ -304,9 +306,52 @@ public class Home extends Fragment {
                             }
                         });
             } else if (SEARCH_CONTENT == 2) { // for you
+                fireStore
+                        .collectionGroup("Post Images")
+                        .whereIn("uid", uidList)
+                        .orderBy("timestamp", Query.Direction.DESCENDING)
+                        .get()
+                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                list.clear();
+                                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                    HomeModel model = documentSnapshot.toObject(HomeModel.class);
+                                    if (model.getLikes().contains(user.getUid())) { // if user have not clicked like to a post, the post will not be added to view
+                                        list.add(new HomeModel(
+                                                model.getName(),
+                                                model.getProfileImage(),
+                                                model.getImageUrl(),
+                                                model.getUid(),
+                                                model.getDescription(),
+                                                model.getId(),
+                                                model.getTimestamp(),
+                                                model.getLikes()));
 
+                                        adapter.notifyDataSetChanged();
+
+                                        documentSnapshot.getReference().collection("Comments").get()
+                                                .addOnCompleteListener(task -> {
+
+                                                    if (task.isSuccessful()) {
+
+                                                        Map<String, Object> map = new HashMap<>();
+                                                        for (QueryDocumentSnapshot commentSnapshot : task
+                                                                .getResult()) {
+                                                            map = commentSnapshot.getData();
+                                                        }
+
+                                                        commentCount.setValue(map.size());
+                                                    }
+
+                                                });
+                                    }
+                                }
+
+                            }
+                        });
             }
-            
+
 
 
             // todo: fetch stories
