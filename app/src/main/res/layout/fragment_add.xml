@@ -56,24 +56,22 @@
             <EditText
                 android:id="@+id/descriptionET"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:hint="Add Something About This Post"
+                android:layout_height="200dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/line7"
+                android:fontFamily="@font/fuzzybubblesregular"
+                android:hint="  Say Something About This Post"
                 android:minLines="8" />
 
-            <View
-                android:id="@+id/view"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@id/descriptionET"
-                android:layout_margin="6dp"
-                android:background="#000" />
+
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:layout_below="@id/view"
+                android:layout_below="@id/descriptionET"
                 android:background="@color/colorAccent"
                 android:contentDescription="@null"
                 android:scaleType="centerCrop"
