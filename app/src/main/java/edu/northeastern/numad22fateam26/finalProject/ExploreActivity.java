@@ -1,6 +1,7 @@
 package edu.northeastern.numad22fateam26.finalProject;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -12,10 +13,12 @@ import android.util.Log;
 import android.widget.Button;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -47,6 +50,9 @@ public class ExploreActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private Button b1;
+    private FirebaseMessaging mMessaging;
+    private FirebaseDatabase mDatabase;
+    private static final String TAG = "Replacer Activity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,16 +66,40 @@ public class ExploreActivity extends AppCompatActivity {
 
         init();
 
+        refreshToken();
+
         addTabs();
 
         setViewPagerInitItem(savedInstanceState);
+
+
     }
 
     private void init() {
 
         viewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
+        mMessaging = FirebaseMessaging.getInstance();
+        mDatabase = FirebaseDatabase.getInstance();
 
+    }
+
+    private void refreshToken() {
+        mMessaging.getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                            return;
+
+                        }
+
+                        String token = task.getResult();
+                        DatabaseReference userRef = mDatabase.getReference("users").child(user.getUid());
+                        userRef.child("FCMToken").setValue(token);
+                    }
+                });
     }
 
     private void addTabs() {
