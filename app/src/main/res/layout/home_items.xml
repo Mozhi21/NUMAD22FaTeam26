@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    >
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profileImage"
@@ -24,14 +26,15 @@
         android:layout_toEndOf="@id/profileImage"
         android:layout_toRightOf="@id/profileImage"
         android:gravity="center_vertical"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@android:color/white" >
 
         <TextView
             android:id="@+id/nameTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="username"
             android:textColor="#000"
-            android:text ="username"
             android:textStyle="bold" />
 
         <TextView
@@ -90,7 +93,6 @@
             android:layout_marginTop="8dp"
             android:layout_marginLeft="6dp"
             android:background="@drawable/ic_share" />
-
 
 
     </LinearLayout>

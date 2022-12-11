@@ -7,13 +7,15 @@ public class RecipeModel {
     private String postId;
     private String uid;
     private List<String> steps;
+    private List<String> ingredients;
 
     public RecipeModel() {}
 
-    public RecipeModel(String postId, String uid, List<String> steps) {
+    public RecipeModel(String postId, String uid, List<String> steps, List<String> ingredients) {
         this.postId = postId;
         this.uid = uid;
         this.steps = steps;
+        this.ingredients = ingredients;
     }
 
     public String getPostId() {
@@ -39,4 +41,12 @@ public class RecipeModel {
     public void setSteps(List<String> steps) {
         this.steps = steps;
     }
+
+
+    public List<String> getIngredients() { return ingredients; }
+
+    public void setIngredients(List<String> ingredients) {
+        this.ingredients = ingredients;
+    }
+
 }

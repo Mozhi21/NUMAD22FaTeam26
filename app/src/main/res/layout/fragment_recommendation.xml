@@ -9,7 +9,7 @@
     tools:ignore="UnusedAttribute">
 
     <RelativeLayout
-        android:id="@+id/recommendation_layout"
+        android:id="@+id/app_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical">
@@ -23,125 +23,60 @@
             android:textColor="@color/fog_red"
             android:textSize="18sp"
             android:textStyle="bold" />
-
-        <ImageButton
-            android:id="@+id/backBtn2"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_margin="4dp"
-            android:background="@drawable/ic_circle"
-            android:elevation="3dp"
-            android:foreground="?attr/selectableItemBackground"
-            android:padding="4dp"
-            android:src="@drawable/ic_back" />
-
-        <ImageButton
-            android:id="@+id/nextBtn2"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="4dp"
-            android:background="@drawable/ic_circle"
-            android:elevation="3dp"
-            android:foreground="?attr/selectableItemBackground"
-            android:padding="4dp"
-            android:src="@drawable/ic_next"
-            android:visibility="gone" />
-
     </RelativeLayout>
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/recommendation_layout">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/app_title">
 
-        <RelativeLayout
+        <ImageView
+            android:id="@+id/admin_pic"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="180dp"
+            android:contentDescription="@string/cuisine_of_the_day_pic"
+            android:fitsSystemWindows="true"
+            android:scaleType="centerCrop"
+            app:layout_collapseMode="parallax" />
 
-            <LinearLayout
-                android:id="@+id/daily_panel"
-                android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/admin_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/recommendation_tab"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/lobster"
+            android:text="@string/cuisine_of_the_day"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="40sp" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/recommendation_tab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/admin_pic"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:text="@string/detailed_recipe" />
 
-                <LinearLayout
-                    android:id="@+id/daily_panel_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/dish_topic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/fuzzybubblesbold"
-                        android:text="@string/cuisine_of_the_day"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/dish_description"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:background="@android:color/transparent"
-                        android:minLines="2" />
-
-                    <TextView
-                        android:id="@+id/dish_recipe"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/fuzzybubblesbold"
-                        android:text="@string/detailed_recipe"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/detailed_recipe"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:background="@android:color/transparent"
-                        android:minLines="5"
-                        android:text="@string/no_recipe_found" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|end"
-                    android:layout_weight="0.4">
-
-                    <ImageView
-                        android:id="@+id/admin_pic"
-                        android:layout_width="200dp"
-                        android:layout_height="170dp"
-                        android:contentDescription="@string/cuisine_of_the_day_pic"
-                        android:src="@drawable/c01" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <View
-                android:id="@+id/view_rc"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@id/daily_panel"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginEnd="6dp"
-                android:layout_marginBottom="6dp"
-                android:background="#000" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView_rc"
-                android:layout_width="match_parent"
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/view_rc" />
+                android:text="@string/relevant_posts" />
 
-        </RelativeLayout>
-    </ScrollView>
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/rec_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/recommendation_tab" />
+
+    </RelativeLayout>
 </RelativeLayout>
