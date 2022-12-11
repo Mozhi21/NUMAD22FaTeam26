@@ -3,17 +3,20 @@ package edu.northeastern.numad22fateam26.finalProject.model;
 public class Users {
 
     private String email, name, profileImage, uid, status, search;
+    private boolean online;
 
     public Users() {
     }
 
-    public Users(String email, String name, String profileImage, String uid, String status, String search) {
+    public Users(String email, String name, String profileImage, String uid, String status, String search,
+                 boolean online) {
         this.email = email;
         this.name = name;
         this.profileImage = profileImage;
         this.uid = uid;
         this.status = status;
         this.search = search;
+        this.online = online;
     }
 
     public String getEmail() {
@@ -62,5 +65,13 @@ public class Users {
 
     public void setSearch(String search) {
         this.search = search;
+    }
+
+    public boolean isOnline() {
+        return online;
+    }
+
+    public void setOnline(boolean online) {
+        this.online = online;
     }
 }

@@ -1,7 +1,6 @@
 package edu.northeastern.numad22fateam26.finalProject.fragments;
 
 import static edu.northeastern.numad22fateam26.finalProject.fragments.CreateAccountFragment.EMAIL_REGEX;
-
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -34,10 +33,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingService;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import edu.northeastern.numad22fateam26.MainActivity;
 import edu.northeastern.numad22fateam26.R;
@@ -56,6 +60,10 @@ public class LoginFragment extends Fragment {
     GoogleSignInClient mGoogleSignInClient;
 
     private FirebaseAuth auth;
+    private FirebaseDatabase database;
+    private FirebaseMessaging messaging;
+
+    private static final String TAG = "Login Fragment";
 
 
     public LoginFragment() {
@@ -92,6 +100,8 @@ public class LoginFragment extends Fragment {
 
 
         auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        messaging = FirebaseMessaging.getInstance();
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -221,6 +231,8 @@ public class LoginFragment extends Fragment {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = auth.getCurrentUser();
                             updateUi(user);
+                            String uid = Objects.requireNonNull(task.getResult().getUser()).getUid();
+                            createUserInRealTimeDatabase(uid, idToken);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("TAG", "signInWithCredential:failure", task.getException());
@@ -229,6 +241,27 @@ public class LoginFragment extends Fragment {
                     }
                 });
 
+    }
+
+    private void createUserInRealTimeDatabase(String uid, String username) {
+        messaging.getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+
+                        DatabaseReference userRef = database.getReference("users").child(uid);
+                        userRef.child("username").setValue(username);
+                        userRef.child("FCMToken").setValue(token);
+                        userRef.child("google_sign_in").setValue("yes");
+                    }
+                });
     }
 
     private void updateUi(FirebaseUser user) {

@@ -8,36 +8,10 @@ import static edu.northeastern.numad22fateam26.finalProject.utils.Constants.PREF
 import static edu.northeastern.numad22fateam26.finalProject.utils.Constants.PREF_STORED;
 import static edu.northeastern.numad22fateam26.finalProject.utils.Constants.PREF_URL;
 
-import android.os.Bundle;
-
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.widget.AppCompatImageButton;
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.firestore.DocumentReference;
-
-import java.util.Arrays;
-import java.util.List;
-
-import edu.northeastern.numad22fateam26.MainActivity;
-import edu.northeastern.numad22fateam26.R;
-import edu.northeastern.numad22fateam26.finalProject.ExploreActivity;
-import edu.northeastern.numad22fateam26.finalProject.PostViewActivity;
-import edu.northeastern.numad22fateam26.finalProject.ReplacerActivity;
-import edu.northeastern.numad22fateam26.finalProject.chat.ChatActivity;
-import edu.northeastern.numad22fateam26.finalProject.model.ChatUserModel;
-import edu.northeastern.numad22fateam26.finalProject.model.PostImageModel;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -51,15 +25,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -70,12 +47,20 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -85,15 +70,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.marsad.stylishdialogs.StylishAlertDialog;
+import com.suke.widget.SwitchButton;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
-//import com.theartofdev.edmodo.cropper.CropImage;
-//import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -105,9 +88,16 @@ import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import edu.northeastern.numad22fateam26.sticker.StickerActivity;
+import edu.northeastern.numad22fateam26.R;
+import edu.northeastern.numad22fateam26.finalProject.ExploreActivity;
+import edu.northeastern.numad22fateam26.finalProject.ReplacerActivity;
+import edu.northeastern.numad22fateam26.finalProject.chat.ChatActivity;
+import edu.northeastern.numad22fateam26.finalProject.model.ChatUserModel;
+import edu.northeastern.numad22fateam26.finalProject.model.PostImageModel;
+import edu.northeastern.numad22fateam26.finalProject.services.PushNotificationService;
+import edu.northeastern.numad22fateam26.sticker.Dialog;
 
-public class Profile extends Fragment {
+public class Profile extends Fragment implements Dialog.DialogListener {
 
     boolean isMyProfile = true;
     String userUID;
@@ -116,18 +106,20 @@ public class Profile extends Fragment {
     boolean isFollowed;
     DocumentReference userRef, myRef;
     int count;
-    private TextView nameTv, toolbarNameTv, statusTv, followingCountTv, followersCountTv, postCountTv, switchTv;
+    private EditText statusText;
+    private TextView nameTv, toolbarNameTv, followingCountTv, followersCountTv, postCountTv, switchText;
     private CircleImageView profileImage;
     private Button followBtn, startChatBtn;
     private AppCompatImageButton signOutbtn;
     private RecyclerView recyclerView;
     private LinearLayout countLayout;
     private FirebaseUser user;
-    private ImageButton editProfileBtn;
+    private ImageButton editProfileBtn, editStatusBtn;
     private FirebaseAuth auth;
+    private String receiverToken;
+
     NavigationView navigationView;
     RelativeLayout relativeLayout;
-    Toolbar toolbar;
 
 
     public Profile() {
@@ -135,8 +127,7 @@ public class Profile extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
@@ -148,23 +139,38 @@ public class Profile extends Fragment {
         init(view);
 
 
-        myRef = FirebaseFirestore.getInstance().collection("Users")
-                .document(user.getUid());
+        myRef = FirebaseFirestore.getInstance().collection("Users").document(user.getUid());
+        com.suke.widget.SwitchButton switchButton = (com.suke.widget.SwitchButton) view.findViewById(R.id.switchTv);
 
+        switchButton.setChecked(false);
+        switchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+                USER_ID = auth.getUid();
+                IS_SEARCHED_USER = false;
+                Intent intent = new Intent(getActivity(), ExploreActivity.class);
+                intent.putExtra("init_view_pager_item", 4);
+                startActivity(intent);
+            }
+        });
 
         if (IS_SEARCHED_USER && !USER_ID.equals(user.getUid())) {
             isMyProfile = false;
-            switchTv.setVisibility(View.VISIBLE);
+            switchButton.setVisibility(View.VISIBLE);
+            switchText.setVisibility(View.VISIBLE);
             userUID = USER_ID;
             loadData();
         } else {
             isMyProfile = true;
-            switchTv.setVisibility(View.INVISIBLE);
+            switchButton.setVisibility(View.INVISIBLE);
+            switchText.setVisibility(View.INVISIBLE);
             userUID = user.getUid();
         }
 
         if (isMyProfile) {
             editProfileBtn.setVisibility(View.VISIBLE);
+            editStatusBtn.setVisibility(View.VISIBLE);
+            statusText.setFocusableInTouchMode(true);
             followBtn.setVisibility(View.GONE);
             countLayout.setVisibility(View.VISIBLE);
 
@@ -173,8 +179,10 @@ public class Profile extends Fragment {
 
         } else {
             editProfileBtn.setVisibility(View.GONE);
+            editStatusBtn.setVisibility(View.GONE);
+            statusText.setFocusable(false);
             followBtn.setVisibility(View.VISIBLE);
-//            countLayout.setVisibility(View.GONE);
+            //            countLayout.setVisibility(View.GONE);
         }
         userRef = FirebaseFirestore.getInstance().collection("Users").document(userUID);
 
@@ -188,15 +196,7 @@ public class Profile extends Fragment {
         recyclerView.setAdapter(adapter);
 
         clickListener();
-
-//        navigationView.bringToFront();
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, relativeLayout, toolbar,
-//                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-//
-//        relativeLayout.addDrawerListener(toggle);
-//        toggle.syncState();
-
-//        navigationView.setNavigationItemSelectedListener(this);
+        readReceiverToken();
 
     }
 
@@ -225,19 +225,34 @@ public class Profile extends Fragment {
 
     private void clickListener() {
 
+        editStatusBtn.setOnClickListener(v -> {
+            new AlertDialog.Builder(getActivity()).setMessage("Do you want to update the status?").setIcon(android.R.drawable.ic_dialog_alert).setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+
+                    DocumentReference reference = FirebaseFirestore.getInstance().collection("Users").document(user.getUid());
+
+                    reference.get().addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists() && documentSnapshot.contains("status")) {
+                            reference.update("status", statusText.getText().toString()).addOnSuccessListener(v -> Toast.makeText(getActivity(), "Update Succeed!", Toast.LENGTH_SHORT).show());
+                        }
+                    });
+                }
+            }).setNegativeButton(android.R.string.no, null).show();
+        });
+
         signOutbtn.setOnClickListener(v -> {
             auth.signOut();
             startActivity(new Intent(getActivity(), ReplacerActivity.class));
         });
 
-        switchTv.setOnClickListener(v -> {
-            //getActivity().finish();
-            USER_ID = auth.getUid();
-            IS_SEARCHED_USER = false;
-            Intent intent = new Intent(getActivity(), ExploreActivity.class);
-            intent.putExtra("init_view_pager_item", 4);
-            startActivity(intent);
-        });
+        //        switchTv.setOnClickListener(v -> {
+        //            //getActivity().finish();
+        //            USER_ID = auth.getUid();
+        //            IS_SEARCHED_USER = false;
+        //            Intent intent = new Intent(getActivity(), ExploreActivity.class);
+        //            intent.putExtra("init_view_pager_item", 4);
+        //            startActivity(intent);
+        //        });
 
 
         followBtn.setOnClickListener(v -> {
@@ -307,6 +322,7 @@ public class Profile extends Fragment {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(getContext(), "Followed", Toast.LENGTH_SHORT).show();
+
                                     } else {
                                         Log.e("tag_3_1", task.getException().getMessage());
                                     }
@@ -327,15 +343,11 @@ public class Profile extends Fragment {
 
         assert getContext() != null;
 
-        editProfileBtn.setOnClickListener(v -> CropImage.activity()
-                .setGuidelines(CropImageView.Guidelines.ON)
-                .setAspectRatio(1, 1)
-                .start(getContext(), Profile.this));
+        editProfileBtn.setOnClickListener(v -> CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).setAspectRatio(1, 1).start(getContext(), Profile.this));
 
         startChatBtn.setOnClickListener(v -> {
             queryChat();
         });
-
 
     }
 
@@ -405,10 +417,7 @@ public class Profile extends Fragment {
         //todo - ---- - -- - -
         //Message
 
-        CollectionReference messageRef = FirebaseFirestore.getInstance()
-                .collection("Messages")
-                .document(pushID)
-                .collection("Messages");
+        CollectionReference messageRef = FirebaseFirestore.getInstance().collection("Messages").document(pushID).collection("Messages");
 
         String messageID = messageRef.document().getId();
 
@@ -440,12 +449,12 @@ public class Profile extends Fragment {
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
         nameTv = view.findViewById(R.id.nameTv);
-        statusTv = view.findViewById(R.id.statusTV);
+        statusText = view.findViewById(R.id.statusTV);
         toolbarNameTv = view.findViewById(R.id.toolbarNameTV);
         followersCountTv = view.findViewById(R.id.followersCountTv);
         followingCountTv = view.findViewById(R.id.followingCountTv);
         postCountTv = view.findViewById(R.id.postCountTv);
-        switchTv = view.findViewById(R.id.switchTv);
+        switchText = view.findViewById(R.id.switchText);
         profileImage = view.findViewById(R.id.profileImage);
         followBtn = view.findViewById(R.id.followBtn);
         recyclerView = view.findViewById(R.id.recyclerView);
@@ -453,13 +462,12 @@ public class Profile extends Fragment {
         editProfileBtn = view.findViewById(R.id.edit_profileImage);
         startChatBtn = view.findViewById(R.id.startChatBtn);
         signOutbtn = view.findViewById(R.id.signOutbtn);
-//        navigationView = view.findViewById(R.id.nav_view);
+        //        navigationView = view.findViewById(R.id.nav_view);
         relativeLayout = view.findViewById(R.id.relativeLayout);
-
+        editStatusBtn = view.findViewById(R.id.edit_status);
 
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
-
     }
 
     private void loadBasicData() {
@@ -481,7 +489,7 @@ public class Profile extends Fragment {
 
                 nameTv.setText(name);
                 toolbarNameTv.setText(name);
-                statusTv.setText(status);
+                statusText.setText(status);
 
                 followersList = (List<Object>) value.get("followers");
                 followingList = (List<Object>) value.get("following");
@@ -492,26 +500,20 @@ public class Profile extends Fragment {
 
                 try {
 
-                    Glide.with(getContext().getApplicationContext())
-                            .load(profileURL)
-                            .placeholder(R.drawable.ic_person)
-                            .circleCrop()
-                            .listener(new RequestListener<Drawable>() {
-                                @Override
-                                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                    return false;
-                                }
+                    Glide.with(getContext().getApplicationContext()).load(profileURL).placeholder(R.drawable.ic_person).circleCrop().listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            return false;
+                        }
 
-                                @Override
-                                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
 
-                                    Bitmap bitmap = ((BitmapDrawable) resource).getBitmap();
-                                    storeProfileImage(bitmap, profileURL);
-                                    return false;
-                                }
-                            })
-                            .timeout(6500)
-                            .into(profileImage);
+                            Bitmap bitmap = ((BitmapDrawable) resource).getBitmap();
+                            storeProfileImage(bitmap, profileURL);
+                            return false;
+                        }
+                    }).timeout(6500).into(profileImage);
 
 
                 } catch (Exception e) {
@@ -597,9 +599,7 @@ public class Profile extends Fragment {
 
         Query query = reference.collection("Post Images").orderBy("timestamp", Query.Direction.DESCENDING);
 
-        FirestoreRecyclerOptions<PostImageModel> options = new FirestoreRecyclerOptions.Builder<PostImageModel>()
-                .setQuery(query, PostImageModel.class)
-                .build();
+        FirestoreRecyclerOptions<PostImageModel> options = new FirestoreRecyclerOptions.Builder<PostImageModel>().setQuery(query, PostImageModel.class).build();
 
         adapter = new FirestoreRecyclerAdapter<PostImageModel, PostImageHolder>(options) {
             @NonNull
@@ -612,10 +612,7 @@ public class Profile extends Fragment {
             @Override
             protected void onBindViewHolder(@NonNull PostImageHolder holder, int position, @NonNull PostImageModel model) {
 
-                Glide.with(holder.itemView.getContext().getApplicationContext())
-                        .load(model.getImageUrl())
-                        .timeout(6500)
-                        .into(holder.imageView);
+                Glide.with(holder.itemView.getContext().getApplicationContext()).load(model.getImageUrl()).timeout(6500).into(holder.imageView);
                 count = getItemCount();
                 postCountTv.setText("" + count);
 
@@ -657,52 +654,46 @@ public class Profile extends Fragment {
 
         final StorageReference reference = FirebaseStorage.getInstance().getReference().child("Profile Images");
 
-        reference.putFile(uri)
-                .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+        reference.putFile(uri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
 
-                        if (task.isSuccessful()) {
+                if (task.isSuccessful()) {
 
-                            reference.getDownloadUrl()
-                                    .addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                        @Override
-                                        public void onSuccess(Uri uri) {
-                                            String imageURL = uri.toString();
+                    reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            String imageURL = uri.toString();
 
-                                            UserProfileChangeRequest.Builder request = new UserProfileChangeRequest.Builder();
-                                            request.setPhotoUri(uri);
+                            UserProfileChangeRequest.Builder request = new UserProfileChangeRequest.Builder();
+                            request.setPhotoUri(uri);
 
-                                            user.updateProfile(request.build());
+                            user.updateProfile(request.build());
 
-                                            Map<String, Object> map = new HashMap<>();
-                                            map.put("profileImage", imageURL);
+                            Map<String, Object> map = new HashMap<>();
+                            map.put("profileImage", imageURL);
 
-                                            FirebaseFirestore.getInstance().collection("Users")
-                                                    .document(user.getUid())
-                                                    .update(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<Void> task) {
+                            FirebaseFirestore.getInstance().collection("Users").document(user.getUid()).update(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
 
-                                                            if (task.isSuccessful())
-                                                                Toast.makeText(getContext(), "Updated Successful", Toast.LENGTH_SHORT).show();
-                                                            else
-                                                                Toast.makeText(getContext(), "Error: " + task.getException().getMessage(),
-                                                                        Toast.LENGTH_SHORT).show();
+                                    if (task.isSuccessful())
+                                        Toast.makeText(getContext(), "Updated Successful", Toast.LENGTH_SHORT).show();
+                                    else
+                                        Toast.makeText(getContext(), "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
 
-                                                        }
-                                                    });
+                                }
+                            });
 
-                                        }
-                                    });
-
-                        } else {
-                            Toast.makeText(getContext(), "Error: " + task.getException().getMessage(),
-                                    Toast.LENGTH_SHORT).show();
                         }
+                    });
 
-                    }
-                });
+                } else {
+                    Toast.makeText(getContext(), "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
 
 
     }
@@ -720,6 +711,12 @@ public class Profile extends Fragment {
 
 
         reference.document(id).set(map);
+        PushNotificationService.sendNotification(getContext(), receiverToken, "Awesome", (String) map.get("notification"));
+
+    }
+
+    @Override
+    public void applyTexts(String message, String senderName, int position) {
 
     }
 
@@ -733,6 +730,31 @@ public class Profile extends Fragment {
             imageView = itemView.findViewById(R.id.imageView);
 
         }
+
+    }
+
+
+    public void openDialog() {
+        Dialog dialog = new Dialog(0);
+        dialog.show(getActivity().getSupportFragmentManager(), "Dialog");
+    }
+
+    void readReceiverToken() {
+        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("users").child(userUID);
+        reference1.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    receiverToken = snapshot.child("FCMToken").getValue().toString();
+                    Log.v("TAG", "sender id: " + receiverToken);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 

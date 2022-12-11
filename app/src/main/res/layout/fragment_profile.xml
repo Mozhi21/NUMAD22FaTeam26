@@ -78,7 +78,7 @@
                 android:layout_marginEnd="14dp"
                 android:layout_marginBottom="14dp"
                 android:src="@drawable/b01"
-                app:civ_border_color="#F37E0505"
+                app:civ_border_color="#3EEDA72A"
                 app:civ_border_width="1dp" />
 
             <ImageButton
@@ -108,7 +108,7 @@
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:weightSum="2">
+                android:weightSum="1">
 
                 <TextView
                     android:id="@+id/nameTv"
@@ -116,23 +116,38 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:maxLines="1"
-                    android:padding="4dp"
+                    android:padding="10dp"
                     android:text="Username"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <ImageButton
-                    android:id="@+id/edit_status"
-                    android:layout_width="30dp"
-                    android:layout_height="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_alignEnd="@id/nameTv"
-                    android:layout_alignRight="@id/nameTv"
-                    android:layout_alignBottom="@id/nameTv"
-                    android:background="@drawable/ic_circle"
-                    android:layout_weight="1"
-                    android:src="@drawable/ic_edit" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:layout_marginRight="15dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/switchText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:maxLines="1"
+                        android:text="To My Profile"
+                        android:textColor="@color/colorGreyDark"
+                        android:textSize="10sp"
+                        android:textStyle="bold"/>
+                    <com.suke.widget.SwitchButton
+                        android:id="@+id/switchTv"
+                        android:layout_width="50dp"
+                        android:layout_height="20dp"
+                        android:maxLines="1"/>
+                </LinearLayout>
+
 
             </LinearLayout>
 
@@ -142,31 +157,38 @@
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:weightSum="2">
+                android:weightSum="1">
+                <ImageButton
+                    android:id="@+id/edit_status"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="6dp"
+                    android:layout_alignEnd="@id/nameTv"
+                    android:layout_alignRight="@id/nameTv"
+                    android:layout_alignBottom="@id/nameTv"
+                    android:background="@drawable/ic_circle"
+                    android:layout_weight="0"
+                    android:src="@drawable/ic_edit"
+                    android:visibility="gone"/>
 
-                <TextView
+                <EditText
                     android:id="@+id/statusTV"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="30dp"
                     android:layout_weight="1"
                     android:maxLines="3"
                     android:padding="4dp"
-                    android:text="Love to travel around the world"
-                    android:textColor="@android:color/black"
-                    android:textStyle="bold" />
-                <TextView
-                    android:id="@+id/switchTv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:maxLines="1"
-                    android:padding="4dp"
-                    android:text="Switch To My Profile"
+                    android:background="@android:color/transparent"
+                    android:text="Love Chinese food"
+                    android:textSize="14sp"
                     android:textColor="@color/colorGreyDark"
-                    android:textSize="10sp"
-                    android:textStyle="bold" />
+                    android:fontFamily="@font/fuzzybubblesregular"/>
+
+<!--                    android:visibility="gone"-->
+
+
+
+
 
 
 

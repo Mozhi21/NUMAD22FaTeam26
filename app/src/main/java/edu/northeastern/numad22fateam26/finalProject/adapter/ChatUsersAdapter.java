@@ -26,6 +26,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 import edu.northeastern.numad22fateam26.R;
 import edu.northeastern.numad22fateam26.finalProject.model.ChatUserModel;
+import edu.northeastern.numad22fateam26.finalProject.utils.Common;
 
 public class ChatUsersAdapter extends RecyclerView.Adapter<ChatUsersAdapter.ChatUserHolder> {
 
@@ -55,7 +56,7 @@ public class ChatUsersAdapter extends RecyclerView.Adapter<ChatUsersAdapter.Chat
         fetchImageUrl(chatUser.getUid(), holder);
 
 
-        holder.time.setText(calculateTime(chatUser.getTime()));
+        holder.time.setText(Common.calculateTime(chatUser.getTime()));
 
         holder.lastMessage.setText(chatUser.getLastMessage());
 
@@ -68,12 +69,6 @@ public class ChatUsersAdapter extends RecyclerView.Adapter<ChatUsersAdapter.Chat
             holder.count.setVisibility(View.GONE);
         }
 
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    String calculateTime(Date date) {
-        long millis = date.toInstant().toEpochMilli();
-        return DateUtils.getRelativeTimeSpanString(millis, System.currentTimeMillis(), 60000, DateUtils.FORMAT_ABBREV_TIME).toString();
     }
 
 

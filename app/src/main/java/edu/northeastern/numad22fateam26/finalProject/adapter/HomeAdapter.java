@@ -27,6 +27,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import edu.northeastern.numad22fateam26.R;
 import edu.northeastern.numad22fateam26.finalProject.ReplacerActivity;
 import edu.northeastern.numad22fateam26.finalProject.model.HomeModel;
+import edu.northeastern.numad22fateam26.finalProject.utils.Common;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeHolder> {
 
@@ -52,7 +53,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeHolder> {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         holder.userNameTv.setText(list.get(position).getName());
-        holder.timeTv.setText("" + list.get(position).getTimestamp());
+        holder.timeTv.setText(Common.calculateTime(list.get(position).getTimestamp()));
 
         List<String> likeList = list.get(position).getLikes();
 
