@@ -26,7 +26,7 @@
                     android:fontFamily="@font/fuzzybubblesbold"
                     android:text="Ingredients"
                     android:textColor="@color/black"
-                    android:textSize="14sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <androidx.cardview.widget.CardView
@@ -46,6 +46,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
+                    android:textSize="15sp"
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/fuzzybubblesbold"
                     android:minLines="2" />
@@ -59,7 +60,7 @@
                     android:fontFamily="@font/fuzzybubblesbold"
                     android:text="Detailed Steps"
                     android:textColor="@color/black"
-                    android:textSize="14sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <androidx.cardview.widget.CardView
@@ -81,6 +82,7 @@
                     android:layout_marginTop="2dp"
                     android:background="@android:color/transparent"
                     android:minLines="5"
+                    android:textSize="15sp"
                     android:fontFamily="@font/fuzzybubblesbold"
                     android:text="@string/no_recipe_found" />
                 </androidx.cardview.widget.CardView>

@@ -49,6 +49,7 @@
             android:fontFamily="@font/lobster"
             android:text="@string/cuisine_of_the_day"
             android:textColor="@color/black"
+            android:textStyle="bold"
             android:textSize="40sp" />
 
         <com.google.android.material.tabs.TabLayout
