@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="8dp"
-    tools:context=".finalProject.fragments.Recipe">
+    tools:context=".finalProject.fragments.RecipeFragment">
 
     <LinearLayout
         android:id="@+id/daily_panel"
