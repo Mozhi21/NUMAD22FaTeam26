@@ -63,12 +63,11 @@ public class Home extends Fragment {
     private List<HomeModel> list;
     private FirebaseUser user;
     private FirebaseFirestore fireStore;
-    Button followBtn, likeBtn;
+    Button followBtn, likeBtn, exploreBtn;
     ImageButton sendBtn;
     Activity activity;
     ImageView circle;
     private static final String TAG = "HOME FRAGMENT";
-    private MaterialButton exploreBtn;
 
     public Home() {
         // Required empty public constructor
