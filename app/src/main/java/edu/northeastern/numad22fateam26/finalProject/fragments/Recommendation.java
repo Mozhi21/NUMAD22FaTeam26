@@ -65,7 +65,7 @@ public class Recommendation extends Fragment {
     }
 
     private void initDailyPanel(View view) {
-        adminStory = view.findViewById(R.id.dish_description);
+//        adminStory = view.findViewById(R.id.dish_description);
         adminPic = view.findViewById(R.id.admin_pic);
         loadAdminPost();
     }
@@ -99,7 +99,7 @@ public class Recommendation extends Fragment {
 
     private void setPostView(List<PostImageModel> postsModelList) {
         PostImageModel adminPost = postsModelList.get(0);
-        adminStory.setText(adminPost.getDescription());
+//        adminStory.setText(adminPost.getDescription());
         Glide.with(this)
                 .load(adminPost.getImageUrl())
                 .timeout(6500)
@@ -109,8 +109,13 @@ public class Recommendation extends Fragment {
     private void initTabs(View view) {
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.recommendation_tab);
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.rec_view_pager);
-        PagerAdapter adapter = new RecViewPagerAdapter(getChildFragmentManager(), 2);
+        RecViewPagerAdapter adapter = new RecViewPagerAdapter(getChildFragmentManager(), 0);
+        adapter.addFragment(new RecipeFragment(), "Detailed Recipe");
+        adapter.addFragment(new RelevantPostsFragment(), "Relevant Posts");
         viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
+        viewPager.addOnPageChangeListener(new
+                TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 
             @Override

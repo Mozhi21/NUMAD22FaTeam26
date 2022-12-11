@@ -3,35 +3,39 @@ package edu.northeastern.numad22fateam26.finalProject.adapter;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.FragmentPagerAdapter;
 
-import edu.northeastern.numad22fateam26.finalProject.fragments.RecipeFragment;
-import edu.northeastern.numad22fateam26.finalProject.fragments.RelevantPostsFragment;
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class RecViewPagerAdapter extends FragmentStatePagerAdapter {
+public class RecViewPagerAdapter extends FragmentPagerAdapter {
 
-    int mNumOfTabs;
+    private List<Fragment> fragments = new ArrayList<>();
+    private List<String> fragmentTitles = new ArrayList<>();
 
-    public RecViewPagerAdapter(FragmentManager fm, int NumOfTabs) {
-        super(fm);
-        this.mNumOfTabs = NumOfTabs;
+    public RecViewPagerAdapter(FragmentManager fm, int behavior) {
+        super(fm, behavior);
+    }
+
+    public void addFragment(Fragment fragment, String title) {
+        fragments.add(fragment);
+        fragmentTitles.add(title);
     }
 
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        switch (position) {
-            case 1:
-                return new RelevantPostsFragment();
-            case 0:
-            default:
-                return new RecipeFragment();
-        }
+        return fragments.get(position);
     }
 
     @Override
     public int getCount() {
-        return mNumOfTabs;
+        return fragments.size();
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return fragmentTitles.get(position);
     }
 }

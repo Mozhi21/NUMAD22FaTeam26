@@ -23,123 +23,75 @@
             android:textColor="@color/fog_red"
             android:textSize="18sp"
             android:textStyle="bold" />
-
-        <ImageButton
-            android:id="@+id/backBtn2"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_margin="4dp"
-            android:background="@drawable/ic_circle"
-            android:elevation="3dp"
-            android:foreground="?attr/selectableItemBackground"
-            android:padding="4dp"
-            android:src="@drawable/ic_back" />
-
-        <ImageButton
-            android:id="@+id/nextBtn2"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="4dp"
-            android:background="@drawable/ic_circle"
-            android:elevation="3dp"
-            android:foreground="?attr/selectableItemBackground"
-            android:padding="4dp"
-            android:src="@drawable/ic_next"
-            android:visibility="gone" />
     </RelativeLayout>
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/recommendation_layout">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/recommendation_layout">
 
-        <RelativeLayout
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:title="Cuisine of The Day">
 
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/collapsing_toolbar"
+            <ImageView
+                android:id="@+id/admin_pic"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:title="Cuisine of The Day">
+                android:layout_height="200dp"
+                android:contentDescription="@string/cuisine_of_the_day_pic"
+                android:fitsSystemWindows="true"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax" />
 
-                <ImageView
-                    android:id="@+id/admin_pic"
-                    android:layout_width="match_parent"
-                    android:layout_height="250dp"
-                    android:contentDescription="@string/cuisine_of_the_day_pic"
-
-                    android:fitsSystemWindows="true"
-                    android:scaleType="centerCrop"
-                    app:layout_collapseMode="parallax" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:scaleType="centerCrop" />
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:layout_collapseMode="pin"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-            <TextView
-                android:id="@+id/dish_description"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        <View
+            android:id="@+id/view_rc"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/collapsing_toolbar"
+
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="6dp"
+            android:background="#000" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/recommendation_tab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view_rc"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/collapsing_toolbar"
-                android:layout_marginTop="2dp"
-                android:background="@android:color/transparent"
-                android:fontFamily="@font/fuzzybubblesbold"
-                android:gravity="center"
-                android:minLines="1"
-                android:textColor="@color/fog_red"
-                android:textSize="18sp" />
+                android:text="@string/detailed_recipe" />
 
-            <View
-                android:id="@+id/view_rc"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@id/dish_description"
-
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginEnd="6dp"
-                android:layout_marginBottom="6dp"
-                android:background="#000" />
-
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/recommendation_tab"
-                android:layout_width="match_parent"
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/view_rc"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true">
+                android:text="@string/relevant_posts" />
 
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Detailed Recipe" />
+        </com.google.android.material.tabs.TabLayout>
 
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Relevant Posts" />
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/rec_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/recommendation_tab" />
 
-            </com.google.android.material.tabs.TabLayout>
-
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/rec_view_pager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/recommendation_tab" />
-
-        </RelativeLayout>
-    </ScrollView>
+    </RelativeLayout>
 </RelativeLayout>
