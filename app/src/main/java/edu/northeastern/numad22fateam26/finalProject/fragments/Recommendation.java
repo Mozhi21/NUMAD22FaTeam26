@@ -37,7 +37,7 @@ import edu.northeastern.numad22fateam26.finalProject.model.PostImageModel;
 public class Recommendation extends Fragment {
 
     private static final String TAG = "Recommendation";
-    private static final String ADMIN_ID = "YvXGXIeL8IXd8FJiPRJJPzWU2gF3";
+    private static final String ADMIN_ID = "KAG9Tsfv4rUUtura8CLInb22ckV2";
     private FirebaseUser user;
     private List<PostImageModel> adminPosts;
     private TextView adminDescription;
