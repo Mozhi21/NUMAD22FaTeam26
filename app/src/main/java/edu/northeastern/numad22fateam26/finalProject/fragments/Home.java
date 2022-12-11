@@ -113,6 +113,12 @@ public class Home extends Fragment {
 
                 reference.update(map);
 
+                recyclerView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.notifyDataSetChanged();
+                    }
+                });
             }
 
             @Override

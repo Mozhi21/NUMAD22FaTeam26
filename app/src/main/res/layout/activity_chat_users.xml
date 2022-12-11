@@ -41,7 +41,8 @@
         android:drawableTint="@color/colorGreyDark"
         android:hint="Search..."
         android:padding="12dp"
-        tools:ignore="UnusedAttribute" />
+        tools:ignore="UnusedAttribute"
+        android:visibility="gone"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="8dp"
