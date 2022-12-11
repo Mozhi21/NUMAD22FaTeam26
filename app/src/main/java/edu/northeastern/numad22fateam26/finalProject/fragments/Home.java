@@ -27,9 +27,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -61,10 +63,12 @@ public class Home extends Fragment {
     private List<HomeModel> list;
     private FirebaseUser user;
     private FirebaseFirestore fireStore;
-    Button followBtn, likeBtn, forYouBtn;
+    Button followBtn, likeBtn;
     ImageButton sendBtn;
     Activity activity;
     ImageView circle;
+    private static final String TAG = "HOME FRAGMENT";
+    private MaterialButton exploreBtn;
 
     public Home() {
         // Required empty public constructor
@@ -151,19 +155,25 @@ public class Home extends Fragment {
             startActivity(intent);
         });
 
-        followBtn.setOnClickListener(v -> {
+        exploreBtn.setOnClickListener(v -> {
+            exploreBtn.setPressed(true);
+            exploreBtn.setBackgroundColor(getResources().getColor(com.marsad.stylishdialogs.R.color.main_orange_light_stroke_color));
             Intent intent = new Intent(getActivity(), ExploreActivity.class);
             intent.putExtra("search_content", 0);
             startActivity(intent);
         });
 
         likeBtn.setOnClickListener(v -> {
+            likeBtn.setPressed(true);
+            likeBtn.setBackgroundColor(getResources().getColor(com.marsad.stylishdialogs.R.color.main_orange_light_stroke_color));
             Intent intent = new Intent(getActivity(), ExploreActivity.class);
             intent.putExtra("search_content", 1);
             startActivity(intent);
         });
 
-        forYouBtn.setOnClickListener(v -> {
+        followBtn.setOnClickListener(v -> {
+            followBtn.setPressed(true);
+            followBtn.setBackgroundColor(getResources().getColor(com.marsad.stylishdialogs.R.color.main_orange_light_stroke_color));
             Intent intent = new Intent(getActivity(), ExploreActivity.class);
             intent.putExtra("search_content", 2);
             startActivity(intent);
@@ -199,7 +209,8 @@ public class Home extends Fragment {
         sendBtn = view.findViewById(R.id.sendBtn);
         followBtn = view.findViewById(R.id.followBtn);
         likeBtn = view.findViewById(R.id.likeBtn);
-        forYouBtn = view.findViewById(R.id.forYouBtn);
+        exploreBtn = view.findViewById(R.id.exploreBtn);
+
     }
 
     private void loadDataFromFirestore() {
@@ -222,17 +233,17 @@ public class Home extends Fragment {
             if (uidList == null || uidList.isEmpty())
                 return;
 
-            if (SEARCH_CONTENT == 0) { // follow
+            if (SEARCH_CONTENT == 0) { // Explore
                 fireStore
                         .collectionGroup("Post Images")
-                        .whereIn("uid", uidList)
                         .orderBy("timestamp", Query.Direction.DESCENDING)
-                        .get()
-                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                            @Override
-                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        .addSnapshotListener((queryDocumentSnapshots, e) -> {
+                                if (e != null) {
+                                    Log.w(TAG, "Listen failed.", e);
+                                    return;
+                                }
                                 list.clear();
-                                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots.getDocuments()) {
                                     HomeModel model = documentSnapshot.toObject(HomeModel.class);
 
                                     list.add(new HomeModel(
@@ -264,19 +275,19 @@ public class Home extends Fragment {
                                             });
                                 }
 
-                            }
-                        });
+                            });
+
             } else if (SEARCH_CONTENT == 1) { // like
                 fireStore
                         .collectionGroup("Post Images")
-                        .whereIn("uid", uidList)
                         .orderBy("timestamp", Query.Direction.DESCENDING)
-                        .get()
-                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                            @Override
-                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        .addSnapshotListener((queryDocumentSnapshots, e) -> {
+                            if (e != null) {
+                                Log.w(TAG, "Listen failed.", e);
+                                return;
+                            }
                                 list.clear();
-                                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots.getDocuments()) {
                                     HomeModel model = documentSnapshot.toObject(HomeModel.class);
                                     if (model.getLikes().contains(user.getUid())) { // if user have not clicked like to a post, the post will not be added to view
                                         list.add(new HomeModel(
@@ -309,52 +320,48 @@ public class Home extends Fragment {
                                     }
                                 }
 
-                            }
                         });
-            } else if (SEARCH_CONTENT == 2) { // for you
+            } else if (SEARCH_CONTENT == 2) { // follow
                 fireStore
                         .collectionGroup("Post Images")
                         .whereIn("uid", uidList)
                         .orderBy("timestamp", Query.Direction.DESCENDING)
-                        .get()
-                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                            @Override
-                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        .addSnapshotListener((queryDocumentSnapshots, e) -> {
+                            if (e != null) {
+                                Log.w(TAG, "Listen failed.", e);
+                                return;
+                            }
                                 list.clear();
-                                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots.getDocuments()) {
                                     HomeModel model = documentSnapshot.toObject(HomeModel.class);
-                                    if (model.getLikes().contains(user.getUid())) { // if user have not clicked like to a post, the post will not be added to view
-                                        list.add(new HomeModel(
-                                                model.getName(),
-                                                model.getProfileImage(),
-                                                model.getImageUrl(),
-                                                model.getUid(),
-                                                model.getDescription(),
-                                                model.getId(),
-                                                model.getTimestamp(),
-                                                model.getLikes()));
+                                    list.add(new HomeModel(
+                                            model.getName(),
+                                            model.getProfileImage(),
+                                            model.getImageUrl(),
+                                            model.getUid(),
+                                            model.getDescription(),
+                                            model.getId(),
+                                            model.getTimestamp(),
+                                            model.getLikes()));
 
-                                        adapter.notifyDataSetChanged();
+                                    adapter.notifyDataSetChanged();
 
-                                        documentSnapshot.getReference().collection("Comments").get()
-                                                .addOnCompleteListener(task -> {
+                                    documentSnapshot.getReference().collection("Comments").get()
+                                            .addOnCompleteListener(task -> {
 
-                                                    if (task.isSuccessful()) {
+                                                if (task.isSuccessful()) {
 
-                                                        Map<String, Object> map = new HashMap<>();
-                                                        for (QueryDocumentSnapshot commentSnapshot : task
-                                                                .getResult()) {
-                                                            map = commentSnapshot.getData();
-                                                        }
-
-                                                        commentCount.setValue(map.size());
+                                                    Map<String, Object> map = new HashMap<>();
+                                                    for (QueryDocumentSnapshot commentSnapshot : task
+                                                            .getResult()) {
+                                                        map = commentSnapshot.getData();
                                                     }
 
-                                                });
-                                    }
-                                }
+                                                    commentCount.setValue(map.size());
+                                                }
 
-                            }
+                                            });
+                                }
                         });
             }
 
