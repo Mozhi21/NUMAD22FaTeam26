@@ -53,7 +53,6 @@ public class Home_ChildFragment extends Fragment {
 
     ImageButton messageBtn11;
     Activity activity;
-
     ImageView circle;
 
     @Override
