@@ -53,7 +53,7 @@ public class StoriesAdapter extends RecyclerView.Adapter<StoriesAdapter.StoriesH
         if (position == 0) {
 
             Glide.with(context.getApplicationContext())
-                    .load(context.getResources().getDrawable(R.drawable.ic_add))
+                    .load(context.getResources().getDrawable(R.drawable.ic_add_small))
                     .into(holder.imageView);
 
             holder.imageView.setOnClickListener(new View.OnClickListener() {
