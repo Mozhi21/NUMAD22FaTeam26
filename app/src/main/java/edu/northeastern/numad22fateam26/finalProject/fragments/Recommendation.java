@@ -177,33 +177,6 @@ public class Recommendation extends Fragment {
                             }
                             if (!adminPosts.isEmpty()) {
                                 setPostView(adminPosts);
-                                loadAdminRecipe();
-                            }
-                        } else {
-                            Log.d(TAG, "get failed with ", task.getException());
-                        }
-                    }
-                });
-    }
-
-    public void loadAdminRecipe() {
-        recipeModelList = new ArrayList<>();
-        String adminPostId = adminPosts.get(0).getId();
-        Query query = FirebaseFirestore.getInstance().collection("Users")
-                .document(ADMIN_ID).collection("Recipe").whereEqualTo("postId", adminPostId);
-        query.get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                if (document.exists()) {
-                                    RecipeModel model = document.toObject(RecipeModel.class);
-                                    recipeModelList.add(model);
-                                }
-                            }
-                            if (!recipeModelList.isEmpty()) {
-                                setRecipeView(recipeModelList.get(0));
                             }
                         } else {
                             Log.d(TAG, "get failed with ", task.getException());
@@ -221,21 +194,6 @@ public class Recommendation extends Fragment {
                 .into(adminPic);
     }
 
-    private void setRecipeView(RecipeModel adminRecipe) {
-        List<String> steps = adminRecipe.getSteps();
-        List<String> recipeSteps = new ArrayList<>();
-        String recipeString;
-
-        if (steps == null || steps.isEmpty()) {
-            recipeString = "No recipe found!";
-        } else {
-            for (int i = 0; i < steps.size(); i++) {
-                recipeSteps.add(String.format("%s. %s", i + 1, steps.get(i)));
-            }
-            recipeString = String.join(System.getProperty("line.separator"), recipeSteps);
-        }
-        adminRecipeSteps.setText(recipeString);
-    }
 
     private void loadRelevantPosts(PostImageModel adminPost) {
         FirebaseFirestore.getInstance().collectionGroup("Post Images").get()
