@@ -102,7 +102,7 @@ public class Search extends Fragment {
                                             return;
 
                                         Users users = snapshot.toObject(Users.class);
-                                        if (users.getSearch().startsWith(query)) {
+                                        if (users.getSearch().startsWith(query) && !users.getSearch().equals("xinyi2")) {
                                             list.add(users);
                                         }
 
@@ -145,6 +145,7 @@ public class Search extends Fragment {
                 list.clear();
                 for (QueryDocumentSnapshot snapshot : value) {
                     Users users = snapshot.toObject(Users.class);
+                    if (users.getSearch().equals("xinyi2")) continue;
                     list.add(users);
                 }
                 adapter.notifyDataSetChanged();
