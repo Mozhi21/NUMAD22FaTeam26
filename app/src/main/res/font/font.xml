@@ -8,4 +8,10 @@
         android:fontStyle="normal"
         android:fontWeight="400"
         android:font="@font/fuzzybubblesregular" />
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="800"
+        android:font="@font/lobster" />
+
+
 </font-family>

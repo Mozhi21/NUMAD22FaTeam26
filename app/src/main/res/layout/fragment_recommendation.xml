@@ -46,10 +46,10 @@
             android:layout_above="@id/recommendation_tab"
             android:layout_marginStart="20dp"
             android:layout_marginBottom="20dp"
-            android:fontFamily="@font/fuzzybubblesbold"
+            android:fontFamily="@font/lobster"
             android:text="@string/cuisine_of_the_day"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textColor="@color/black"
+            android:textSize="40sp" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/recommendation_tab"
