@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
@@ -41,7 +40,7 @@ public class Recommendation extends Fragment {
     private static final String ADMIN_ID = "YvXGXIeL8IXd8FJiPRJJPzWU2gF3";
     private FirebaseUser user;
     private List<PostImageModel> adminPosts;
-    private TextView adminStory;
+    private TextView adminDescription;
     private ImageView adminPic;
 
     public Recommendation() {
@@ -65,7 +64,7 @@ public class Recommendation extends Fragment {
     }
 
     private void initDailyPanel(View view) {
-//        adminStory = view.findViewById(R.id.dish_description);
+        adminDescription = view.findViewById(R.id.admin_title);
         adminPic = view.findViewById(R.id.admin_pic);
         loadAdminPost();
     }
@@ -99,7 +98,7 @@ public class Recommendation extends Fragment {
 
     private void setPostView(List<PostImageModel> postsModelList) {
         PostImageModel adminPost = postsModelList.get(0);
-//        adminStory.setText(adminPost.getDescription());
+        adminDescription.append(System.getProperty("line.separator") + adminPost.getDescription());
         Glide.with(this)
                 .load(adminPost.getImageUrl())
                 .timeout(6500)
