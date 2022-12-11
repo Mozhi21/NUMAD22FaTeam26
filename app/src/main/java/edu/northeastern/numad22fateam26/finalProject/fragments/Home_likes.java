@@ -149,10 +149,6 @@ public class Home_likes extends Fragment {
             if (value == null)
                 return;
 
-            List<String> uidList = (List<String>) value.get("following");
-
-            if (uidList == null || uidList.isEmpty())
-                return;
 
             fireStore
                     .collectionGroup("Post Images")
