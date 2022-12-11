@@ -15,6 +15,7 @@
         android:gravity="center_vertical">
 
         <TextView
+            android:id="@+id/titletext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -24,9 +25,15 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/titletext"
+            android:src="@drawable/search_content2" />
+
         <ImageButton
             android:id="@+id/nextBtn"
-            android:visibility="gone"
             android:layout_width="34dp"
             android:layout_height="34dp"
             android:layout_alignParentEnd="true"
@@ -39,7 +46,8 @@
             android:elevation="3dp"
             android:foreground="?attr/selectableItemBackground"
             android:padding="4dp"
-            android:src="@drawable/ic_send" />
+            android:src="@drawable/ic_send"
+            android:visibility="gone" />
 
     </RelativeLayout>
 
@@ -64,7 +72,6 @@
                 android:fontFamily="@font/fuzzybubblesregular"
                 android:hint="  Say Something About This Post"
                 android:minLines="8" />
-
 
 
             <ImageView

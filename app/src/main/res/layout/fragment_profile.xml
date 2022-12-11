@@ -39,6 +39,12 @@
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/toolbarNameTV"
+                android:src="@drawable/search_content1" />
 
             <ImageButton
                 android:id="@+id/signOutbtn"
