@@ -64,7 +64,7 @@ public class Recommendation extends Fragment {
     }
 
     private void initDailyPanel(View view) {
-        adminDescription = view.findViewById(R.id.admin_title);
+        adminDescription = view.findViewById(R.id.admin_subtitle);
         adminPic = view.findViewById(R.id.admin_pic);
         loadAdminPost();
     }
@@ -98,7 +98,7 @@ public class Recommendation extends Fragment {
 
     private void setPostView(List<PostImageModel> postsModelList) {
         PostImageModel adminPost = postsModelList.get(0);
-        adminDescription.append(System.getProperty("line.separator") + adminPost.getDescription());
+        adminDescription.setText(adminPost.getDescription());
         Glide.with(this)
                 .load(adminPost.getImageUrl())
                 .timeout(6500)
