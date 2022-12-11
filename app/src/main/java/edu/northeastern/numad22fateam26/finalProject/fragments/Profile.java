@@ -23,7 +23,13 @@ import android.widget.TextView;
 import com.dd.morphingbutton.MorphingButton;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.android.material.navigation.NavigationView;
+
 import com.google.firebase.firestore.DocumentReference;
 
 import java.util.Arrays;
@@ -108,6 +114,7 @@ import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import edu.northeastern.numad22fateam26.sticker.Dialog;
+import edu.northeastern.numad22fateam26.finalProject.services.PushNotificationService;
 import edu.northeastern.numad22fateam26.sticker.StickerActivity;
 
 public class Profile extends Fragment implements Dialog.DialogListener {
@@ -128,6 +135,9 @@ public class Profile extends Fragment implements Dialog.DialogListener {
     private FirebaseUser user;
     private ImageButton editProfileBtn, editStatusBtn;
     private FirebaseAuth auth;
+    private String receiverToken;
+
+    NavigationView navigationView;
     RelativeLayout relativeLayout;
 
 
@@ -206,6 +216,7 @@ public class Profile extends Fragment implements Dialog.DialogListener {
         recyclerView.setAdapter(adapter);
 
         clickListener();
+        readReceiverToken();
 
 //        navigationView.bringToFront();
 //        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, relativeLayout, toolbar,
@@ -329,6 +340,7 @@ public class Profile extends Fragment implements Dialog.DialogListener {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(getContext(), "Followed", Toast.LENGTH_SHORT).show();
+
                                     } else {
                                         Log.e("tag_3_1", task.getException().getMessage());
                                     }
@@ -740,6 +752,7 @@ public class Profile extends Fragment implements Dialog.DialogListener {
 
 
         reference.document(id).set(map);
+        PushNotificationService.sendNotification(getContext(),receiverToken, "Awesome", (String)map.get("notification"));
 
     }
 
@@ -761,9 +774,28 @@ public class Profile extends Fragment implements Dialog.DialogListener {
 
     }
 
+
     public void openDialog(int position) {
         Dialog dialog = new Dialog(position);
-       // dialog.show(getSupportFragmentManager(), "Dialog");
+        // dialog.show(getSupportFragmentManager(), "Dialog");
+    }
+    void readReceiverToken() {
+        DatabaseReference reference1 =  FirebaseDatabase.getInstance().getReference().child("users").child(userUID);
+        reference1.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    receiverToken = snapshot.child("FCMToken").getValue().toString();
+                    Log.v("TAG", "sender id: " + receiverToken);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
 }

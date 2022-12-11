@@ -11,6 +11,4 @@
         app:civ_border_color="#CCCCCC"
         app:civ_border_width="1dp"
         android:id="@+id/imageView" />
-
-
 </RelativeLayout>
