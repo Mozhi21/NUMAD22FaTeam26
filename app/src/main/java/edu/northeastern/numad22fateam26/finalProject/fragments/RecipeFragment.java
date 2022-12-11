@@ -29,7 +29,7 @@ import edu.northeastern.numad22fateam26.finalProject.model.RecipeModel;
 
 public class RecipeFragment extends Fragment {
     private static final String TAG = "Recipe";
-    private static final String ADMIN_ID = "YvXGXIeL8IXd8FJiPRJJPzWU2gF3";
+    private static final String ADMIN_ID = "KAG9Tsfv4rUUtura8CLInb22ckV2";
     private List<RecipeModel> recipeModelList;
     private TextView adminRecipeSteps;
     private TextView adminRecipeIngredients;

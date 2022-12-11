@@ -40,7 +40,7 @@ import edu.northeastern.numad22fateam26.finalProject.model.PostImageModel;
 
 public class RelevantPostsFragment extends Fragment {
     private static final String TAG = "RelevantPosts";
-    private static final String ADMIN_ID = "YvXGXIeL8IXd8FJiPRJJPzWU2gF3";
+    private static final String ADMIN_ID = "KAG9Tsfv4rUUtura8CLInb22ckV2";
     private final MutableLiveData<Integer> commentCount = new MutableLiveData<>();
 
     private HomeAdapter postAdapter;
