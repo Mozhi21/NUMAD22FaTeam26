@@ -112,6 +112,12 @@ public class Home_follow extends Fragment {
                 Map<String, Object> map = new HashMap<>();
                 map.put("likes", likeList);
                 reference.update(map);
+                recyclerView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        postAdapter.notifyDataSetChanged();
+                    }
+                });
             }
 
             @Override
