@@ -167,7 +167,15 @@ public class Home_likes extends Fragment {
                 }
                 Map<String, Object> map = new HashMap<>();
                 map.put("likes", likeList);
+                
                 reference.update(map);
+
+                recyclerView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.notifyDataSetChanged();
+                    }
+                });
             }
 
             @Override
