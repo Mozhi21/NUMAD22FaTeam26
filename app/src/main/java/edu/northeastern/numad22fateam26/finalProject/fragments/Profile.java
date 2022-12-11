@@ -10,14 +10,17 @@ import static edu.northeastern.numad22fateam26.finalProject.utils.Constants.PREF
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.dd.morphingbutton.MorphingButton;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
@@ -25,6 +28,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.android.material.navigation.NavigationView;
+
 import com.google.firebase.firestore.DocumentReference;
 
 import java.util.Arrays;
@@ -92,6 +97,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.marsad.stylishdialogs.StylishAlertDialog;
+import com.suke.widget.SwitchButton;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 //import com.theartofdev.edmodo.cropper.CropImage;
@@ -107,10 +113,11 @@ import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import edu.northeastern.numad22fateam26.sticker.Dialog;
 import edu.northeastern.numad22fateam26.finalProject.services.PushNotificationService;
 import edu.northeastern.numad22fateam26.sticker.StickerActivity;
 
-public class Profile extends Fragment {
+public class Profile extends Fragment implements Dialog.DialogListener {
 
     boolean isMyProfile = true;
     String userUID;
@@ -119,16 +126,19 @@ public class Profile extends Fragment {
     boolean isFollowed;
     DocumentReference userRef, myRef;
     int count;
-    private TextView nameTv, toolbarNameTv, statusTv, followingCountTv, followersCountTv, postCountTv, switchTv;
+    private TextView nameTv, toolbarNameTv, statusTv, followingCountTv, followersCountTv, postCountTv, switchText;
     private CircleImageView profileImage;
     private Button followBtn, startChatBtn;
     private AppCompatImageButton signOutbtn;
     private RecyclerView recyclerView;
     private LinearLayout countLayout;
     private FirebaseUser user;
-    private ImageButton editProfileBtn;
+    private ImageButton editProfileBtn, editStatusBtn;
     private FirebaseAuth auth;
     private String receiverToken;
+
+    NavigationView navigationView;
+    RelativeLayout relativeLayout;
 
 
     public Profile() {
@@ -151,21 +161,37 @@ public class Profile extends Fragment {
 
         myRef = FirebaseFirestore.getInstance().collection("Users")
                 .document(user.getUid());
+        com.suke.widget.SwitchButton switchButton = (com.suke.widget.SwitchButton)
+                view.findViewById(R.id.switchTv);
 
+        switchButton.setChecked(false);
+        switchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+                USER_ID = auth.getUid();
+                IS_SEARCHED_USER = false;
+                Intent intent = new Intent(getActivity(), ExploreActivity.class);
+                intent.putExtra("init_view_pager_item", 4);
+                startActivity(intent);
+            }
+        });
 
         if (IS_SEARCHED_USER && !USER_ID.equals(user.getUid())) {
             isMyProfile = false;
-            switchTv.setVisibility(View.VISIBLE);
+            switchButton.setVisibility(View.VISIBLE);
+            switchText.setVisibility(View.VISIBLE);
             userUID = USER_ID;
             loadData();
         } else {
             isMyProfile = true;
-            switchTv.setVisibility(View.INVISIBLE);
+            switchButton.setVisibility(View.INVISIBLE);
+            switchText.setVisibility(View.INVISIBLE);
             userUID = user.getUid();
         }
 
         if (isMyProfile) {
             editProfileBtn.setVisibility(View.VISIBLE);
+            editStatusBtn.setVisibility(View.VISIBLE);
             followBtn.setVisibility(View.GONE);
             countLayout.setVisibility(View.VISIBLE);
 
@@ -174,6 +200,7 @@ public class Profile extends Fragment {
 
         } else {
             editProfileBtn.setVisibility(View.GONE);
+            editStatusBtn.setVisibility(View.GONE);
             followBtn.setVisibility(View.VISIBLE);
 //            countLayout.setVisibility(View.GONE);
         }
@@ -190,6 +217,15 @@ public class Profile extends Fragment {
 
         clickListener();
         readReceiverToken();
+
+//        navigationView.bringToFront();
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, relativeLayout, toolbar,
+//                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//
+//        relativeLayout.addDrawerListener(toggle);
+//        toggle.syncState();
+
+//        navigationView.setNavigationItemSelectedListener(this);
 
     }
 
@@ -218,19 +254,23 @@ public class Profile extends Fragment {
 
     private void clickListener() {
 
+        editStatusBtn.setOnClickListener(v->{
+           // openDialog();
+        });
+
         signOutbtn.setOnClickListener(v -> {
             auth.signOut();
             startActivity(new Intent(getActivity(), ReplacerActivity.class));
         });
 
-        switchTv.setOnClickListener(v -> {
-            //getActivity().finish();
-            USER_ID = auth.getUid();
-            IS_SEARCHED_USER = false;
-            Intent intent = new Intent(getActivity(), ExploreActivity.class);
-            intent.putExtra("init_view_pager_item", 4);
-            startActivity(intent);
-        });
+//        switchTv.setOnClickListener(v -> {
+//            //getActivity().finish();
+//            USER_ID = auth.getUid();
+//            IS_SEARCHED_USER = false;
+//            Intent intent = new Intent(getActivity(), ExploreActivity.class);
+//            intent.putExtra("init_view_pager_item", 4);
+//            startActivity(intent);
+//        });
 
 
         followBtn.setOnClickListener(v -> {
@@ -329,7 +369,6 @@ public class Profile extends Fragment {
         startChatBtn.setOnClickListener(v -> {
             queryChat();
         });
-
 
     }
 
@@ -439,7 +478,7 @@ public class Profile extends Fragment {
         followersCountTv = view.findViewById(R.id.followersCountTv);
         followingCountTv = view.findViewById(R.id.followingCountTv);
         postCountTv = view.findViewById(R.id.postCountTv);
-        switchTv = view.findViewById(R.id.switchTv);
+        switchText = view.findViewById(R.id.switchText);
         profileImage = view.findViewById(R.id.profileImage);
         followBtn = view.findViewById(R.id.followBtn);
         recyclerView = view.findViewById(R.id.recyclerView);
@@ -447,11 +486,12 @@ public class Profile extends Fragment {
         editProfileBtn = view.findViewById(R.id.edit_profileImage);
         startChatBtn = view.findViewById(R.id.startChatBtn);
         signOutbtn = view.findViewById(R.id.signOutbtn);
-
+//        navigationView = view.findViewById(R.id.nav_view);
+        relativeLayout = view.findViewById(R.id.relativeLayout);
+        editStatusBtn = view.findViewById(R.id.edit_status);
 
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
-
     }
 
     private void loadBasicData() {
@@ -716,6 +756,11 @@ public class Profile extends Fragment {
 
     }
 
+    @Override
+    public void applyTexts(String message, String senderName, int position) {
+
+    }
+
     private static class PostImageHolder extends RecyclerView.ViewHolder {
 
         private ImageView imageView;
@@ -729,6 +774,11 @@ public class Profile extends Fragment {
 
     }
 
+
+    public void openDialog(int position) {
+        Dialog dialog = new Dialog(position);
+        // dialog.show(getSupportFragmentManager(), "Dialog");
+    }
     void readReceiverToken() {
         DatabaseReference reference1 =  FirebaseDatabase.getInstance().getReference().child("users").child(userUID);
         reference1.addListenerForSingleValueEvent(new ValueEventListener() {

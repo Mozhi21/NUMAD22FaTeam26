@@ -2,9 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id ="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".finalProject.fragments.Profile">
+
+<!--    <com.google.android.material.navigation.NavigationView-->
+<!--        android:id="@+id/nav_view"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_gravity="start"-->
+<!--        app:headerLayout="@layout/header"-->
+<!--        app:menu="@menu/main_menu" />-->
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -69,7 +78,7 @@
                 android:layout_marginEnd="14dp"
                 android:layout_marginBottom="14dp"
                 android:src="@drawable/b01"
-                app:civ_border_color="#F37E0505"
+                app:civ_border_color="#3EEDA72A"
                 app:civ_border_width="1dp" />
 
             <ImageButton
@@ -81,7 +90,7 @@
                 android:layout_alignBottom="@id/profileImage"
                 android:background="@drawable/ic_circle"
                 android:elevation="3dp"
-                android:src="@drawable/ic_edit"
+                android:src="@drawable/ic_camera"
                 android:visibility="gone" />
 
         </RelativeLayout>
@@ -93,51 +102,89 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <LinearLayout android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
-                android:weightSum="2"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="1">
 
                 <TextView
                     android:id="@+id/nameTv"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:padding="4dp"
                     android:layout_weight="1"
+                    android:maxLines="1"
+                    android:padding="10dp"
                     android:text="Username"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/switchTv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:padding="4dp"
-                    android:layout_marginRight="10dp"
-                    android:text="Switch to my homepage"
-                    android:gravity="right"
+                <ImageButton
+                    android:id="@+id/edit_status"
+                    android:layout_width="30dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_alignEnd="@id/nameTv"
+                    android:layout_alignRight="@id/nameTv"
+                    android:layout_alignBottom="@id/nameTv"
+                    android:background="@drawable/ic_circle"
                     android:layout_weight="1"
-                    android:textColor="@color/fog_red"
-                    android:textSize="10sp"
-                    android:textStyle="bold" />
+                    android:src="@drawable/ic_edit"
+                    android:visibility="gone"/>
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/statusTV"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="3"
-                android:padding="4dp"
-                android:text="Love to travel around the world"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="1">
 
+                <TextView
+                    android:id="@+id/statusTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:maxLines="3"
+                    android:padding="4dp"
+                    android:text="Love Chinese food"
+                    android:textColor="@color/colorGreyDark"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:layout_marginRight="15dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/switchText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:maxLines="1"
+                        android:text="To My Profile"
+                        android:textColor="@color/colorGreyDark"
+                        android:textSize="10sp"
+                        android:textStyle="bold"/>
+                <com.suke.widget.SwitchButton
+                    android:id="@+id/switchTv"
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:maxLines="1"/>
+                </LinearLayout>
+
+
+
+            </LinearLayout>
 
         </LinearLayout>
 
