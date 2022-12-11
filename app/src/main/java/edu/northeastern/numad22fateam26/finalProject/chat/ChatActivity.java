@@ -46,6 +46,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import edu.northeastern.numad22fateam26.R;
 import edu.northeastern.numad22fateam26.finalProject.adapter.ChatAdapter;
 import edu.northeastern.numad22fateam26.finalProject.model.ChatModel;
+import edu.northeastern.numad22fateam26.finalProject.services.PushNotificationService;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -67,6 +68,7 @@ public class ChatActivity extends AppCompatActivity {
     String oppositeUID;
     String chatID;
     String receiverToken;
+    String sender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,11 +118,12 @@ public class ChatActivity extends AppCompatActivity {
             messageMap.put("senderID", user.getUid());
             messageMap.put("time", FieldValue.serverTimestamp());
 
-
+            PushNotificationService.sendNotification(this, receiverToken, sender,message);
             reference.document(chatID).collection("Messages").document(messageID).set(messageMap)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             chatET.setText("");
+
                         } else {
                             Toast.makeText(ChatActivity.this, "Something went wrong !", Toast.LENGTH_SHORT).show();
                         }
@@ -207,6 +210,24 @@ public class ChatActivity extends AppCompatActivity {
                     Glide.with(getApplicationContext()).load(value.getString("profileImage")).into(imageView);
 
                     name.setText(value.getString("name"));
+
+
+                });
+
+        firestore.collection("Users").document(user.getUid())
+                .addSnapshotListener((value, error) -> {
+
+                    if (error != null)
+                        return;
+
+                    if (value == null)
+                        return;
+
+
+                    if (!value.exists())
+                        return;
+
+                    sender = value.getString("name");
 
 
                 });

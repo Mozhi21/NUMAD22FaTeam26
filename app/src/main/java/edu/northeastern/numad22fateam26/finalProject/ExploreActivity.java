@@ -2,17 +2,24 @@ package edu.northeastern.numad22fateam26.finalProject;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 
 import java.io.File;
@@ -26,6 +33,8 @@ import java.util.Map;
 
 import edu.northeastern.numad22fateam26.R;
 import edu.northeastern.numad22fateam26.finalProject.adapter.ViewPagerAdapter;
+import edu.northeastern.numad22fateam26.finalProject.fragments.CreateAccountFragment;
+import edu.northeastern.numad22fateam26.finalProject.fragments.Notification;
 
 
 public class ExploreActivity extends AppCompatActivity {

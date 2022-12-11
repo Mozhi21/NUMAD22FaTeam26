@@ -13,6 +13,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
 import edu.northeastern.numad22fateam26.R;
+import edu.northeastern.numad22fateam26.finalProject.ExploreActivity;
+import edu.northeastern.numad22fateam26.finalProject.chat.ChatUsersActivity;
 import edu.northeastern.numad22fateam26.finalProject.fragments.Notification;
 import edu.northeastern.numad22fateam26.sticker.StickerHistoryActivity;
 
@@ -65,9 +67,13 @@ public class PushNotificationService extends FirebaseMessagingService {
         String title = remoteMessage.getNotification().getTitle();
         String textMessage = remoteMessage.getNotification().getBody();
 
-        Intent activityIntent = new Intent(this, Notification.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this,
-                0, activityIntent, PendingIntent.FLAG_MUTABLE);
+        Intent activityIntent = new Intent(this, ExploreActivity.class);
+        if (!title.equals("Awesome")) {
+            activityIntent = new Intent(this, ChatUsersActivity.class);
+        }
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, activityIntent, PendingIntent.FLAG_MUTABLE);
+
 
         NotificationCompat.Builder notification = new NotificationCompat.Builder(this, CHANNEL_ID_MESSAGE)
                 .setContentTitle(title)
@@ -95,7 +101,7 @@ public class PushNotificationService extends FirebaseMessagingService {
         }
     }
 
-    private void sendNotification(Context context, String receiverToken, String title, String message) {
+    public static void sendNotification(Context context, String receiverToken, String title, String message) {
         Log.v(TAG, receiverToken + "\n" + title + "\n" + message + "\n");
 
         RequestQueue queue = Volley.newRequestQueue(context);

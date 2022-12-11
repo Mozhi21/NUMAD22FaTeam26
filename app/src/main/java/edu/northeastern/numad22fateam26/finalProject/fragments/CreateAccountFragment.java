@@ -175,7 +175,7 @@ public class CreateAccountFragment extends Fragment {
                                     });
                             uploadUser(user, username, email);
                             String uid = Objects.requireNonNull(task.getResult().getUser()).getUid();
-                            createUserInRealTimeDatabase(uid, username);
+                            createUserInRealTimeDatabase(uid, username, email);
 
                         } else {
                             progressBar.setVisibility(View.GONE);
@@ -188,7 +188,7 @@ public class CreateAccountFragment extends Fragment {
 
     }
 
-    private void createUserInRealTimeDatabase(String uid, String username) {
+    private void createUserInRealTimeDatabase(String uid, String username, String email) {
         messaging.getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
                     @Override
@@ -200,11 +200,12 @@ public class CreateAccountFragment extends Fragment {
 
                         // Get new FCM registration token
                         String token = task.getResult();
-
+                        Log.v(TAG, "Token is: "+ token);
                         DatabaseReference userRef = database.getReference("users").child(uid);
                         userRef.child("username").setValue(username);
                         userRef.child("FCMToken").setValue(token);
                         userRef.child("google_sign_in").setValue("no");
+                        userRef.child("email").setValue(email);
                     }
                 });
     }
