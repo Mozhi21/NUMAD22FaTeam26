@@ -51,7 +51,7 @@
             android:padding="8dp"
             android:text="online"
             android:textColor="@color/colorGreenMid"
-            android:textSize="8sp"
+            android:textSize="12sp"
             android:textStyle="bold"
             android:visibility="gone"/>
 

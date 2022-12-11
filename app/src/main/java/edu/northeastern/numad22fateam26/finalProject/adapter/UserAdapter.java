@@ -54,6 +54,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
         holder.nameTV.setText(list.get(position).getName());
         holder.statusTV.setText(list.get(position).getStatus());
 
+        if (list.get(position).isOnline()) {
+            holder.onlineTV.setVisibility(View.VISIBLE);
+        } else {
+            holder.onlineTV.setVisibility(View.GONE);
+        }
+
         Glide.with(holder.itemView.getContext().getApplicationContext())
                 .load(list.get(position).getProfileImage())
                 .placeholder(R.drawable.ic_person)
@@ -80,7 +86,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
     static class UserHolder extends RecyclerView.ViewHolder {
 
         CircleImageView profileImage;
-        TextView nameTV, statusTV;
+        TextView nameTV, statusTV, onlineTV;
         RelativeLayout layout;
 
         public UserHolder(@NonNull View itemView) {
@@ -89,6 +95,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
             profileImage = itemView.findViewById(R.id.profileImage);
             nameTV = itemView.findViewById(R.id.nameTV);
             statusTV = itemView.findViewById(R.id.statusTV);
+            onlineTV = itemView.findViewById(R.id.onlineTV);
             layout = itemView.findViewById(R.id.relativeLayout);
 
         }
