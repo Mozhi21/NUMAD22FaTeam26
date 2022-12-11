@@ -24,6 +24,7 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/apptitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -32,6 +33,13 @@
                 android:textColor="@color/fog_red"
                 android:textSize="18sp"
                 android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/apptitle"
+                android:src="@drawable/search_content3" />
 
             <ImageButton
                 android:id="@+id/sendBtn"
