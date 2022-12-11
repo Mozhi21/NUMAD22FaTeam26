@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/home_fragment"
     tools:context=".finalProject.fragments.Home">
+
+
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -58,49 +61,91 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+
     <LinearLayout
-        android:id="@+id/buttons"
+        android:id="@+id/searchContentButtons"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
         android:gravity="center"
-        android:layout_below="@id/toolbar">
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <ImageView
+            android:id="@+id/decor_image_1"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="20dp"
+            android:padding="2dp"
+            android:layout_gravity="center"
+            android:src="@drawable/search_content1" />
 
         <Button
-
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:id="@+id/followBtn"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/fuzzybubblesbold"
+            android:padding="5dp"
             android:text="follow"
-            android:textSize="9sp"
-            android:layout_marginLeft="10dp"
-            />
+            android:textSize="12sp"
+            android:layout_gravity="center"
+            app:strokeColor="@color/fog_red" />
+
+        <ImageView
+            android:id="@+id/decor_image_2"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:padding="1dp"
+            android:layout_gravity="center"
+            android:src="@drawable/search_content2" />
+
         <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_weight="1"
-            android:text="like"
-            android:textColor="@color/bai"
-            android:textSize="9sp"
-            />
+            android:id="@+id/likeBtn"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/fuzzybubblesbold"
+            android:padding="5dp"
+            android:text="Likes"
+            android:textSize="14sp"
+            android:layout_gravity="center"
+            app:strokeColor="@color/fog_red" />
+
+        <ImageView
+            android:id="@+id/decor_image_3"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:padding="2dp"
+            android:layout_gravity="center"
+            android:src="@drawable/search_content3" />
+
         <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:id="@+id/forYouBtn"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/fuzzybubblesbold"
+            android:padding="5dp"
+            android:state_pressed="false"
             android:text="For You"
-            android:textColor="@color/bai"
-            android:textSize="9sp"
-            android:layout_weight = "1"
-            android:layout_marginLeft="20dp"/>
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Recipe"
-            android:textColor="@color/bai"
-            android:textSize="9sp"
-            android:layout_weight = "1"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp"/>
+            android:textSize="14sp"
+            android:layout_gravity="center"
+            app:strokeColor="@color/fog_red" />
+
+        <ImageView
+            android:id="@+id/decor_image_4"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginRight="20dp"
+            android:padding="2dp"
+            android:layout_gravity="center"
+            android:src="@drawable/search_content4" />
+
 
     </LinearLayout>
 
@@ -108,7 +153,7 @@
         android:id="@+id/storiesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/buttons" />
+        android:layout_below="@id/searchContentButtons" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewfp"

@@ -10,16 +10,19 @@ import static edu.northeastern.numad22fateam26.finalProject.utils.Constants.PREF
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.firestore.DocumentReference;
 
 import java.util.Arrays;
@@ -122,6 +125,9 @@ public class Profile extends Fragment {
     private FirebaseUser user;
     private ImageButton editProfileBtn;
     private FirebaseAuth auth;
+    NavigationView navigationView;
+    RelativeLayout relativeLayout;
+    Toolbar toolbar;
 
 
     public Profile() {
@@ -182,6 +188,15 @@ public class Profile extends Fragment {
         recyclerView.setAdapter(adapter);
 
         clickListener();
+
+//        navigationView.bringToFront();
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, relativeLayout, toolbar,
+//                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//
+//        relativeLayout.addDrawerListener(toggle);
+//        toggle.syncState();
+
+//        navigationView.setNavigationItemSelectedListener(this);
 
     }
 
@@ -438,6 +453,8 @@ public class Profile extends Fragment {
         editProfileBtn = view.findViewById(R.id.edit_profileImage);
         startChatBtn = view.findViewById(R.id.startChatBtn);
         signOutbtn = view.findViewById(R.id.signOutbtn);
+//        navigationView = view.findViewById(R.id.nav_view);
+        relativeLayout = view.findViewById(R.id.relativeLayout);
 
 
         auth = FirebaseAuth.getInstance();
