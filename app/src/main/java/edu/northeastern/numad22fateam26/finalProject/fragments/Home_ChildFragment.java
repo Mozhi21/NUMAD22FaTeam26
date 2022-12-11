@@ -50,7 +50,10 @@ public class Home_ChildFragment extends Fragment {
     StoriesAdapter storiesAdapter;
     List<StoriesModel> storiesModelList;
     private FirebaseFirestore fireStore;
-    ImageButton sendBtn;
+
+    ImageButton messageBtn11;
+    Activity activity;
+
     ImageView circle;
 
     @Override
@@ -69,9 +72,12 @@ public class Home_ChildFragment extends Fragment {
         initTabs(view);
 
         checkIfUnreadMessages();
+
         final DocumentReference reference = fireStore.collection("Users")
                 .document(user.getUid());
-        sendBtn.setOnClickListener(v -> {
+
+        messageBtn11.setOnClickListener(v -> {
+
             Intent intent = new Intent(getActivity(), ChatUsersActivity.class);
             startActivity(intent);
         });
@@ -115,7 +121,7 @@ public class Home_ChildFragment extends Fragment {
         user = auth.getCurrentUser();
         fireStore = FirebaseFirestore.getInstance();
 
-        sendBtn = view.findViewById(R.id.sendBtn);
+        messageBtn11 = view.findViewById(R.id.messageBtn11);
     }
     private void initTabs(View view) {
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.ContentTabLayout);
