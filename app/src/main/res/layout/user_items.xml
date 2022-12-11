@@ -21,8 +21,10 @@
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/profileImage"
         android:layout_toRightOf="@id/profileImage"
-        android:padding="8dp"
+        android:fontFamily="@font/fuzzybubblesbold"
+        android:padding="5dp"
         android:text="Username"
+        android:textColor="@color/colorPrimaryText"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -33,10 +35,10 @@
         android:layout_below="@id/nameTV"
         android:layout_toEndOf="@id/profileImage"
         android:layout_toRightOf="@id/profileImage"
-        android:paddingStart="8dp"
+        android:fontFamily="@font/fuzzybubblesregular"
+        android:paddingStart="5dp"
         android:paddingEnd="8dp"
-        android:text="Status"
-        android:textStyle="bold" />
+        android:text="Status" />
 
 
 </RelativeLayout>

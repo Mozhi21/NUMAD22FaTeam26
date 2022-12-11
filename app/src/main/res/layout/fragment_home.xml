@@ -67,6 +67,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
+        android:layout_margin="2dp"
         android:gravity="center"
         android:orientation="horizontal"
         android:padding="5dp">
@@ -76,7 +77,7 @@
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:padding="2dp"
             android:layout_gravity="center"
             android:src="@drawable/search_content1" />
