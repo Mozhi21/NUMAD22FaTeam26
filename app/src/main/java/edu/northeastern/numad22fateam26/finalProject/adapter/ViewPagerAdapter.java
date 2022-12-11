@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import edu.northeastern.numad22fateam26.finalProject.fragments.Add;
 import edu.northeastern.numad22fateam26.finalProject.fragments.Home;
+import edu.northeastern.numad22fateam26.finalProject.fragments.Home_ChildFragment;
 import edu.northeastern.numad22fateam26.finalProject.fragments.Notification;
 import edu.northeastern.numad22fateam26.finalProject.fragments.Profile;
 import edu.northeastern.numad22fateam26.finalProject.fragments.Search;
@@ -32,7 +33,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
             default:
             case 0:
-                return new Home();
+                return new Home_ChildFragment();
 
             case 1:
                 return new Search();
