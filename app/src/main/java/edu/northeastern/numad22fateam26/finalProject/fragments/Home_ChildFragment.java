@@ -36,6 +36,7 @@ import javax.annotation.Nullable;
 
 import edu.northeastern.numad22fateam26.R;
 import edu.northeastern.numad22fateam26.finalProject.adapter.HomeAdapter;
+import edu.northeastern.numad22fateam26.finalProject.adapter.HomeViewPagerAdapter;
 import edu.northeastern.numad22fateam26.finalProject.adapter.RecViewPagerAdapter;
 import edu.northeastern.numad22fateam26.finalProject.adapter.StoriesAdapter;
 import edu.northeastern.numad22fateam26.finalProject.chat.ChatUsersActivity;
@@ -123,8 +124,11 @@ public class Home_ChildFragment extends Fragment {
     }
     private void initTabs(View view) {
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.ContentTabLayout);
+        tabLayout.addTab(tabLayout.newTab());
+        tabLayout.addTab(tabLayout.newTab());
+        tabLayout.addTab(tabLayout.newTab());
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.rec_view_pager);
-        RecViewPagerAdapter adapter = new RecViewPagerAdapter(getChildFragmentManager(), 0);
+        HomeViewPagerAdapter adapter = new HomeViewPagerAdapter(getChildFragmentManager(), 0);
         adapter.addFragment(new Home_explore(), "Explore");
         adapter.addFragment(new Home_likes(), "Likes");
         adapter.addFragment(new Home_follow(), "Follow");

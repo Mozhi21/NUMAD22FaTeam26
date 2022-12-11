@@ -77,22 +77,6 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true">
 
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/explore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="explore" />
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/likes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="likes" />
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/follow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="follow" />
 
         </com.google.android.material.tabs.TabLayout>
 
