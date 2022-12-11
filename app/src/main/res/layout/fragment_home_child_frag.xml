@@ -42,7 +42,7 @@
                 android:src="@drawable/search_content3" />
 
             <ImageButton
-                android:id="@+id/sendBtn"
+                android:id="@+id/messageBtn11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
