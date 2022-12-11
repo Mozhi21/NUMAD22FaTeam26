@@ -92,8 +92,11 @@ public class ChatUsersAdapter extends RecyclerView.Adapter<ChatUsersAdapter.Chat
 
                         DocumentSnapshot snapshot = task.getResult();
 
-                        Glide.with(context.getApplicationContext()).load(snapshot.getString("profileImage")).into(holder.imageView);
-                        holder.name.setText(snapshot.getString("name"));
+                        String profileImage = snapshot.getString("profileImage").trim();
+                        if (profileImage.length() > 0) {
+                            Glide.with(context.getApplicationContext()).load(snapshot.getString("profileImage")).into(holder.imageView);
+                            holder.name.setText(snapshot.getString("name"));
+                        }
 
                     } else {
                         assert task.getException() != null;
