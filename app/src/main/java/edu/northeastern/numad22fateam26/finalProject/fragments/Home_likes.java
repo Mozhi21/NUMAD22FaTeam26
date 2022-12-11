@@ -49,7 +49,6 @@ import edu.northeastern.numad22fateam26.finalProject.model.StoriesModel;
 
 public class Home_likes extends Fragment {
     private final MutableLiveData<Integer> commentCount = new MutableLiveData<>();
-    HomeAdapter adapter;
     private RecyclerView recyclerView;
     private List<HomeModel> list;
     private FirebaseUser user;
@@ -80,79 +79,21 @@ public class Home_likes extends Fragment {
 
         init(view);
 
-        list = new ArrayList<>();
-        adapter = new HomeAdapter(list, getActivity());
-        recyclerView.setAdapter(adapter);
-
         loadDataFromFirestore();
-
-        adapter.OnPressed(new HomeAdapter.OnPressed() {
-            @Override
-            public void onLiked(int position, String id, String uid, List<String> likeList, boolean isChecked) {
-
-                DocumentReference reference = FirebaseFirestore.getInstance().collection("Users")
-                        .document(uid)
-                        .collection("Post Images")
-                        .document(id);
-
-                if (likeList.contains(user.getUid())) {
-                    likeList.remove(user.getUid()); // unlike
-                } else {
-                    likeList.add(user.getUid()); // like
-                }
-
-                Map<String, Object> map = new HashMap<>();
-                map.put("likes", likeList);
-
-                reference.update(map);
-
-                recyclerView.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        adapter.notifyDataSetChanged();
-                    }
-                });
-            }
-
-            @Override
-            public void setCommentCount(final TextView textView) {
-
-                commentCount.observe((LifecycleOwner) activity, integer -> {
-
-                    assert commentCount.getValue() != null;
-
-                    if (commentCount.getValue() == 0) {
-                        textView.setVisibility(View.GONE);
-                    } else
-                        textView.setVisibility(View.VISIBLE);
-
-                    StringBuilder builder = new StringBuilder();
-                    builder.append("See all")
-                            .append(commentCount.getValue())
-                            .append(" comments");
-
-                    textView.setText(builder);
-                    textView.setText("See all " + commentCount.getValue() + " comments");
-
-                });
-
-            }
-        });
 
     }
 
     private void init(View view) {
+        list = new ArrayList<>();
         recyclerView = view.findViewById(R.id.recyclerExplore);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        postAdapter = new HomeAdapter(list, getActivity());
+        recyclerView.setAdapter(postAdapter);
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
         fireStore = FirebaseFirestore.getInstance();
-
-
-        postAdapter = new HomeAdapter(list, getActivity());
-        recyclerView.setAdapter(postAdapter);
 
         postAdapter.OnPressed(new HomeAdapter.OnPressed() {
             @Override
@@ -167,13 +108,12 @@ public class Home_likes extends Fragment {
                 }
                 Map<String, Object> map = new HashMap<>();
                 map.put("likes", likeList);
-                
                 reference.update(map);
 
                 recyclerView.post(new Runnable() {
                     @Override
                     public void run() {
-                        adapter.notifyDataSetChanged();
+                        postAdapter.notifyDataSetChanged();
                     }
                 });
             }
@@ -194,6 +134,7 @@ public class Home_likes extends Fragment {
         });
 
     }
+
     private void loadDataFromFirestore() {
         final DocumentReference reference = fireStore.collection("Users")
                 .document(user.getUid());
@@ -235,7 +176,7 @@ public class Home_likes extends Fragment {
                                         model.getTimestamp(),
                                         model.getLikes()));
 
-                                adapter.notifyDataSetChanged();
+                                postAdapter.notifyDataSetChanged();
 
                                 documentSnapshot.getReference().collection("Comments").get()
                                         .addOnCompleteListener(task -> {
