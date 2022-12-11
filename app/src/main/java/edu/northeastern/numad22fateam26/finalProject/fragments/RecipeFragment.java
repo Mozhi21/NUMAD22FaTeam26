@@ -32,6 +32,7 @@ public class RecipeFragment extends Fragment {
     private static final String ADMIN_ID = "YvXGXIeL8IXd8FJiPRJJPzWU2gF3";
     private List<RecipeModel> recipeModelList;
     private TextView adminRecipeSteps;
+    private TextView adminRecipeIngredients;
 
     public RecipeFragment() {
     }
@@ -47,6 +48,7 @@ public class RecipeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         adminRecipeSteps = view.findViewById(R.id.detailed_recipe);
+        adminRecipeIngredients = view.findViewById(R.id.dish_ingredients);
         loadAdminRecipe();
     }
 
@@ -101,15 +103,24 @@ public class RecipeFragment extends Fragment {
         List<String> steps = adminRecipe.getSteps();
         List<String> recipeSteps = new ArrayList<>();
         String recipeString;
+        List<String> ingredients = adminRecipe.getIngredients();
+        List<String> recipeIngredients = new ArrayList<>();
+        String ingredientString;
 
         if (steps == null || steps.isEmpty()) {
             recipeString = "No recipe found!";
+            ingredientString = "No recipe found!";
         } else {
             for (int i = 0; i < steps.size(); i++) {
                 recipeSteps.add(String.format("%s. %s", i + 1, steps.get(i)));
+
             }
             recipeString = String.join(System.getProperty("line.separator"), recipeSteps);
+            recipeIngredients.addAll(ingredients);
+            ingredientString = String.join(System.getProperty("line.separator"), recipeIngredients);
+
         }
         adminRecipeSteps.setText(recipeString);
+        adminRecipeIngredients.setText(ingredientString);
     }
 }
