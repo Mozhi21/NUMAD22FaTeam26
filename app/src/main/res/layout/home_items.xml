@@ -90,8 +90,8 @@
             android:id="@+id/shareBtn"
             android:layout_width="28dp"
             android:layout_height="30dp"
-            android:layout_marginTop="8dp"
             android:layout_marginLeft="6dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/ic_share" />
 
 

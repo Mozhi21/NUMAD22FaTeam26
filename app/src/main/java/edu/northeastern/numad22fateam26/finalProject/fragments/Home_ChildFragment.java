@@ -49,11 +49,11 @@ public class Home_ChildFragment extends Fragment {
     RecyclerView storiesRecyclerView;
     StoriesAdapter storiesAdapter;
     List<StoriesModel> storiesModelList;
-    private RecyclerView recyclerView;
-    private List<HomeModel> list;
     private FirebaseFirestore fireStore;
+
     ImageButton messageBtn11;
     Activity activity;
+
     ImageView circle;
 
     @Override
@@ -68,18 +68,19 @@ public class Home_ChildFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         FirebaseAuth auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
-
         init(view);
         initTabs(view);
 
         checkIfUnreadMessages();
-        messageBtn11.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), ChatUsersActivity.class);
-            startActivity(intent);
-        });
 
         final DocumentReference reference = fireStore.collection("Users")
                 .document(user.getUid());
+
+        messageBtn11.setOnClickListener(v -> {
+
+            Intent intent = new Intent(getActivity(), ChatUsersActivity.class);
+            startActivity(intent);
+        });
 
         reference.addSnapshotListener((value, error) -> {
 

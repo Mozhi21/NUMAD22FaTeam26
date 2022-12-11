@@ -174,7 +174,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeHolder> {
                 intent.putExtra("imageUrl", imageUrl);
 
                 context.startActivity(intent);
-
             });
 
             likeCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> onPressed.onLiked(position, id, uid, likes, isChecked));
