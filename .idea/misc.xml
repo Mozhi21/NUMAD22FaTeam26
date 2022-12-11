@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.17476019184652278" />
+        <entry key="app/src/main/res/drawable-v24/btn_red_outline.xml" value="0.1445" />
         <entry key="app/src/main/res/drawable-v24/circle_black_border.xml" value="0.284" />
         <entry key="app/src/main/res/drawable-v24/ic_circle_notification.xml" value="0.276" />
         <entry key="app/src/main/res/drawable-v24/next_btn.xml" value="0.284" />
@@ -56,9 +57,10 @@
         <entry key="app/src/main/res/drawable/right_chat.xml" value="0.233" />
         <entry key="app/src/main/res/drawable/search_view_bg.xml" value="0.264" />
         <entry key="app/src/main/res/drawable/shdow_bottom_to_top.xml" value="0.338" />
+        <entry key="app/src/main/res/drawable/skip_icon.xml" value="0.1445" />
         <entry key="app/src/main/res/drawable/spinner_background.xml" value="0.1305" />
         <entry key="app/src/main/res/drawable/sticker_dialog.xml" value="0.264" />
-        <entry key="app/src/main/res/drawable/text_box.xml" value="0.233" />
+        <entry key="app/src/main/res/drawable/text_box.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/text_box_edit.xml" value="0.233" />
         <entry key="app/src/main/res/font/font.xml" value="0.3546875" />
         <entry key="app/src/main/res/font/fonts.xml" value="0.3546875" />
@@ -94,6 +96,7 @@
         <entry key="app/src/main/res/layout/chat_items.xml" value="0.37640482584635415" />
         <entry key="app/src/main/res/layout/chat_user_items.xml" value="0.3171875" />
         <entry key="app/src/main/res/layout/comment_items.xml" value="0.10185185185185185" />
+        <entry key="app/src/main/res/layout/editStatus_dialog.xml" value="0.3" />
         <entry key="app/src/main/res/layout/forgot_password.xml" value="0.22324981689453133" />
         <entry key="app/src/main/res/layout/fragment_add.xml" value="0.3224639892578125" />
         <entry key="app/src/main/res/layout/fragment_category.xml" value="0.18707885742187505" />
@@ -125,6 +128,7 @@
         <entry key="app/src/main/res/layout/single_user_item.xml" value="0.32447916666666665" />
         <entry key="app/src/main/res/layout/skip_icon.xml" value="0.34375" />
         <entry key="app/src/main/res/layout/slides_layout.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/status_dialog.xml" value="0.3" />
         <entry key="app/src/main/res/layout/sticker_dialog.xml" value="0.31354166666666666" />
         <entry key="app/src/main/res/layout/stories_layout.xml" value="0.3171875" />
         <entry key="app/src/main/res/layout/user_items.xml" value="0.1348169397424768" />

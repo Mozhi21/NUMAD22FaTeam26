@@ -56,11 +56,11 @@
             <EditText
                 android:id="@+id/descriptionET"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="5dp"
+                android:layout_height="100dp"
                 android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/line7"
+                android:background="@drawable/f2"
                 android:fontFamily="@font/fuzzybubblesregular"
                 android:hint="  Say Something About This Post"
                 android:minLines="8" />

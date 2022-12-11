@@ -87,4 +87,7 @@ dependencies {
     api 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
     implementation 'com.github.a914-gowtham:android-video-trimmer:1.7.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
+
+    implementation 'com.github.zcweng:switch-button:0.0.3@aar'
+    implementation 'com.github.dmytrodanylyk:android-morphing-button:1.0'
 }
