@@ -55,7 +55,12 @@ public class OnBoardingActivity extends AppCompatActivity {
     }
 
     public void next(View view) {
-        viewPager.setCurrentItem(currentPos + 1);
+        if (currentPos == 2) {
+            startActivity(new Intent(this, ExploreActivity.class));
+            finish();
+        } else {
+            viewPager.setCurrentItem(currentPos + 1);
+        }
     }
 
 
