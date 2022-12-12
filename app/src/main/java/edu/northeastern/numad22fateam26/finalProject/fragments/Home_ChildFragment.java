@@ -150,7 +150,7 @@ public class Home_ChildFragment extends Fragment {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
+                adapter.notifyDataSetChanged();
             }
         });
     }

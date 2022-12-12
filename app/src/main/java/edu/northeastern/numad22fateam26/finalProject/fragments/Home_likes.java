@@ -101,21 +101,10 @@ public class Home_likes extends Fragment {
 
                 DocumentReference reference = FirebaseFirestore.getInstance().collection("Users").document(uid).collection("Post Images").document(id);
 
-                if (likeList.contains(user.getUid())) {
-                    likeList.remove(user.getUid()); // unlike
-                } else {
-                    likeList.add(user.getUid()); // like
-                }
+                likeList.remove(user.getUid()); // unlike only
                 Map<String, Object> map = new HashMap<>();
                 map.put("likes", likeList);
-                reference.update(map);
-
-                recyclerView.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        postAdapter.notifyDataSetChanged();
-                    }
-                });
+                reference.update(map).addOnSuccessListener(v -> postAdapter.notifyDataSetChanged());
             }
 
             @Override
