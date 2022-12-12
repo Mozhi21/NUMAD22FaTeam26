@@ -652,7 +652,8 @@ public class Profile extends Fragment implements Dialog.DialogListener {
 
     private void uploadImage(Uri uri) {
 
-        final StorageReference reference = FirebaseStorage.getInstance().getReference().child("Profile Images");
+        final StorageReference reference =
+                FirebaseStorage.getInstance().getReference().child("Profile Images").child(user.getUid());
 
         reference.putFile(uri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
             @Override
