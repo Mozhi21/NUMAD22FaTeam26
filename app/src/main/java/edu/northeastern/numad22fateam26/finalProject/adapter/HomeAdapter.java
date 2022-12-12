@@ -12,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 import java.util.Random;
@@ -76,11 +79,22 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeHolder> {
 
         int color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
 
-        Glide.with(context.getApplicationContext())
-                .load(list.get(position).getProfileImage())
-                .placeholder(R.drawable.ic_person)
-                .timeout(6500)
-                .into(holder.profileImage);
+        // load real time profile image
+        String poster_id = list.get(position).getUid();
+        FirebaseFirestore.getInstance().collection("Users").document(poster_id)
+                .get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot snapshot = task.getResult();
+                        String profileImage = snapshot.getString("profileImage");
+                        if (profileImage!=null && profileImage.trim().length() > 0) {
+                            Glide.with(context.getApplicationContext())
+                                    .load(profileImage)
+                                    .placeholder(R.drawable.ic_person)
+                                    .timeout(6500)
+                                    .into(holder.profileImage);
+                        }
+                    }
+                });
 
         Glide.with(context.getApplicationContext())
                 .load(list.get(position).getImageUrl())
