@@ -207,7 +207,12 @@ public class ChatActivity extends AppCompatActivity {
                     boolean isOnline = Boolean.TRUE.equals(value.getBoolean("online"));
                     status.setText(isOnline ? "Online" : "Offline");
 
-                    Glide.with(getApplicationContext()).load(value.getString("profileImage")).into(imageView);
+                    String profileImage = value.getString("profileImage");
+
+                    if (profileImage != null && profileImage.trim().length() > 0) {
+                        Glide.with(getApplicationContext()).load(profileImage).into(imageView);
+                    }
+
 
                     name.setText(value.getString("name"));
 
